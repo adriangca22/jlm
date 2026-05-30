@@ -52,17 +52,15 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: default; /* ← Cursor nativo por defecto */
+  cursor: default;
 }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg2); }
 ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
 img { display: block; max-width: 100%; }
 
-/* ── CUSTOM CURSOR DESACTIVADO ── */
 .cursor-dot, .cursor-ring { display: none !important; }
 
-/* ── PAGE TRANSITION OVERLAY ── */
 .page-overlay {
   position: fixed; inset: 0; z-index: 9997;
   background: var(--bg-dark);
@@ -70,11 +68,8 @@ img { display: block; max-width: 100%; }
   transform-origin: top;
   animation: overlayOut 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.2s forwards;
 }
-@keyframes overlayOut {
-  to { transform: scaleY(0); transform-origin: bottom; }
-}
+@keyframes overlayOut { to { transform: scaleY(0); transform-origin: bottom; } }
 
-/* ── FLOATING PARTICLES ── */
 .particles-container {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none; overflow: hidden;
@@ -93,7 +88,6 @@ img { display: block; max-width: 100%; }
   100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
 }
 
-/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 1000; height: 72px;
@@ -140,28 +134,16 @@ nav.scrolled .nav-links a { color: var(--text-muted); text-shadow: none; }
 .nav-links a:hover::after { right: 0; }
 nav.scrolled .nav-links a:hover { color: var(--primary); }
 
-/* ← SOCIAL ICONS EN HEADER (reemplaza Free Estimate) */
-.nav-socials {
-  display: flex; gap: 0.6rem; align-items: center;
-}
+.nav-socials { display: flex; gap: 0.6rem; align-items: center; }
 .nav-socials a {
-  width: 36px; height: 36px;
-  border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-light); /* blanco en hero */
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  border: none !important; /* ← sin border */
-  background: transparent;
+  color: var(--text-light); font-size: 0.9rem;
+  transition: all 0.3s ease; text-decoration: none;
+  border: none !important; background: transparent;
 }
-nav.scrolled .nav-socials a {
-  color: var(--primary); /* cambia a primary al hacer scroll */
-}
-.nav-socials a:hover {
-  color: var(--accent);
-  transform: translateY(-2px);
-}
+nav.scrolled .nav-socials a { color: var(--primary); }
+.nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
 
 .hamburger {
   display: none; background: none; border: none;
@@ -192,7 +174,6 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 }
 .mobile-close:hover { background: var(--primary); border-color: var(--primary-light); }
 
-/* ── HERO ── */
 #hero {
   position: relative; height: 100vh; min-height: 680px;
   display: flex; align-items: flex-end; overflow: hidden;
@@ -277,7 +258,6 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 .scroll-arrow { animation: bounce 2s ease infinite; color: rgba(255,255,255,0.9); font-size: 1.1rem; }
 @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
 
-/* ── STATS ── */
 .stats-bar-inner {
   display: grid; grid-template-columns: repeat(4,1fr);
   gap: 0; background: var(--bg-dark); border-radius: var(--r-lg);
@@ -290,13 +270,11 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 .stat-num sup { font-size: 1.4rem; }
 .stat-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(255,255,255,0.7); margin-top: 0.6rem; font-weight: 600; }
 
-/* ── SECTION COMMON ── */
 .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--primary); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
 .section-tag::before { content:''; width:32px; height:2px; background:var(--primary); border-radius:2px; }
 .section-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 5vw, 4.8rem); line-height: 0.95; letter-spacing: -0.025em; margin-bottom: 1.4rem; color: var(--text-dark); }
 .section-title span { color: var(--primary); }
 
-/* ── ABOUT ── */
 #about { padding: 8rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; background: var(--bg); }
 .about-imgs { position: relative; }
 .about-img-main { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
@@ -311,7 +289,6 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 .client-chip i { color: var(--primary); font-size: 0.85rem; }
 .client-chip:hover { background: var(--bg3); border-color: var(--primary); transform: translateX(4px); color: var(--primary); }
 
-/* ── WHY ── */
 #why { padding: 8rem 5vw; background: linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-darker) 100%); position: relative; overflow: hidden; }
 #why::after { content: 'WHY US'; position: absolute; right: -3rem; bottom: -2rem; font-family: var(--font-display); font-size: 18vw; font-weight: 800; color: rgba(255,255,255,0.025); pointer-events: none; white-space: nowrap; line-height: 1; }
 #why .section-tag { color: var(--accent); }
@@ -328,7 +305,6 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 .feat-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--text-light); letter-spacing: 0.01em; margin-bottom: 0.8rem; }
 .feat-card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.75; }
 
-/* ── BRANDS ── */
 #brands { padding: 5rem 0; background: var(--bg); overflow: hidden; }
 .brands-head { text-align: center; padding: 0 5vw; margin-bottom: 3.5rem; }
 .brands-head p { color: var(--text-muted); font-size: 1rem; max-width: 520px; margin: 1rem auto 0; line-height: 1.75; }
@@ -344,105 +320,73 @@ nav.scrolled .hamburger span { background: var(--text-dark); box-shadow: none; }
 .brand-chip:hover { border-color: var(--primary); background: var(--bg3); color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
 /* ════════════════════════════════════════
-   ── PORTFOLIO CAROUSEL (MODIFICADO) ──
+   ── PORTFOLIO CAROUSEL (ACTUALIZADO) ──
 ════════════════════════════════════════ */
 #portfolio { padding: 8rem 5vw; background: var(--bg2); overflow: hidden; }
 .port-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; }
 .port-head p { max-width: 400px; color: var(--text-muted); font-size: 1rem; line-height: 1.75; text-align: right; }
 
-/* Slider container */
-.port-slider-wrap { position: relative; }
-.port-slider-track-outer {
-  overflow: hidden;
-  border-radius: var(--r-xl);
-  cursor: default; /* ← cursor nativo */
-  user-select: none;
+/* Nuevo estilo de carousel continuo */
+.port-carousel-wrap { position: relative; overflow: hidden; margin-top: 2rem; }
+.port-carousel-wrap::before,
+.port-carousel-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
 }
-.port-slider-track {
-  display: flex;
-  gap: 20px;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* ← transición más suave */
-  will-change: transform;
-}
+.port-carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+.port-carousel-wrap::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
 
-/* Main slide - IMÁGENES MÁS CUADRADAS */
-.port-slide {
-  flex: 0 0 calc(55% - 10px);
+.port-carousel-track {
+  display: flex; gap: 1.5rem; width: max-content;
+  animation: scrollLeft 55s linear infinite; /* ← Más lento que brands (30s) */
+  padding: 0.5rem 0;
+}
+.port-carousel-track:hover { animation-play-state: paused; }
+
+/* Tarjeta de proyecto - IMAGEN CUADRADA */
+.port-card {
+  flex: 0 0 auto;
+  width: 280px;
+  aspect-ratio: 1/1; /* ← Cuadrada */
+  border-radius: var(--r-xl);
+  overflow: hidden;
   position: relative;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  aspect-ratio: 4/3; /* ← más cuadrado (antes 16/10) */
+  box-shadow: var(--shadow-md);
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.port-card:hover {
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.port-slide:not(.active-slide) {
-  opacity: 0.65;
-  transform: scale(0.97);
-  filter: brightness(0.75);
+
+.port-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
-.port-slide.active-slide {
-  opacity: 1;
-  transform: scale(1);
-  filter: brightness(1);
-  box-shadow: 0 30px 80px rgba(0,80,130,0.25);
-}
-.port-slide img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-  pointer-events: none;
-}
-.port-slide.active-slide:hover img { transform: scale(1.06); }
-.port-slide-overlay {
+.port-card:hover img { transform: scale(1.08); }
+
+/* Overlay con texto - aparece en hover */
+.port-card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.3) 50%, transparent 100%);
-  display: flex; align-items: flex-end; padding: 2.4rem;
-  opacity: 0; transition: opacity 0.4s ease;
+  background: linear-gradient(to top, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.5) 40%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.4rem;
+  opacity: 0; transition: opacity 0.3s ease;
 }
-.port-slide.active-slide:hover .port-slide-overlay { opacity: 1; }
+.port-card:hover .port-card-overlay { opacity: 1; }
 
-/* Side peek slides */
-.port-slide:nth-child(n+2):nth-child(-n+3) { flex: 0 0 calc(27.5% - 10px); }
-
-.port-slide-label small {
-  display: block; font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
-  margin-bottom: 0.4rem;
+.port-card-label small {
+  display: block; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.3rem;
 }
-.port-slide-label strong {
-  font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
-  color: var(--text-light); display: block;
+.port-card-label strong {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  color: var(--text-light); display: block; line-height: 1.3;
 }
 
-/* Nav arrows */
-.port-nav {
-  display: flex; gap: 0.8rem;
-  justify-content: center; margin-top: 2rem; align-items: center;
-}
-.port-arrow {
-  width: 52px; height: 52px;
-  background: var(--bg); border: 1.5px solid var(--border);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  font-size: 1rem; color: var(--primary);
-  box-shadow: var(--shadow-sm);
-}
-.port-arrow:hover { background: var(--primary); color: var(--text-light); border-color: var(--primary); transform: scale(1.12); box-shadow: 0 8px 24px rgba(0,80,130,0.3); }
-.port-dots-row { display: flex; gap: 0.5rem; align-items: center; }
-.port-dot-btn {
-  width: 8px; height: 8px; border-radius: 99px;
-  background: var(--border); border: none; cursor: pointer;
-  transition: all 0.3s ease; padding: 0;
-}
-.port-dot-btn.active { width: 28px; background: var(--primary); }
-
-/* Slide counter */
-.port-counter {
-  font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
-  color: var(--text-muted); letter-spacing: 0.1em;
-  min-width: 52px; text-align: center;
-}
-
-/* ── FOUNDER ── */
 #founder { padding: 8rem 5vw; display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; background: var(--bg); }
 .founder-img-wrap { position: relative; }
 .founder-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
@@ -459,7 +403,6 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 .f-metric strong { display: block; font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--primary); line-height: 1; }
 .f-metric span { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 600; }
 
-/* ── TEAM ── */
 #team { padding: 8rem 5vw; background: var(--bg2); }
 .team-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1.3rem; margin-top: 3.2rem; }
 .team-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--r-xl); padding: 2.2rem 1.3rem; text-align: center; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: var(--shadow-sm); }
@@ -468,7 +411,6 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 .team-card h3 { font-weight: 600; font-size: 0.92rem; line-height: 1.35; color: var(--text-dark); margin-bottom: 0.4rem; }
 .team-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.13em; color: var(--primary); font-weight: 600; }
 
-/* ── AREAS ── */
 #areas { padding: 8rem 5vw; background: var(--bg-dark); }
 #areas .section-tag { color: var(--accent); }
 #areas .section-tag::before { background: var(--accent); }
@@ -484,36 +426,21 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 .area-chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--r-full); padding: 0.55rem 1.2rem; font-size: 0.85rem; color: rgba(255,255,255,0.85); transition: all 0.3s ease; cursor: default; font-weight: 500; }
 .area-chip:hover { background: rgba(0,92,138,0.3); border-color: rgba(0,92,138,0.55); color: var(--accent); transform: scale(1.06); }
 
-/* ════════════════════════════════════════
-   ── CTA / CONTACT FORM SECTION ──
-════════════════════════════════════════ */
 #cta {
-  padding: 0;
-  background: var(--bg2);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 700px;
-  overflow: hidden;
+  padding: 0; background: var(--bg2);
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 700px; overflow: hidden;
 }
-
-/* Left image panel */
-.cta-image-panel {
-  position: relative;
-  overflow: hidden;
-  min-height: 700px;
-}
+.cta-image-panel { position: relative; overflow: hidden; min-height: 700px; }
 .cta-image-panel img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 12s ease;
-  transform: scale(1.08);
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 12s ease; transform: scale(1.08);
 }
 #cta:hover .cta-image-panel img { transform: scale(1); }
 .cta-image-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(0,30,60,0.78) 0%, rgba(0,80,130,0.55) 50%, rgba(0,40,80,0.7) 100%);
-  display: flex; flex-direction: column;
-  align-items: flex-start; justify-content: flex-end;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
   padding: 3.5rem;
 }
 .cta-panel-badge {
@@ -540,31 +467,23 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
   color: rgba(255,255,255,0.9); font-size: 0.88rem; font-weight: 500;
 }
 .cta-panel-feature i {
-  width: 28px; height: 28px;
-  background: rgba(56,189,248,0.2); border-radius: 50%;
+  width: 28px; height: 28px; background: rgba(56,189,248,0.2); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--accent); font-size: 0.7rem; flex-shrink: 0;
 }
 
-/* ← TESTIMONIAL CARD ELIMINADO (se quitó la tarjeta flotante con estrellas) */
-
-/* Right form panel */
 .cta-form-panel {
-  background: var(--bg);
-  padding: 4rem 4rem 4rem 4.5rem;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative;
+  background: var(--bg); padding: 4rem 4rem 4rem 4.5rem;
+  display: flex; flex-direction: column; justify-content: center; position: relative;
 }
 .cta-form-panel::before {
-  content: '';
-  position: absolute; left: 0; top: 10%; bottom: 10%;
+  content: ''; position: absolute; left: 0; top: 10%; bottom: 10%;
   width: 1px; background: linear-gradient(to bottom, transparent, var(--border), transparent);
 }
 .cta-form-tag {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--primary);
-  display: flex; align-items: center; gap: 0.7rem;
-  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem;
 }
 .cta-form-tag::before { content:''; width:24px; height:2px; background:var(--primary); border-radius:2px; }
 .cta-form-title {
@@ -574,47 +493,38 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 }
 .cta-form-sub { color: var(--text-muted); font-size: 0.93rem; line-height: 1.6; margin-bottom: 2.2rem; }
 
-/* Form fields */
 .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-field label {
   font-size: 0.75rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--text-darker);
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-darker);
 }
-.form-field input,
-.form-field select,
-.form-field textarea {
+.form-field input, .form-field select, .form-field textarea {
   width: 100%; padding: 0.85rem 1.1rem;
   background: var(--bg2); border: 1.5px solid var(--border);
   border-radius: var(--r-md); font-family: var(--font-body);
   font-size: 0.93rem; color: var(--text-dark);
-  transition: all 0.3s ease; outline: none;
-  appearance: none; -webkit-appearance: none;
+  transition: all 0.3s ease; outline: none; appearance: none; -webkit-appearance: none;
 }
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-  border-color: var(--primary);
-  background: var(--bg);
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  border-color: var(--primary); background: var(--bg);
   box-shadow: 0 0 0 4px rgba(0,80,130,0.1);
 }
-.form-field input::placeholder,
-.form-field textarea::placeholder { color: var(--text-muted-light); }
+.form-field input::placeholder, .form-field textarea::placeholder { color: var(--text-muted-light); }
 .form-field textarea { resize: none; min-height: 100px; }
-.form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+}
 
-/* Submit button */
 .form-submit-btn {
   display: flex; align-items: center; justify-content: center; gap: 0.7rem;
   background: var(--primary); color: var(--text-light);
-  padding: 1.05rem 2rem; border-radius: var(--r-md);
-  border: none; cursor: pointer; font-family: var(--font-body);
-  font-size: 0.92rem; font-weight: 700; letter-spacing: 0.07em;
+  padding: 1.05rem 2rem; border-radius: var(--r-md); border: none; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.07em;
   text-transform: uppercase; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow: 0 6px 24px rgba(0,80,130,0.3);
-  margin-top: 0.4rem; position: relative; overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,80,130,0.3); margin-top: 0.4rem; position: relative; overflow: hidden;
 }
 .form-submit-btn::before {
   content: ''; position: absolute; inset: 0;
@@ -625,25 +535,19 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 .form-submit-btn:hover::before { opacity: 1; }
 .form-submit-btn:active { transform: translateY(0) scale(0.98); }
 
-/* Success state */
-.form-success {
-  display: none; text-align: center; padding: 3rem 2rem;
-  animation: fadeUp 0.5s ease both;
-}
+.form-success { display: none; text-align: center; padding: 3rem 2rem; animation: fadeUp 0.5s ease both; }
 .form-success.show { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .form-success-icon {
   width: 72px; height: 72px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem; color: white;
-  box-shadow: 0 10px 30px rgba(0,80,130,0.35);
+  font-size: 1.8rem; color: white; box-shadow: 0 10px 30px rgba(0,80,130,0.35);
   animation: successPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 @keyframes successPop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
 .form-success h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--text-dark); }
 .form-success p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 300px; }
 
-/* Contact quick links below form */
 .form-contact-links {
   display: flex; gap: 1.5rem; margin-top: 1.4rem;
   padding-top: 1.4rem; border-top: 1px solid var(--border);
@@ -656,7 +560,6 @@ blockquote { font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 300; font-st
 .form-contact-link i { color: var(--primary); }
 .form-contact-link:hover { color: var(--primary); }
 
-/* ── FOOTER ── */
 footer { background: var(--bg-darker); }
 .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1.3fr; gap: 4.2rem; padding: 6rem 5vw 4.5rem; }
 .foot-logo { display: block; margin-bottom: 1.2rem; max-width: 200px; }
@@ -677,27 +580,15 @@ footer { background: var(--bg-darker); }
 .footer-bottom a:hover { color: var(--accent); }
 .footer-bottom i { color: var(--accent); }
 
-/* ── SCROLL PROGRESS BAR ── */
-.scroll-progress {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 3px; z-index: 1001;
-  background: transparent;
-}
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1001; background: transparent; }
 .scroll-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  width: 0%; transition: width 0.1s linear;
-  box-shadow: 0 0 10px rgba(56,189,248,0.5);
+  height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+  width: 0%; transition: width 0.1s linear; box-shadow: 0 0 10px rgba(56,189,248,0.5);
 }
 
-/* ── SECTION REVEAL WITH CLIP PATH ── */
-.clip-reveal {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1.1s cubic-bezier(0.77, 0, 0.18, 1);
-}
+.clip-reveal { clip-path: inset(0 100% 0 0); transition: clip-path 1.1s cubic-bezier(0.77, 0, 0.18, 1); }
 .clip-reveal.on { clip-path: inset(0 0% 0 0); }
 
-/* ── ANIMATIONS ── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 .anim-up { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -715,7 +606,6 @@ footer { background: var(--bg-darker); }
 .stagger-children.on > *:nth-child(6){opacity:1;transform:none;transition-delay:.45s}
 .stagger-children.on > *:nth-child(7){opacity:1;transform:none;transition-delay:.54s}
 
-/* ── RESPONSIVE ── */
 @media(max-width:1100px){
   .features-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(3,1fr)}
@@ -741,7 +631,7 @@ footer { background: var(--bg-darker); }
   .footer-main{grid-template-columns:1fr}
   .hero-btns{flex-direction:column;align-items:flex-start}
   .hero-title{font-size:clamp(2.8rem,8vw,4.2rem)}
-  .port-slide{flex:0 0 85%}
+  .port-card{width:240px}
   .cta-form-panel{padding:2.5rem 1.5rem}
   .form-row{grid-template-columns:1fr}
   .form-contact-links{flex-direction:column;gap:0.8rem}
@@ -750,20 +640,12 @@ footer { background: var(--bg-darker); }
 </head>
 <body>
 
-<!-- PAGE TRANSITION OVERLAY -->
 <div class="page-overlay"></div>
-
-<!-- SCROLL PROGRESS -->
 <div class="scroll-progress"><div class="scroll-progress-bar" id="progressBar"></div></div>
-
-<!-- CUSTOM CURSOR (OCULTO) -->
 <div class="cursor-dot" id="cursorDot" style="display:none"></div>
 <div class="cursor-ring" id="cursorRing" style="display:none"></div>
-
-<!-- FLOATING PARTICLES -->
 <div class="particles-container" id="particles"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">
     <img src="jlm.png" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px;">
@@ -775,7 +657,6 @@ footer { background: var(--bg-darker); }
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#areas">Areas</a></li>
-    <!-- ← SOCIAL ICONS en lugar de Free Estimate -->
     <li class="nav-socials">
       <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -786,7 +667,6 @@ footer { background: var(--bg-darker); }
   <button class="hamburger" id="hbg"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mmenu">
   <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
   <a href="#about" onclick="closeM()">About</a>
@@ -797,7 +677,6 @@ footer { background: var(--bg-darker); }
   <a href="#cta" onclick="closeM()" style="color:var(--accent)">Free Estimate</a>
 </div>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-slide active"></div>
   <div class="hero-slide"></div>
@@ -823,7 +702,6 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-bar-inner">
   <div class="stat-item stagger-children">
     <div class="stat-num" data-target="25" data-suffix="+">0</div>
@@ -843,7 +721,6 @@ footer { background: var(--bg-darker); }
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-imgs anim-left">
     <img class="about-img-main" src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=85&fit=crop&crop=center" alt="Installation">
@@ -867,7 +744,6 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- WHY -->
 <section id="why">
   <div class="anim-up" style="max-width:680px">
     <div class="section-tag">What Sets Us Apart</div>
@@ -908,7 +784,6 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- BRANDS -->
 <section id="brands">
   <div class="brands-head anim-up">
     <div class="section-tag" style="justify-content:center">Trusted Brands</div>
@@ -941,7 +816,9 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- PORTFOLIO CAROUSEL -->
+<!-- ════════════════════════════════════════
+     PORTFOLIO CAROUSEL (ACTUALIZADO)
+════════════════════════════════════════ -->
 <section id="portfolio">
   <div class="port-head anim-up">
     <div>
@@ -951,50 +828,98 @@ footer { background: var(--bg-darker); }
     <p>Every project is handled with unmatched precision. Browse a selection of our recent residential and commercial installations across South Florida.</p>
   </div>
 
-  <div class="port-slider-wrap anim-up">
-    <div class="port-slider-track-outer" id="sliderOuter">
-      <div class="port-slider-track" id="sliderTrack">
-        <div class="port-slide active-slide">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop" alt="Impact Sliding Doors" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Residential</small><strong>Impact Sliding Doors</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&fit=crop" alt="Storefront Install" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Commercial</small><strong>Storefront Install</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=85&fit=crop" alt="Condo Windows" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>High-Rise</small><strong>Condo Windows</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85&fit=crop" alt="French Doors" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Residential</small><strong>French Doors</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=85&fit=crop" alt="Full Window Replace" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Renovation</small><strong>Full Window Replace</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85&fit=crop" alt="Glass Façade" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Commercial</small><strong>Glass Façade</strong></div></div>
-        </div>
-        <div class="port-slide">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=85&fit=crop" alt="Custom Home Install" draggable="false">
-          <div class="port-slide-overlay"><div class="port-slide-label"><small>Luxury</small><strong>Custom Home Install</strong></div></div>
+  <div class="port-carousel-wrap anim-up">
+    <div class="port-carousel-track">
+      <!-- Duplicamos las tarjetas para loop infinito -->
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=85&fit=crop" alt="Impact Sliding Doors" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Residential</small><strong>Impact Sliding Doors</strong></div>
         </div>
       </div>
-    </div>
-
-    <div class="port-nav">
-      <button class="port-arrow" id="portPrev"><i class="fa fa-chevron-left"></i></button>
-      <div class="port-dots-row" id="portDots"></div>
-      <div class="port-counter" id="portCounter">1 / 7</div>
-      <button class="port-arrow" id="portNext"><i class="fa fa-chevron-right"></i></button>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&fit=crop" alt="Storefront Install" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Commercial</small><strong>Storefront Install</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=85&fit=crop" alt="Condo Windows" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>High-Rise</small><strong>Condo Windows</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=85&fit=crop" alt="French Doors" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Residential</small><strong>French Doors</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=85&fit=crop" alt="Full Window Replace" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Renovation</small><strong>Full Window Replace</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=85&fit=crop" alt="Glass Façade" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Commercial</small><strong>Glass Façade</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=85&fit=crop" alt="Custom Home Install" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Luxury</small><strong>Custom Home Install</strong></div>
+        </div>
+      </div>
+      <!-- Duplicado para loop infinito -->
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=85&fit=crop" alt="Impact Sliding Doors" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Residential</small><strong>Impact Sliding Doors</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&fit=crop" alt="Storefront Install" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Commercial</small><strong>Storefront Install</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=85&fit=crop" alt="Condo Windows" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>High-Rise</small><strong>Condo Windows</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=85&fit=crop" alt="French Doors" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Residential</small><strong>French Doors</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=85&fit=crop" alt="Full Window Replace" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Renovation</small><strong>Full Window Replace</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=85&fit=crop" alt="Glass Façade" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Commercial</small><strong>Glass Façade</strong></div>
+        </div>
+      </div>
+      <div class="port-card">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=85&fit=crop" alt="Custom Home Install" draggable="false">
+        <div class="port-card-overlay">
+          <div class="port-card-label"><small>Luxury</small><strong>Custom Home Install</strong></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOUNDER -->
 <section id="founder">
   <div class="founder-img-wrap anim-left">
     <div class="founder-ring"></div>
@@ -1020,7 +945,6 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- TEAM -->
 <section id="team">
   <div class="anim-up">
     <div class="section-tag">The People Behind the Work</div>
@@ -1036,7 +960,6 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- AREAS -->
 <section id="areas">
   <div class="areas-inner">
     <div class="anim-left">
@@ -1081,9 +1004,7 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- CTA — CONTACT FORM (testimonial card eliminado) -->
 <section id="cta">
-  <!-- Left: Image panel with overlay info -->
   <div class="cta-image-panel anim-left">
     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85&fit=crop" alt="Installation work">
     <div class="cta-image-overlay">
@@ -1097,36 +1018,20 @@ footer { background: var(--bg-darker); }
         <div class="cta-panel-feature"><i class="fa fa-check"></i> Serving Palm Beach, Broward & Dade</div>
       </div>
     </div>
-    <!-- ← TESTIMONIAL CARD ELIMINADO AQUÍ -->
   </div>
-
-  <!-- Right: Contact form -->
   <div class="cta-form-panel anim-right">
     <div class="cta-form-tag">Get In Touch</div>
     <h2 class="cta-form-title">Request a<br>Free Estimate</h2>
     <p class="cta-form-sub">Fill out the form and our team will contact you within 24 hours with a detailed quote.</p>
-
     <div id="contactFormWrap">
       <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
         <div class="form-row">
-          <div class="form-field">
-            <label>First Name</label>
-            <input type="text" placeholder="John" required>
-          </div>
-          <div class="form-field">
-            <label>Last Name</label>
-            <input type="text" placeholder="Smith" required>
-          </div>
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="John" required></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith" required></div>
         </div>
         <div class="form-row">
-          <div class="form-field">
-            <label>Email Address</label>
-            <input type="email" placeholder="john@example.com" required>
-          </div>
-          <div class="form-field">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="(786) 000-0000">
-          </div>
+          <div class="form-field"><label>Email Address</label><input type="email" placeholder="john@example.com" required></div>
+          <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="(786) 000-0000"></div>
         </div>
         <div class="form-field">
           <label>Service Needed</label>
@@ -1152,28 +1057,17 @@ footer { background: var(--bg-darker); }
               <option>Mixed Use</option>
             </select>
           </div>
-          <div class="form-field">
-            <label>City / Area</label>
-            <input type="text" placeholder="Miami, Fort Lauderdale…">
-          </div>
+          <div class="form-field"><label>City / Area</label><input type="text" placeholder="Miami, Fort Lauderdale…"></div>
         </div>
-        <div class="form-field">
-          <label>Project Details</label>
-          <textarea placeholder="Tell us about your project — number of windows/doors, timeline, any special requirements…"></textarea>
-        </div>
-        <button type="submit" class="form-submit-btn">
-          <i class="fa fa-paper-plane"></i> Send My Request
-        </button>
+        <div class="form-field"><label>Project Details</label><textarea placeholder="Tell us about your project…"></textarea></div>
+        <button type="submit" class="form-submit-btn"><i class="fa fa-paper-plane"></i> Send My Request</button>
       </form>
-
       <div class="form-contact-links">
         <a href="tel:7863666875" class="form-contact-link"><i class="fa fa-phone"></i> 786-366-6875</a>
         <a href="tel:8884140767" class="form-contact-link"><i class="fa fa-phone"></i> (888) 414-0767</a>
         <a href="mailto:info@jlmdinstall.com" class="form-contact-link"><i class="fa fa-envelope"></i> info@jlmdinstall.com</a>
       </div>
     </div>
-
-    <!-- Success message (hidden) -->
     <div class="form-success" id="formSuccess">
       <div class="form-success-icon"><i class="fa fa-check"></i></div>
       <h3>Message Sent!</h3>
@@ -1183,13 +1077,10 @@ footer { background: var(--bg-darker); }
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-main">
     <div class="footer-brand">
-      <a href="#" class="foot-logo">
-        <img src="src/logo-jlmd.png" alt="JLMD Install">
-      </a>
+      <a href="#" class="foot-logo"><img src="src/logo-jlmd.png" alt="JLMD Install"></a>
       <p>Your go-to installation experts. Precision windows and doors across South Florida for over a decade. Licensed, insured, committed to excellence.</p>
       <div class="foot-license"><i class="fa fa-certificate"></i> CGC – 1536193 · Licensed & Insured</div>
     </div>
@@ -1237,209 +1128,41 @@ footer { background: var(--bg-darker); }
 </footer>
 
 <script>
-/* ── NAV SCROLL ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
-
-/* ── HAMBURGER ── */
-document.getElementById('hbg').addEventListener('click', () => {
-  document.getElementById('mmenu').classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
+document.getElementById('hbg').addEventListener('click', () => { document.getElementById('mmenu').classList.add('open'); document.body.style.overflow = 'hidden'; });
 document.getElementById('mclose').addEventListener('click', closeM);
-function closeM() {
-  document.getElementById('mmenu').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closeM() { document.getElementById('mmenu').classList.remove('open'); document.body.style.overflow = ''; }
 
-/* ── HERO SLIDESHOW ── */
 let slide = 0;
 const slides = document.querySelectorAll('.hero-slide');
 const heroDots = document.querySelectorAll('.hero-dot');
-function goSlide(n) {
-  slides[slide].classList.remove('active');
-  heroDots[slide].classList.remove('active');
-  slide = n;
-  slides[slide].classList.add('active');
-  heroDots[slide].classList.add('active');
-}
+function goSlide(n) { slides[slide].classList.remove('active'); heroDots[slide].classList.remove('active'); slide = n; slides[slide].classList.add('active'); heroDots[slide].classList.add('active'); }
 setInterval(() => goSlide((slide + 1) % slides.length), 5000);
 
-/* ── SCROLL REVEAL ── */
 const anims = document.querySelectorAll('.anim-up,.anim-left,.anim-right,.anim-scale,.stagger-children');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
+const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
 anims.forEach(el => io.observe(el));
 
-/* ── COUNTER ANIMATION ── */
 const counters = document.querySelectorAll('.stat-num[data-target]');
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target;
-    const target = +el.dataset.target;
-    const suffix = el.dataset.suffix || '';
-    let cur = 0;
-    const step = target / 55;
-    const t = setInterval(() => {
-      cur = Math.min(cur + step, target);
-      el.textContent = Math.floor(cur) + suffix;
-      if (cur >= target) clearInterval(t);
-    }, 22);
-    cio.unobserve(el);
-  });
-}, { threshold: 0.5 });
+const cio = new IntersectionObserver(entries => { entries.forEach(e => { if (!e.isIntersecting) return; const el = e.target; const target = +el.dataset.target; const suffix = el.dataset.suffix || ''; let cur = 0; const step = target / 55; const t = setInterval(() => { cur = Math.min(cur + step, target); el.textContent = Math.floor(cur) + suffix; if (cur >= target) clearInterval(t); }, 22); cio.unobserve(el); }); }, { threshold: 0.5 });
 counters.forEach(el => cio.observe(el));
 
-/* ── ACTIVE NAV ── */
 const secs = document.querySelectorAll('section[id]');
 const nLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  secs.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
-  nLinks.forEach(a => {
-    const href = a.getAttribute('href');
-    a.style.opacity = href === '#' + cur ? '1' : '';
-  });
-});
+window.addEventListener('scroll', () => { let cur = ''; secs.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; }); nLinks.forEach(a => { const href = a.getAttribute('href'); a.style.opacity = href === '#' + cur ? '1' : ''; }); });
 
-/* ── SCROLL PROGRESS BAR ── */
-window.addEventListener('scroll', () => {
-  const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
-  document.getElementById('progressBar').style.width = pct + '%';
-});
+window.addEventListener('scroll', () => { const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100; document.getElementById('progressBar').style.width = pct + '%'; });
 
-/* ── FLOATING PARTICLES ── */
 const container = document.getElementById('particles');
-for (let i = 0; i < 18; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const size = Math.random() * 3 + 1;
-  p.style.cssText = `
-    left: ${Math.random() * 100}%;
-    width: ${size}px; height: ${size}px;
-    animation-duration: ${Math.random() * 20 + 15}s;
-    animation-delay: ${Math.random() * -20}s;
-    --drift: ${(Math.random() - 0.5) * 200}px;
-    opacity: ${Math.random() * 0.5 + 0.1};
-  `;
-  container.appendChild(p);
-}
+for (let i = 0; i < 18; i++) { const p = document.createElement('div'); p.className = 'particle'; const size = Math.random() * 3 + 1; p.style.cssText = `left: ${Math.random() * 100}%; width: ${size}px; height: ${size}px; animation-duration: ${Math.random() * 20 + 15}s; animation-delay: ${Math.random() * -20}s; --drift: ${(Math.random() - 0.5) * 200}px; opacity: ${Math.random() * 0.5 + 0.1};`; container.appendChild(p); }
 
-/* ── PORTFOLIO CAROUSEL (SUAVE + LOOP) ── */
-const sliderTrack = document.getElementById('sliderTrack');
-const portSlides = sliderTrack.querySelectorAll('.port-slide');
-const portDotsRow = document.getElementById('portDots');
-const portCounter = document.getElementById('portCounter');
-const total = portSlides.length;
-let currentSlide = 0;
-let isDragging = false, startX = 0, currentX = 0, dragStarted = false;
-
-// Build dots
-portSlides.forEach((_, i) => {
-  const d = document.createElement('button');
-  d.className = 'port-dot-btn' + (i === 0 ? ' active' : '');
-  d.addEventListener('click', () => goPortSlide(i));
-  portDotsRow.appendChild(d);
-});
-
-function updateSlider() {
-  const outer = document.getElementById('sliderOuter');
-  const outerW = outer.offsetWidth;
-  const slideW = portSlides[0].offsetWidth;
-  const gap = 20;
-  const offset = (outerW / 2) - (slideW / 2) - currentSlide * (slideW + gap);
-  sliderTrack.style.transform = `translateX(${offset}px)`;
-  portSlides.forEach((s, i) => s.classList.toggle('active-slide', i === currentSlide));
-  const dots = portDotsRow.querySelectorAll('.port-dot-btn');
-  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-  portCounter.textContent = (currentSlide + 1) + ' / ' + total;
-}
-
-function goPortSlide(n) {
-  currentSlide = ((n % total) + total) % total; // ← loop infinito
-  updateSlider();
-}
-
-document.getElementById('portNext').addEventListener('click', () => goPortSlide(currentSlide + 1));
-document.getElementById('portPrev').addEventListener('click', () => goPortSlide(currentSlide - 1));
-
-// Drag / swipe
-const outer = document.getElementById('sliderOuter');
-outer.addEventListener('mousedown', e => {
-  isDragging = true; startX = e.clientX; dragStarted = false;
-  sliderTrack.style.transition = 'none';
-});
-window.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  const diff = e.clientX - startX;
-  if (Math.abs(diff) > 5) dragStarted = true;
-});
-window.addEventListener('mouseup', e => {
-  if (!isDragging) return;
-  isDragging = false;
-  sliderTrack.style.transition = '';
-  const diff = e.clientX - startX;
-  if (Math.abs(diff) > 60) {
-    goPortSlide(diff < 0 ? currentSlide + 1 : currentSlide - 1);
-  } else {
-    updateSlider();
-  }
-});
-outer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; sliderTrack.style.transition = 'none'; });
-outer.addEventListener('touchend', e => {
-  sliderTrack.style.transition = '';
-  const diff = e.changedTouches[0].clientX - startX;
-  if (Math.abs(diff) > 50) goPortSlide(diff < 0 ? currentSlide + 1 : currentSlide - 1);
-  else updateSlider();
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') goPortSlide(currentSlide - 1);
-  if (e.key === 'ArrowRight') goPortSlide(currentSlide + 1);
-});
-
-// ← AUTO-PLAY SUAVE EN BUCLE
-let portTimer;
-function startAutoPlay() {
-  portTimer = setInterval(() => goPortSlide(currentSlide + 1), 4500); // ← 4.5s, más suave
-}
-function stopAutoPlay() { clearInterval(portTimer); }
-outer.addEventListener('mouseenter', stopAutoPlay);
-outer.addEventListener('mouseleave', startAutoPlay);
-startAutoPlay();
-
-window.addEventListener('resize', updateSlider);
-setTimeout(updateSlider, 100);
-
-/* ── TILT EFFECT ON FEAT CARDS ── */
 document.querySelectorAll('.tilt-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-8px)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
+  card.addEventListener('mousemove', e => { const rect = card.getBoundingClientRect(); const x = (e.clientX - rect.left) / rect.width - 0.5; const y = (e.clientY - rect.top) / rect.height - 0.5; card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-8px)`; });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-/* ── FORM SUBMIT ── */
-function handleFormSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.form-submit-btn');
-  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending…';
-  btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('contactForm').style.display = 'none';
-    document.querySelector('.form-contact-links').style.display = 'none';
-    const success = document.getElementById('formSuccess');
-    success.classList.add('show');
-  }, 1400);
-}
+function handleFormSubmit(e) { e.preventDefault(); const btn = e.target.querySelector('.form-submit-btn'); btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending…'; btn.disabled = true; setTimeout(() => { document.getElementById('contactForm').style.display = 'none'; document.querySelector('.form-contact-links').style.display = 'none'; document.getElementById('formSuccess').classList.add('show'); }, 1400); }
 </script>
 </body>
 </html>
