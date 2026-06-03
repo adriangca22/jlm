@@ -57,12 +57,20 @@
 </div>
 
 <section id="hero">
-  <div class="hero-slide active"></div>
-  <div class="hero-slide"></div>
-  <div class="hero-slide"></div>
-  <div class="hero-overlay"></div>
+  <!-- Video Background: single video.mp4, covering full hero area -->
+  <div class="hero-video-wrapper">
+    <video autoplay muted loop playsinline class="hero-video">
+          <source src="https://files.catbox.moe/hv9wgq.mp4"video/mp4">
+
+      Your browser does not support the video tag.
+    </video>
+    <!-- Optional overlay for better text contrast (preserves original style) -->
+    <div class="hero-video-overlay"></div>
+  </div>
+  <!-- Removed hero-slide divs as they are no longer needed; video replaces them -->
+  <div class="hero-overlay"></div> <!-- kept for consistency, but layered properly -->
   <div class="hero-content">
- 
+   
     <h1 class="hero-title">WINDOW & DOOR<br><span class="accent">Install Experts</span></h1>
     <p class="hero-sub">Your go-to installation experts. Precision craftsmanship, zero compromise — serving South Florida for over a decade.</p>
     <div class="hero-btns">
@@ -70,11 +78,7 @@
       <a href="tel:8884140767" class="btn-outline-white"><i class="fa fa-phone"></i> (888) 414-0767</a>
     </div>
   </div>
-  <div class="hero-dots" id="heroDots">
-    <button class="hero-dot active" onclick="goSlide(0)"></button>
-    <button class="hero-dot" onclick="goSlide(1)"></button>
-    <button class="hero-dot" onclick="goSlide(2)"></button>
-  </div>
+  <!-- Dots removed because video has no slides; removed scroll-hint remains same -->
   <div class="scroll-hint">
     <span>Scroll</span>
     <i class="fa fa-chevron-down scroll-arrow"></i>
