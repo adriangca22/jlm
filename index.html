@@ -1,40 +1,36 @@
+
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>JLMD Install – Window & Door Installation Experts</title> <!-- En el head --> <link rel="stylesheet" href="styles.css"> <!-- Antes de </body> --> <l
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JLMD Install – Window & Door Installation Experts</title>
-<!-- En el head -->
-<link rel="stylesheet" href="styles.css">
-<!-- Antes de </body> -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
+ 
 <div class="page-overlay"></div>
 <div class="scroll-progress"><div class="scroll-progress-bar" id="progressBar"></div></div>
-<div class="cursor-dot" id="cursorDot" style="display:none"></div>
-<div class="cursor-ring" id="cursorRing" style="display:none"></div>
 <div class="particles-container" id="particles"></div>
-
+ 
+<!-- ══════════════════════ NAV ══════════════════════ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <img src="jlm.png" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px;">
+    <img src="jlm.png" alt="JLMD Logo" style="height:40px;width:auto;margin-right:8px;">
     JLMD<span class="dot">.</span>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#why">Why Us</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#team">Team</a></li>
     <li><a href="#areas">Areas</a></li>
     <li class="nav-socials">
       <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -45,32 +41,27 @@
   </ul>
   <button class="hamburger" id="hbg"><span></span><span></span><span></span></button>
 </nav>
-
+ 
 <div class="mobile-menu" id="mmenu">
   <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
   <a href="#about" onclick="closeM()">About</a>
-  <a href="#why" onclick="closeM()">Why Us</a>
+  <a href="#services" onclick="closeM()">Services</a>
   <a href="#portfolio" onclick="closeM()">Portfolio</a>
-  <a href="#team" onclick="closeM()">Team</a>
   <a href="#areas" onclick="closeM()">Areas</a>
   <a href="#cta" onclick="closeM()" style="color:var(--accent)">Free Estimate</a>
 </div>
-
+ 
+<!-- ══════════════════════ 1. HERO ══════════════════════ -->
 <section id="hero">
-  <!-- Video Background: single video.mp4, covering full hero area -->
   <div class="hero-video-wrapper">
     <video autoplay muted loop playsinline class="hero-video">
-          <source src="https://files.catbox.moe/8m1lc7.mp4"video/mp4">
-
+      <source src="https://files.catbox.moe/zur2r9.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-    <!-- Optional overlay for better text contrast (preserves original style) -->
     <div class="hero-video-overlay"></div>
   </div>
-  <!-- Removed hero-slide divs as they are no longer needed; video replaces them -->
-  <div class="hero-overlay"></div> <!-- kept for consistency, but layered properly -->
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-   
     <h1 class="hero-title">WINDOW & DOOR<br><span class="accent">Install Experts</span></h1>
     <p class="hero-sub">Your go-to installation experts. Precision craftsmanship, zero compromise — serving South Florida for over a decade.</p>
     <div class="hero-btns">
@@ -78,153 +69,110 @@
       <a href="tel:8884140767" class="btn-outline-white"><i class="fa fa-phone"></i> (888) 414-0767</a>
     </div>
   </div>
-  <!-- Dots removed because video has no slides; removed scroll-hint remains same -->
   <div class="scroll-hint">
     <span>Scroll</span>
     <i class="fa fa-chevron-down scroll-arrow"></i>
   </div>
 </section>
-
-<div class="stats-bar-inner">
-  <div class="stat-item stagger-children">
-    <div class="stat-num" data-target="25" data-suffix="+">0</div>
-    <div class="stat-lbl">Years Experience</div>
+ 
+<!-- ══════════════════════ 2. LOGOS / PARTNERS ══════════════════════ -->
+<section id="logos">
+  <div class="logos-inner">
+    <img src="bc.png" alt="Partner 1" class="logo-item">
+    <img src="OSHA-03.png" alt="Partner 2" class="logo-item logo-large">
+    <img src="DBR.webp" alt="Partner 3" class="logo-item">
+    <img src="SBE.png" alt="Partner 4" class="logo-item logo-large">
+    <img src="WING.png" alt="Partner 5" class="logo-item">
   </div>
-  <div class="stat-item">
-    <div class="stat-num" data-target="10" data-suffix="+">0</div>
-    <div class="stat-lbl">Years in Business</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" data-target="3" data-suffix="">0</div>
-    <div class="stat-lbl">Counties Served</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" data-target="100" data-suffix="%">0</div>
-    <div class="stat-lbl">Client Satisfaction</div>
-  </div>
-</div>
-
+</section>
+<!-- ══════════════════════ 3. ABOUT ══════════════════════ -->
 <section id="about">
   <div class="about-imgs anim-left">
-    <img class="about-img-main" src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=85&fit=crop&crop=center" alt="Installation">
-    <img class="about-img-float" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=85&fit=crop" alt="Detail">
-    <div class="about-badge-pill"><strong>10+</strong><span>Years<br>Installed</span></div>
+    <div class="about-circle-wrap">
+      <img class="about-img-circle" src="jose.png" alt="Jose Diaz – Founder"
+        onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=85&fit=crop&crop=face'">
+    </div>
   </div>
   <div class="about-text anim-right">
     <div class="section-tag">About Us</div>
-    <h2 class="section-title">Leaders in<br>Installation</h2>
-    <p>With over 10 years of experience, JLMD Install is a leader in the installation industry, renowned for a broad spectrum of specialized services. Our dedicated team is committed to delivering installations that perfectly blend functionality, style, and durability, thereby setting new standards within the industry.</p>
-    <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:1.5rem 0 .9rem">Our Clientele</h3>
+    <h2 class="section-title">Leaders in<br><span>Installation</span></h2>
+    <p>JLMD Install delivers premium window and door installation services across the entire state of Florida. Focusing 100% on precision execution, code compliance, and structural integrity, our expert teams ensure seamless project delivery for new builds and large-scale renovations.</p>
+    <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:1.5rem 0 .9rem">Sectors We Serve</h3>
     <div class="clients-grid stagger-children">
       <div class="client-chip"><i class="fa fa-home"></i> Homeowners</div>
-      <div class="client-chip"><i class="fa fa-hard-hat"></i> Contractors and Builders</div>
+      <div class="client-chip"><i class="fa fa-hard-hat"></i> Contractors &amp; Builders</div>
       <div class="client-chip"><i class="fa fa-building"></i> Commercial Clients</div>
       <div class="client-chip"><i class="fa fa-city"></i> Real Estate Developers</div>
-      <div class="client-chip"><i class="fa fa-drafting-compass"></i> Architects and Designers</div>
+      <div class="client-chip"><i class="fa fa-drafting-compass"></i> Architects &amp; Designers</div>
       <div class="client-chip"><i class="fa fa-key"></i> Property Management Companies</div>
     </div>
-    <p class="mt-2" style="margin-top:1rem; font-style:italic">At JLMD Install, our commitment to excellence and capability to cater to diverse needs across various sectors place us at the forefront of the installation industry. We consistently fulfill and exceed our clients' expectations, regardless of the project's size or scope.</p>
   </div>
 </section>
-
-<section id="why">
-  <div class="why-container">
-    <div class="anim-up">
-      <div class="section-tag">What Sets Us Apart</div>
-      <h2 class="section-title">Why Choose<br>JLMD Install</h2>
-      <p class="why-intro">Our unique edge lies in our comprehensive range of specialized services. From high-quality impact sliding and swing doors that ensure security and weather resistance to stylish sidelight installations and precision floor cutting for perfect door fittings, we cover every aspect of door and window installation. Our expertise extends to high-rise condo installations, wood frame home services, and custom storefront installations, each tailored to meet specific needs. Additionally, we offer expert services like shutter removal, window sill replacement, stucco band installation, and precise aluminum angles and plate installation. Our skilled operation of boom and scissor lifts and secure scaffolding solutions enable us to handle elevated work areas efficiently. Above all, our commitment to waterproofing ensures that every installation is aesthetically pleasing but also watertight and durable, setting us apart in providing comprehensive, high-quality installation services.</p>
+<!-- ══════════════════════ 4. OUR SERVICES ══════════════════════ -->
+<section id="services">
+  <div class="services-container">
+    <div class="anim-up" style="text-align:center;max-width:680px;margin:0 auto 3.5rem;">
+      <div class="section-tag" style="justify-content:center">What We Do</div>
+      <h2 class="section-title" style="color:#ffffff">Our Services</h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:1rem;line-height:1.75">At JLMD Install, we deliver precision window and door installation services across the entire state of Florida. From structural preparation to elevated high-rise execution, our certified teams ensure seamless code compliance, waterproof integrity, and flawless project delivery.</p>
     </div>
-    <div class="features-grid stagger-children">
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-shield-halved"></i></div>
-        <h3>Impact Sliding & Swing Doors</h3>
-        <p>Security and weather resistance designed for South Florida's toughest conditions, total peace of mind.</p>
+    <div class="services-grid stagger-children">
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="Luxury-Impact-Doors.png" alt="Impact Windows & Doors">
+        </div>
+        <div class="service-card-body">
+    
+          <h3>Impact Windows &amp; Doors</h3>
+          <p>High-security, hurricane-grade installations designed for Florida's toughest conditions. We specialize in precision-fit impact windows and sliding glass doors with lights that seamlessly blend structural integrity with modern architectural aesthetics.</p>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-building"></i></div>
-        <h3>High-Rise Condo Installs</h3>
-        <p>Expert high-rise installations using boom lifts, scissor lifts, and scaffolding – safe & compliant.</p>
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="Luxury-Impact-Doors02.png" alt="High-Rise & Commercial Installs">
+        </div>
+        <div class="service-card-body">
+   
+          <h3>High-Rise &amp; Commercial Installs</h3>
+          <p>Specialized, high-elevation window and door replacements for coastal condominiums and custom storefronts. Our certified teams operate boom lifts, scissor lifts, scaffolding, and heavy-lift operations to ensure safety, code-compliant, and flawless execution.</p>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-store"></i></div>
-        <h3>Custom Storefronts</h3>
-        <p>Modern, durable storefront installations tailored to commercial spaces, enhancing curb appeal and function.</p>
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="Luxury-Impact-Doors03.png" alt="Waterproofing & Weatherization">
+        </div>
+        <div class="service-card-body">
+          
+          <h3>Waterproofing &amp; Weatherization</h3>
+          <p>Advanced moisture barrier protocols and commercial-grade sealing to guarantee fully watertight installations. We deliver protection designed to withstand Florida's severe tropical elements, setting the standard for durability across Florida.</p>
+
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-droplet"></i></div>
-        <h3>Waterproofing & Sealing</h3>
-        <p>Our installations are watertight and durable – combining beauty with ultimate protection against moisture.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-ruler-combined"></i></div>
-        <h3>Precision Cutting & Framing</h3>
-        <p>Wood frame home services, stucco band installation, and precise aluminum angles for perfect fits.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fa fa-star"></i></div>
-        <h3>Sidelight & Sill Services</h3>
-        <p>Shutter removal, window sill replacement, and custom aluminum details for a polished final look.</p>
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="Luxury-Impact-Doors04.png" alt="Specialized Framing & Prep Work">
+        </div>
+        <div class="service-card-body">
+         
+          <h3>Specialized Framing &amp; Prep Work</h3>
+          <p>Precision concrete floor cutting, structural wood frame services, stucco band installations, and custom aluminum angles. We handle every detail of pre-installation framing and structural finishes to ensure a perfect, flush architectural fit.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     BRANDS - IMÁGENES GRANDES
-════════════════════════════════════════ -->
-<section id="brands">
-  <div class="brands-head anim-up">
-    <div class="section-tag" style="justify-content:center">Trusted Partners</div>
-    <h2 class="section-title" style="text-align:center">Expert Installs from<br>Top Manufacturers</h2>
-    <p>JLMD Install specializes in installing windows and doors from the esteemed manufacturers listed below. Our team guarantees precise, high-quality installations tailored to products from these trusted brands. Rely on us for expert service that transforms your space with superior windows and doors.</p>
-  </div>
-  <div class="carousel-wrap">
-    <div class="carousel-track">
-      <div class="brand-chip"><img src="img/1.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/2.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/3.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/4.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/5.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/6.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/7.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/8.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/9.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/10.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/11.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/12.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/13.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/14.png" alt="Brand"></div>
-      <!-- Duplicado -->
-      <div class="brand-chip"><img src="img/1.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/2.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/3.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/4.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/5.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/6.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/7.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/8.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/9.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/10.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/11.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/12.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/13.png" alt="Brand"></div>
-      <div class="brand-chip"><img src="img/14.png" alt="Brand"></div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="#cta" class="btn-view-all">ALL VIEW</a>
     </div>
   </div>
 </section>
-
-<!-- ════════════════════════════════════════
-     PORTFOLIO CAROUSEL
-════════════════════════════════════════ -->
+ 
+<!-- ══════════════════════ 5. PORTFOLIO ══════════════════════ -->
 <section id="portfolio">
   <div class="port-head anim-up">
-    <div>
-      <div class="section-tag">Our Work</div>
-      <h2 class="section-title">Installation<br>Portfolio</h2>
-    </div>
-    <p>Every project is handled with unmatched precision. Browse a selection of our recent residential and commercial installations across South Florida.</p>
+    <div class="section-tag" style="justify-content:center">Our Work</div>
+    <h2 class="section-title" style="text-align:center">Portfolio</h2>
+    <p style="text-align:center;color:var(--text-muted);max-width:540px;margin:0 auto">Every project is handled with unmatched precision. Browse a selection of our recent residential and commercial installations across South Florida.</p>
   </div>
-
+ 
   <div class="port-carousel-wrap anim-up">
     <div class="port-carousel-track">
       <div class="port-card">
@@ -255,7 +203,7 @@
         <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=85&fit=crop" alt="Custom Home Install" draggable="false">
         <div class="port-card-overlay"><div class="port-card-label"><small>Luxury</small><strong>Custom Home Install</strong></div></div>
       </div>
-      <!-- Duplicado -->
+      <!-- Duplicado loop -->
       <div class="port-card">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=85&fit=crop" alt="Impact Sliding Doors" draggable="false">
         <div class="port-card-overlay"><div class="port-card-label"><small>Residential</small><strong>Impact Sliding Doors</strong></div></div>
@@ -286,147 +234,78 @@
       </div>
     </div>
   </div>
-</section>
-
-<section id="founder">
-  <div class="founder-img-wrap anim-left">
-    <div class="founder-ring"></div>
-    <div class="founder-ring2"></div>
-    <img class="founder-img" src="jose.webp" alt="Jose Diaz – Founder">
-  </div>
-  <div class="anim-right">
-    <div class="section-tag">From Our Founder</div>
-    <span class="founder-quote-mark">"</span>
-    <blockquote>With 25 years in construction and over a decade in installations, I'm deeply committed to ensuring every client is satisfied. Give us an opportunity, and I assure you — you will not be disappointed.</blockquote>
-    <div class="founder-sig">
-      <img src="jose.webp" alt="Jose Diaz">
-      <div class="founder-sig-text">
-        <strong>Jose Diaz</strong>
-        <span>Founder & CEO, JLMD Install</span>
-      </div>
-    </div>
-    <div class="founder-metrics stagger-children">
-      <div class="f-metric"><strong>25+</strong><span>Years in<br>Construction</span></div>
-      <div class="f-metric"><strong>10+</strong><span>Years in<br>Installation</span></div>
-      <div class="f-metric"><strong>100%</strong><span>Client<br>Satisfaction</span></div>
-    </div>
+ 
+  <div style="text-align:center;margin-top:2.5rem">
+    <a href="#cta" class="btn-view-all">ALL VIEW</a>
   </div>
 </section>
-
-<!-- ════════════════════════════════════════
-     TEAM - PRO CARDS (3 columnas, foto completa)
-════════════════════════════════════════ -->
-<section id="team">
-  <div class="anim-up" style="text-align:center; max-width:600px; margin:0 auto;">
-    <div class="section-tag" style="justify-content:center">The People Behind the Work</div>
-    <h2 class="section-title">Meet The Team</h2>
+ 
+<!-- ══════════════════════ 6. TRUSTED PARTNERS (grid estático) ══════════════════════ -->
+<section id="brands">
+  <div class="brands-head anim-up">
+    <div class="section-tag" style="justify-content:center">Trusted Partners</div>
+    <h2 class="section-title" style="text-align:center;color:var(--text-dark)">Trusted Partners</h2>
+    <p>JLMD Install specializes in installing windows and doors from the esteemed manufacturers listed below. Our team guarantees precise, high-quality installations tailored to products from these trusted brands.</p>
   </div>
-  <div class="team-grid stagger-children">
-    <!-- Miembro 1 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-t5.jpg" alt="Alain Serrano" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">AS</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Alain Serrano</div>
-        <div class="team-card-role">Operations Manager</div>
-      </div>
-    </div>
-    <!-- Miembro 2 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-t2.jpg" alt="Max Diaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">MD</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Max Diaz</div>
-        <div class="team-card-role">Content Creator</div>
-      </div>
-    </div>
-    <!-- Miembro 3 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-hd.jpg" alt="Hilda Diaz" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">HD</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Hilda Diaz</div>
-        <div class="team-card-role">Managing Director</div>
-      </div>
-    </div>
-    <!-- Miembro 4 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-t3.jpg" alt="Domingo Garcias" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">DG</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Domingo Garcias</div>
-        <div class="team-card-role">Project Manager</div>
-      </div>
-    </div>
-    <!-- Miembro 5 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-t4.jpg" alt="Luis Trabanino" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">LT</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Luis Trabanino</div>
-        <div class="team-card-role">Field Supervisor</div>
-      </div>
-    </div>
-    <!-- Miembro 6 -->
-    <div class="team-card">
-      <img class="team-card-img" src="img/jlm-t1.jpg" alt="Juan Carlos C." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="team-card-fallback">JC</div>
-      <div class="team-card-overlay">
-        <div class="team-card-line"></div>
-        <div class="team-card-name">Juan Carlos C.</div>
-        <div class="team-card-role">Project Manager</div>
-      </div>
-    </div>
+  <div class="brands-static-grid stagger-children">
+    <div class="brand-static-chip"><img src="img/1.png" alt="Brand 1"></div>
+    <div class="brand-static-chip"><img src="img/2.png" alt="Brand 2"></div>
+    <div class="brand-static-chip"><img src="img/3.png" alt="Brand 3"></div>
+    <div class="brand-static-chip"><img src="img/4.png" alt="Brand 4"></div>
+    <div class="brand-static-chip"><img src="img/5.png" alt="Brand 5"></div>
+    <div class="brand-static-chip"><img src="img/6.png" alt="Brand 6"></div>
+    <div class="brand-static-chip"><img src="img/7.png" alt="Brand 7"></div>
+    <div class="brand-static-chip"><img src="img/8.png" alt="Brand 8"></div>
+    <div class="brand-static-chip"><img src="img/9.png" alt="Brand 9"></div>
+    <div class="brand-static-chip"><img src="img/10.png" alt="Brand 10"></div>
+    <div class="brand-static-chip"><img src="img/11.png" alt="Brand 11"></div>
+    <div class="brand-static-chip"><img src="img/12.png" alt="Brand 12"></div>
+    <div class="brand-static-chip"><img src="img/13.png" alt="Brand 13"></div>
+    <div class="brand-static-chip"><img src="img/14.png" alt="Brand 14"></div>
   </div>
 </section>
-
+ 
+<!-- ══════════════════════ 7. SERVICE AREAS ══════════════════════ -->
 <section id="areas">
   <div class="areas-inner">
     <div class="anim-left">
       <div class="map-card">
-        <!-- 🗺️ MAPA TRADICIONAL DE GOOGLE MAPS -->
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140374.198242089!2d-81.0644!3d26.1224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sSouth%20Florida!5e0!3m2!1sen!2sus!4v1700000000000" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Áreas de Servicio - South Florida">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140374.198242089!2d-81.0644!3d26.1224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sSouth%20Florida!5e0!3m2!1sen!2sus!4v1700000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Service Areas - South Florida">
         </iframe>
       </div>
     </div>
     <div class="anim-right">
       <div class="section-tag">Where We Work</div>
-      <h2 class="section-title">Service<br>Areas</h2>
-      <p style="color:rgba(255,255,255,0.8);line-height:1.85;margin-bottom:2rem;font-size:1.02rem">Proudly serving <strong style="color:var(--text-light)">Palm Beach, Broward, and Dade Counties</strong> and surrounding communities throughout South Florida.</p>
+      <h2 class="section-title">Serving Palm Beach,<br>Broward, and Dade Counties.</h2>
       <div class="areas-chips stagger-children">
-        <div class="area-chip">Broward County</div>
-        <div class="area-chip">Coral Gables</div>
-        <div class="area-chip">Dade County</div>
-        <div class="area-chip">Fontainebleau</div>
-        <div class="area-chip">Fort Lauderdale</div>
-        <div class="area-chip">Hollywood</div>
-        <div class="area-chip">Little Gables</div>
-        <div class="area-chip">Miami Springs</div>
-        <div class="area-chip">Palm Beach</div>
-        <div class="area-chip">Palm Beach County</div>
-        <div class="area-chip">Pompano Beach</div>
-        <div class="area-chip">South Miami</div>
-        <div class="area-chip">West Park</div>
-        <div class="area-chip">Westchester</div>
-        <div class="area-chip">& More!</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Broward County</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Coral Gables</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Dade County</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Fontainebleau</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Fort Lauderdale</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Hollywood</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Little Gables</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Miami Springs</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Palm Beach</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Palm Beach County</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Pompano Beach</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> South Miami</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> West Park</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Westchester</div>
+        <div class="area-chip"><i class="fa fa-map-marker-alt"></i> &amp; More!</div>
+      </div>
+      <div class="areas-license">
+        <i class="fa fa-certificate"></i>
+        Certified General Contractor: CGC-1536193 | Licensed &amp; Insured
       </div>
     </div>
   </div>
 </section>
-
+ 
+<!-- ══════════════════════ 8. CTA / FREE ESTIMATE ══════════════════════ -->
 <section id="cta">
   <div class="cta-image-panel anim-left">
     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85&fit=crop" alt="Installation work">
@@ -436,9 +315,9 @@
       <p class="cta-panel-desc">Get a free, no-obligation estimate from South Florida's most trusted installation team. We respond within 24 hours.</p>
       <div class="cta-panel-features">
         <div class="cta-panel-feature"><i class="fa fa-check"></i> Free detailed estimate</div>
-        <div class="cta-panel-feature"><i class="fa fa-check"></i> Licensed & fully insured (CGC-1536193)</div>
+        <div class="cta-panel-feature"><i class="fa fa-check"></i> Licensed &amp; fully insured (CGC-1536193)</div>
         <div class="cta-panel-feature"><i class="fa fa-check"></i> 100% satisfaction guarantee</div>
-        <div class="cta-panel-feature"><i class="fa fa-check"></i> Serving Palm Beach, Broward & Dade</div>
+        <div class="cta-panel-feature"><i class="fa fa-check"></i> Serving Palm Beach, Broward &amp; Dade</div>
       </div>
     </div>
   </div>
@@ -460,12 +339,12 @@
           <label>Service Needed</label>
           <select required>
             <option value="" disabled selected>Select a service…</option>
-            <option>Impact Doors & Windows</option>
+            <option>Impact Doors &amp; Windows</option>
             <option>High-Rise Condo Install</option>
             <option>Custom Storefront</option>
             <option>Waterproofing</option>
-            <option>Precision Cutting & Framing</option>
-            <option>Sidelight & Sill Services</option>
+            <option>Precision Cutting &amp; Framing</option>
+            <option>Sidelight &amp; Sill Services</option>
             <option>Other / Not Sure</option>
           </select>
         </div>
@@ -499,21 +378,20 @@
     </div>
   </div>
 </section>
-
+ 
+<!-- ══════════════════════ 9. FOOTER ══════════════════════ -->
 <footer>
   <div class="footer-main">
     <div class="footer-brand">
-      <a href="#" class="foot-logo"><img src="src/logo-jlmd.png" alt="JLMD Install"></a>
+      <a href="#" class="foot-logo"><img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;"></a>
       <p>Your go-to installation experts. Precision windows and doors across South Florida for over a decade. Licensed, insured, committed to excellence.</p>
-      
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
       <ul>
         <li><a href="#about"><i class="fa fa-chevron-right"></i> About Us</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Why Choose Us</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Our Services</a></li>
         <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
-        <li><a href="#team"><i class="fa fa-chevron-right"></i> Our Team</a></li>
         <li><a href="#areas"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
         <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
       </ul>
@@ -521,12 +399,12 @@
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
-        <li><a href="#why"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -534,7 +412,7 @@
       <ul>
         <li><a href="tel:8884140767"><i class="fa fa-phone"></i> (888) 414-0767</a></li>
         <li><a href="tel:7863666875"><i class="fa fa-phone"></i> 786-366-6875</a></li>
-        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward & Dade</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
       </ul>
       <div class="social-row">
         <a href="#" class="soc"><i class="fab fa-facebook-f"></i></a>
@@ -549,8 +427,12 @@
     <span>Made with <i class="fa fa-heart"></i> in South Florida</span>
   </div>
 </footer>
-
+ 
 <script src="main.js"></script>
-
 </body>
 </html>
+ 
+
+
+
+

@@ -127,3 +127,50 @@ function handleFormSubmit(e) {
         }, 1400);
     }
 }
+
+function animateCounter() {
+  const counter = document.querySelector('.about-glass-num');
+  if (!counter) return;
+  
+  const target = 10;
+  const duration = 1000; // 2 segundos
+  const step = target / (duration / 50); // Actualizar cada 50ms
+  let current = 0;
+  
+  const updateCounter = () => {
+    current += step;
+    if (current < target) {
+      counter.textContent = Math.floor(current);
+      counter.classList.add('animate');
+      setTimeout(updateCounter, 50);
+    } else {
+      counter.textContent = target;
+      counter.classList.remove('animate');
+    }
+  };
+  
+  updateCounter();
+}
+
+// Trigger cuando el elemento es visible en pantalla
+const observerOptions = {
+  threshold: 0.5,
+  rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter();
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Observar el badge
+document.addEventListener('DOMContentLoaded', () => {
+  const badge = document.querySelector('.about-glass-badge');
+  if (badge) {
+    observer.observe(badge);
+  }
+});
