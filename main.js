@@ -31,12 +31,25 @@ if (slides.length > 0) {
     window.goSlide = goSlide;
 }
 
-// INTERSECTION OBSERVER — scroll animations
+// INTERSECTION OBSERVER — scroll animations (MEJORADO para stagger)
 const animElements = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale, .stagger-children');
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('on');
+            
+            // Para stagger-children, asegurar que TODOS los hijos sean visibles
+            if (entry.target.classList.contains('stagger-children')) {
+                const children = entry.target.children;
+                Array.from(children).forEach((child, index) => {
+                    setTimeout(() => {
+                        child.style.opacity = '1';
+                        child.style.transform = 'translateY(0)';
+                        child.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    }, index * 50); // 50ms entre cada item
+                });
+            }
+            
             scrollObserver.unobserve(entry.target);
         }
     });
