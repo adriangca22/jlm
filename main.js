@@ -14,20 +14,24 @@ function closeM() {
 }
 
 // HERO SLIDER
-let slide = 0;
+// FIX: guard against missing slides (if section uses video instead of slider, skip)
 const slides = document.querySelectorAll('.hero-slide');
 const heroDots = document.querySelectorAll('.hero-dot');
-function goSlide(n) { 
-    slides[slide].classList.remove('active'); 
-    if(heroDots[slide]) heroDots[slide].classList.remove('active'); 
-    slide = n; 
-    slides[slide].classList.add('active'); 
-    if(heroDots[slide]) heroDots[slide].classList.add('active'); 
-}
-setInterval(() => goSlide((slide + 1) % slides.length), 5000);
-window.goSlide = goSlide;
+let slide = 0;
 
-// INTERSECTION OBSERVER (UNIFICADO - para animaciones de scroll)
+if (slides.length > 0) {
+    function goSlide(n) { 
+        slides[slide].classList.remove('active'); 
+        if (heroDots[slide]) heroDots[slide].classList.remove('active'); 
+        slide = n; 
+        slides[slide].classList.add('active'); 
+        if (heroDots[slide]) heroDots[slide].classList.add('active'); 
+    }
+    setInterval(() => goSlide((slide + 1) % slides.length), 5000);
+    window.goSlide = goSlide;
+}
+
+// INTERSECTION OBSERVER — scroll animations
 const animElements = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale, .stagger-children');
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -37,10 +41,9 @@ const scrollObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.15 });
-
 animElements.forEach(el => scrollObserver.observe(el));
 
-// CONTADORES ESTADÍSTICOS
+// STAT COUNTERS
 const counters = document.querySelectorAll('.stat-num[data-target]');
 const counterObserver = new IntersectionObserver((entries) => { 
     entries.forEach(e => { 
@@ -84,12 +87,12 @@ window.addEventListener('scroll', () => {
 window.addEventListener('scroll', () => { 
     const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100; 
     const progressBar = document.getElementById('progressBar');
-    if(progressBar) progressBar.style.width = pct + '%'; 
+    if (progressBar) progressBar.style.width = pct + '%'; 
 });
 
-// PARTICULAS
+// PARTICLES — disabled via CSS, kept for compatibility
 const container = document.getElementById('particles');
-if(container) {
+if (container) {
     for (let i = 0; i < 18; i++) { 
         const p = document.createElement('div'); 
         p.className = 'particle'; 
@@ -99,7 +102,7 @@ if(container) {
     }
 }
 
-// TILT CARDS (efecto 3D)
+// TILT CARDS (3D hover)
 document.querySelectorAll('.tilt-card').forEach(card => {
     card.addEventListener('mousemove', e => { 
         const rect = card.getBoundingClientRect(); 
@@ -112,65 +115,59 @@ document.querySelectorAll('.tilt-card').forEach(card => {
     });
 });
 
-// FORMULARIO
+// CONTACT FORM
 function handleFormSubmit(e) { 
     e.preventDefault(); 
     const btn = e.target.querySelector('.form-submit-btn'); 
-    if(btn) {
+    if (btn) {
         btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending…'; 
         btn.disabled = true; 
         setTimeout(() => { 
             const formWrap = document.getElementById('contactFormWrap');
             const successDiv = document.getElementById('formSuccess');
-            if(formWrap) formWrap.style.display = 'none';
-            if(successDiv) successDiv.classList.add('show'); 
+            if (formWrap) formWrap.style.display = 'none';
+            if (successDiv) successDiv.classList.add('show'); 
         }, 1400);
     }
 }
 
+// ABOUT COUNTER ANIMATION
 function animateCounter() {
-  const counter = document.querySelector('.about-glass-num');
-  if (!counter) return;
-  
-  const target = 10;
-  const duration = 1000; // 2 segundos
-  const step = target / (duration / 50); // Actualizar cada 50ms
-  let current = 0;
-  
-  const updateCounter = () => {
-    current += step;
-    if (current < target) {
-      counter.textContent = Math.floor(current);
-      counter.classList.add('animate');
-      setTimeout(updateCounter, 50);
-    } else {
-      counter.textContent = target;
-      counter.classList.remove('animate');
-    }
-  };
-  
-  updateCounter();
+    const counter = document.querySelector('.about-glass-num');
+    if (!counter) return;
+
+    const target = 10;
+    const duration = 1000;
+    const step = target / (duration / 50);
+    let current = 0;
+
+    const updateCounter = () => {
+        current += step;
+        if (current < target) {
+            counter.textContent = Math.floor(current);
+            counter.classList.add('animate');
+            setTimeout(updateCounter, 50);
+        } else {
+            counter.textContent = target;
+            counter.classList.remove('animate');
+        }
+    };
+
+    updateCounter();
 }
 
-// Trigger cuando el elemento es visible en pantalla
-const observerOptions = {
-  threshold: 0.5,
-  rootMargin: '0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounter();
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-// Observar el badge
+// Trigger about counter when badge enters viewport
 document.addEventListener('DOMContentLoaded', () => {
-  const badge = document.querySelector('.about-glass-badge');
-  if (badge) {
-    observer.observe(badge);
-  }
+    const badge = document.querySelector('.about-glass-badge');
+    if (badge) {
+        const badgeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    badgeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5, rootMargin: '0px' });
+        badgeObserver.observe(badge);
+    }
 });
