@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLMD Install – Window & Door Installation Experts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/webp" href="icono.webp">
+
+<style>
+:root {
+  --primary: #005082;
+  --primary-dark: #003d63;
+  --primary-light: #005c8a;
+  --bg-dark: #273a52;
+  --bg-darker: #1a2838;
+  --bg-deep: #0d1b2a;
+  --bg: #ffffff;
+  --bg2: #f8fafc;
+  --bg3: #eef2f6;
+  --text-dark: #0f172a;
+  --text-darker: #1e293b;
+  --text-light: #ffffff;
+  --text-muted: #64748b;
+  --text-muted-light: #94a3b8;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.25);
+  --border: #e2e8f0;
+  --border-dark: #334155;
+  --shadow-sm: 0 2px 12px rgba(0,80,130,0.08);
+  --shadow-md: 0 8px 32px rgba(0,80,130,0.12);
+  --shadow-lg: 0 20px 60px rgba(0,80,130,0.18);
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-full: 999px;
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
+img { display: block; max-width: 100%; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000; height: 72px;
+  padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display); font-size: 1.75rem; font-weight: 800;
+  letter-spacing: 0.01em; color: var(--primary); text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.70rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.3s ease; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0; right: 100%;
+  height: 2px; background: var(--accent);
+  transition: right 0.3s ease; border-radius: 2px;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { right: 0; }
+.nav-socials { display: flex; gap: 0.6rem; align-items: center; }
+.nav-socials a {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 0.9rem;
+  transition: all 0.3s ease; text-decoration: none;
+}
+.nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+.hamburger {
+  display: none; background: none; border: none;
+  cursor: pointer; padding: 0.4rem;
+  flex-direction: column; gap: 5px;
+}
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: all 0.3s ease; }
+
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0;
+  background: var(--bg-dark); z-index: 9998;
+  flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-menu.open {
+  display: flex;
+  pointer-events: all;
+  opacity: 1;
+}
+.mobile-menu a {
+  font-family: var(--font-display); font-size: 2.4rem; font-weight: 700;
+  color: var(--text-light); text-decoration: none;
+}
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 5vw;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: var(--text-light); font-size: 1.4rem;
+  width: 52px; height: 52px; border-radius: var(--r-md);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+
+#about {
+  padding: 8rem 5vw 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  background: var(--bg);
+}
+.about-imgs { position: relative; display: flex; justify-content: center; }
+.about-circle-wrap { position: relative; width: 520px; flex-shrink: 0; }
+.about-img-circle {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  object-position: 15% center;
+  border-radius: 260px 260px 24px 24px;
+  display: block; margin-top: 1rem;
+}
+.about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 1.4rem; font-size: 1rem; }
+#about .section-tag { color: var(--text-dark); }
+#about .section-tag::before { background: var(--text-dark); }
+
+.clients-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 1.2rem 2rem; 
+  margin-top: 2.2rem; 
+}
+.client-chip {
+  display: flex; 
+  align-items: center; 
+  gap: 1rem; 
+  background: transparent; 
+  border: none; 
+  font-size: 0.9rem; 
+  color: var(--primary); 
+  font-weight: 700;
+  text-transform: uppercase; 
+  letter-spacing: 0.04em;
+  transition: all 0.3s ease; 
+  width: 100%; 
+  line-height: 1.4;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+.client-chip:nth-child(1) { animation-delay: 0.1s; }
+.client-chip:nth-child(2) { animation-delay: 0.2s; }
+.client-chip:nth-child(3) { animation-delay: 0.3s; }
+.client-chip:nth-child(4) { animation-delay: 0.4s; }
+.client-chip:nth-child(5) { animation-delay: 0.5s; }
+.client-chip:nth-child(6) { animation-delay: 0.6s; }
+.client-chip i { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  font-size: 1.2rem;
+  color: var(--accent);
+  border-radius: 50%; 
+  background: linear-gradient(145deg, #f0f4f8 0%, #d9e2ec 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.client-chip:hover { transform: translateX(5px); }
+.client-chip:hover i {
+  background: linear-gradient(145deg, #d9e2ec 0%, #c3d1e0 100%);
+  transform: scale(1.08);
+}
+
+.section-tag { 
+  font-size: 0.75rem; 
+  font-weight: 700; 
+  letter-spacing: 0.2em; 
+  text-transform: uppercase; 
+  color: var(--primary); 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+  margin-bottom: 1.2rem; 
+}
+.section-tag::before { 
+  content:''; 
+  width:32px; 
+  height:2px; 
+  background:var(--primary); 
+  border-radius:2px; 
+}
+.section-title { 
+  font-family: var(--font-display); 
+  font-weight: 800; 
+  font-size: clamp(1.92rem, 4vw, 3.84rem); 
+  line-height: 0.95; 
+  letter-spacing: -0.025em; 
+  margin-bottom: 1.4rem; 
+  color: var(--text-dark); 
+}
+.section-title span { color: var(--primary); }
+
+#experience {
+  padding: 6rem 5vw;
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+
+#experience::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.experience-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.exp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.exp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--text-light);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--r-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: fit-content;
+  box-shadow: var(--shadow-md);
+}
+
+.exp-badge i {
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.exp-text {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.exp-text strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.exp-images {
+  position: relative;
+  height: 600px;
+}
+
+.exp-img-main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75%;
+  height: 75%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.exp-img-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.exp-img-main:hover img {
+  transform: scale(1.05);
+}
+
+.exp-img-secondary {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  height: 50%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 6px solid var(--bg2);
+}
+
+.exp-img-secondary img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.exp-img-secondary:hover img {
+  transform: scale(1.05);
+}
+
+.exp-floating-badge {
+  position: absolute;
+  top: 45%;
+  left: 30%;
+  background: var(--bg);
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.exp-floating-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.exp-floating-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.exp-floating-number {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.exp-floating-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+#clientele {
+  padding: 6rem 5vw;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.clientele-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.clientele-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 4rem;
+}
+
+.clientele-header .section-tag {
+  justify-content: center;
+}
+
+.clientele-header .section-tag::before {
+  display: none;
+}
+
+.clientele-header .section-title {
+  text-align: center;
+}
+
+.clientele-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-top: 1rem;
+}
+
+.clientele-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.clientele-card {
+  position: relative;
+  background: var(--bg);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  height: 380px;
+  cursor: pointer;
+}
+
+.clientele-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.clientele-card:hover::before {
+  transform: scaleX(1);
+}
+
+.clientele-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.clientele-card-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+
+.clientele-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.clientele-card:hover .clientele-card-bg {
+  opacity: 0.15;
+}
+
+.clientele-card-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.clientele-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(0, 80, 130, 0.08), rgba(56, 189, 248, 0.12));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.clientele-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+}
+
+.clientele-icon i {
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease;
+}
+
+.clientele-card:hover .clientele-icon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.clientele-card:hover .clientele-icon::after {
+  opacity: 1;
+}
+
+.clientele-card:hover .clientele-icon i {
+  color: var(--accent);
+}
+
+.clientele-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-top: 0.5rem;
+}
+
+.clientele-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  flex-grow: 1;
+}
+
+.clientele-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: auto;
+  transition: all 0.3s ease;
+}
+
+.clientele-card-link i {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.clientele-card:hover .clientele-card-link {
+  color: var(--accent);
+}
+
+.clientele-card:hover .clientele-card-link i {
+  transform: translateX(5px);
+}
+
+.clientele-number {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(0, 80, 130, 0.04);
+  line-height: 1;
+  z-index: 0;
+  transition: color 0.4s ease;
+}
+
+.clientele-card:hover .clientele-number {
+  color: rgba(56, 189, 248, 0.1);
+}
+
+.clientele-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: var(--r-xl);
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.clientele-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 50%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.clientele-cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.clientele-cta p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.clientele-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--accent);
+  color: var(--primary-dark);
+  padding: 1rem 2.5rem;
+  border-radius: var(--r-full);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.4);
+}
+
+.clientele-cta-btn:hover {
+  background: var(--bg);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(56, 189, 248, 0.5);
+}
+
+footer { background: var(--bg-darker); }
+.footer-main {
+  padding: 3.5rem 5vw 4.5rem;
+  display: grid; 
+  grid-template-columns: 2fr 1fr 1fr 1.3fr; 
+  gap: 4.2rem;
+}
+.foot-logo { display: block; margin-bottom: 1.2rem; }
+.footer-brand p { 
+  color: rgba(255,255,255,0.6); 
+  font-size: 0.92rem; 
+  line-height: 1.85; 
+  max-width: 300px; 
+}
+.footer-col h4 { 
+  font-family: var(--font-display); 
+  font-size: 0.98rem; 
+  font-weight: 700; 
+  letter-spacing: 0.11em; 
+  text-transform: uppercase; 
+  color: var(--text-light); 
+  margin-bottom: 1.6rem; 
+  padding-bottom: 0.9rem; 
+  border-bottom: 1px solid rgba(255,255,255,0.1); 
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.7rem; }
+.footer-col ul li a { 
+  color: rgba(255,255,255,0.6); 
+  text-decoration: none; 
+  font-size: 0.9rem; 
+  display: flex; 
+  align-items: center; 
+  gap: 0.6rem; 
+  transition: color 0.3s ease, gap 0.3s ease; 
+}
+.footer-col ul li a i { font-size: 0.65rem; color: var(--accent); }
+.footer-col ul li a:hover { color: var(--accent); gap: 0.9rem; }
+.social-row { display: flex; gap: 0.8rem; margin-top: 1.4rem; }
+.soc { 
+  width: 42px; 
+  height: 42px; 
+  background: rgba(255,255,255,0.09); 
+  border: 1px solid rgba(255,255,255,0.14); 
+  border-radius: var(--r-md); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: rgba(255,255,255,0.7); 
+  font-size: 1rem; 
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+}
+.soc:hover { 
+  background: var(--primary); 
+  border-color: var(--primary-light); 
+  color: var(--text-light); 
+  transform: translateY(-3px); 
+}
+.footer-bottom { 
+  border-top: 1px solid rgba(255,255,255,0.09); 
+  padding: 1.8rem 5vw; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  font-size: 0.78rem; 
+  color: rgba(255,255,255,0.5); 
+}
+.footer-bottom a { 
+  color: rgba(255,255,255,0.5); 
+  text-decoration: none; 
+  transition: color 0.3s ease; 
+}
+.footer-bottom a:hover { color: var(--accent); }
+.footer-bottom i { color: var(--accent); }
+
+.anim-left  { opacity: 0; transform: translateX(-36px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.anim-right { opacity: 0; transform: translateX(36px);  transition: opacity 0.8s ease, transform 0.8s ease; }
+.anim-up    { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.anim-left.on,.anim-right.on,.anim-up.on { opacity: 1; transform: none; }
+
+.stagger-children > * { opacity: 0; transform: translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.stagger-children.on > *:nth-child(1) {opacity:1;transform:none;transition-delay:0s}
+.stagger-children.on > *:nth-child(2) {opacity:1;transform:none;transition-delay:.09s}
+.stagger-children.on > *:nth-child(3) {opacity:1;transform:none;transition-delay:.18s}
+.stagger-children.on > *:nth-child(4) {opacity:1;transform:none;transition-delay:.27s}
+.stagger-children.on > *:nth-child(5) {opacity:1;transform:none;transition-delay:.36s}
+.stagger-children.on > *:nth-child(6) {opacity:1;transform:none;transition-delay:.45s}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1100px) {
+  .experience-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .exp-images {
+    height: 500px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .clientele-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-main { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 2.8rem; 
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  
+  #about {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .about-circle-wrap {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  #experience,
+  #clientele {
+    padding: 4rem 1.5rem;
+  }
+  
+  .exp-images {
+    height: 400px;
+  }
+  
+  .exp-floating-badge {
+    top: auto;
+    bottom: 10%;
+    left: 10%;
+    padding: 0.8rem 1rem;
+  }
+  
+  .clientele-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .clientele-card {
+    height: auto;
+    min-height: 320px;
+  }
+  
+  .footer-main { 
+    grid-template-columns: 1fr; 
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-circle-wrap {
+    max-width: 320px;
+  }
+  
+  .exp-images {
+    height: 350px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="jlm.png" alt="JLMD Logo" style="height:50px;width:120px;margin-right:8px;">
+  </a>
+  <ul class="nav-links">
+     <a href="index.html">Home</a>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#portfolio">Products</a></li>
+    <li><a href="#portfolio">Crew</a></li>
+    <li><a href="#areas">Areas</a></li>
+    <li class="nav-socials">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://wa.me/17863666875" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </li>
+  </ul>
+  <button class="hamburger" id="hbg"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mmenu">
+  <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
+  <a href="#about" onclick="closeM()">Home</a>
+
+  <a href="#about" onclick="closeM()">About</a>
+  <a href="#services" onclick="closeM()">Services</a>
+  <a href="#portfolio" onclick="closeM()">Portfolio</a>
+  <a href="#areas" onclick="closeM()">Areas</a>
+  <a href="#cta" onclick="closeM()" style="color:var(--accent)">Free Estimate</a>
+</div>
+
+<section id="about">
+  <div class="about-imgs anim-left">
+    <div class="about-circle-wrap">
+      <img class="about-img-circle" src="jose.png" alt="Jose Diaz – Founder"
+        onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=85&fit=crop&crop=face'">
+    </div>
+  </div>
+  <div class="about-text anim-right">
+    <div class="section-tag">About Us</div>
+    <h2 class="section-title">Leaders in<br><span>Installation</span></h2>
+    <p>JLMD Install delivers premium window and door installation services across the entire state of Florida. Focusing 100% on precision execution, code compliance, and structural integrity, our expert teams ensure seamless project delivery for new builds and large-scale renovations.</p>
+    <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:1.5rem 0 .9rem">Sectors We Serve</h3>
+    <div class="clients-grid stagger-children">
+      <div class="client-chip"><i class="fa fa-home"></i> Homeowners</div>
+      <div class="client-chip"><i class="fa fa-hard-hat"></i> Contractors & Builders</div>
+      <div class="client-chip"><i class="fa fa-building"></i> Commercial Clients</div>
+      <div class="client-chip"><i class="fa fa-city"></i> Real Estate Developers</div>
+      <div class="client-chip"><i class="fa fa-drafting-compass"></i> Architects & Designers</div>
+      <div class="client-chip"><i class="fa fa-key"></i> Property Management</div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="experience-container">
+    <div class="exp-content anim-left">
+      <div class="exp-badge">
+        <i class="fa fa-trophy"></i>
+        <span>Industry Leader Since 2013</span>
+      </div>
+      
+      <div class="section-tag">Our Experience</div>
+      <h2 class="section-title">Over a Decade of<br><span>Excellence</span></h2>
+      
+      <p class="exp-text">
+        With over <strong>10 years of experience</strong>, JLMD Install is a leader in the installation industry, renowned for a broad spectrum of specialized services. Our dedicated team is committed to delivering installations that perfectly blend <strong>functionality, style, and durability</strong>, thereby setting new standards within the industry.
+      </p>
+    </div>
+    
+    <div class="exp-images anim-right">
+      <div class="exp-img-main">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Modern Architecture">
+      </div>
+      <div class="exp-img-secondary">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Installation Work">
+      </div>
+      <div class="exp-floating-badge">
+        <div class="exp-floating-icon">
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="exp-floating-text">
+          <div class="exp-floating-number">5.0</div>
+          <div class="exp-floating-label">Client Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientele">
+  <div class="clientele-container">
+    <div class="clientele-header anim-up">
+      <div class="section-tag">Who We Serve</div>
+      <h2 class="section-title">Our Diverse <span>Clientele</span></h2>
+      <p class="clientele-desc">
+        At JLMD Install, our commitment to excellence and capability to cater to diverse needs across various sectors place us at the forefront of the installation industry. We consistently fulfill and exceed our clients' expectations, regardless of the project's size or scope.
+      </p>
+    </div>
+    
+    <div class="clientele-grid stagger-children">
+      <div class="clientele-card">
+        <div class="clientele-number">01</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-home"></i>
+          </div>
+          <h3>Homeowners</h3>
+          <p>Premium residential installations tailored to your home's unique character and your family's comfort needs.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="clientele-card">
+        <div class="clientele-number">02</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-hard-hat"></i>
+          </div>
+          <h3>Contractors & Builders</h3>
+          <p>Reliable partnership for construction projects with on-time delivery and seamless coordination.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="clientele-card">
+        <div class="clientele-number">03</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-building"></i>
+          </div>
+          <h3>Commercial Clients</h3>
+          <p>Large-scale installations for offices, retail spaces, and commercial facilities with minimal disruption.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="clientele-card">
+        <div class="clientele-number">04</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-city"></i>
+          </div>
+          <h3>Real Estate Developers</h3>
+          <p>End-to-end solutions for new developments from planning through final installation and inspection.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="clientele-card">
+        <div class="clientele-number">05</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-drafting-compass"></i>
+          </div>
+          <h3>Architects & Designers</h3>
+          <p>Technical collaboration to bring your architectural visions to life with precision and craftsmanship.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="clientele-card">
+        <div class="clientele-number">06</div>
+        <div class="clientele-card-bg">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&q=80" alt="">
+        </div>
+        <div class="clientele-card-content">
+          <div class="clientele-icon">
+            <i class="fa fa-key"></i>
+          </div>
+          <h3>Property Management</h3>
+          <p>Efficient bulk installations and replacements for multi-unit property portfolios across Florida.</p>
+          <a href="#cta" class="clientele-card-link">
+            Learn More <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="clientele-cta anim-up">
+      <div class="clientele-cta-content">
+        <p>Ready to experience the JLMD difference? Whether you're a homeowner, builder, or developer, we're here to bring your vision to life with precision and excellence.</p>
+        <a href="#cta" class="clientele-cta-btn">
+          <i class="fa fa-envelope"></i> Get Your Free Estimate
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="#" class="foot-logo"><img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;"></a>
+      <p>Your go-to installation experts. Precision windows and doors across South Florida for over a decade. Licensed, insured, committed to excellence.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#about"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Our Services</a></li>
+        <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
+        <li><a href="#areas"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
+        <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:8884140767"><i class="fa fa-phone"></i> (888) 414-0767</a></li>
+        <li><a href="tel:7863666875"><i class="fa fa-phone"></i> 786-366-6875</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward & Dade</a></li>
+      </ul>
+      <div class="social-row">
+        <a href="#" class="soc"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="soc"><i class="fab fa-instagram"></i></a>
+        <a href="tel:7863666875" class="soc"><i class="fa fa-phone"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 JLMD Install · All Rights Reserved</span>
+    <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    <span>Made with <i class="fa fa-heart"></i> in South Florida</span>
+  </div>
+</footer>
+
+<script>
+const hbg = document.getElementById('hbg');
+const mmenu = document.getElementById('mmenu');
+const mclose = document.getElementById('mclose');
+
+hbg.addEventListener('click', () => mmenu.classList.add('open'));
+mclose.addEventListener('click', () => mmenu.classList.remove('open'));
+function closeM() { mmenu.classList.remove('open'); }
+
+const animObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('on');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.anim-left, .anim-right, .anim-up, .stagger-children').forEach(el => {
+  animObserver.observe(el);
+});
+</script>
+
+</body>
+</html>
