@@ -5,6 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JLMD Install – Window & Door Installation Experts</title>
+
+  
+    <title>JLMD Install</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kristi&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -242,13 +249,19 @@ nav {
  
 /* Signature */
 .exp-signature {
-  font-family: var(--font-script);
-  font-size: 2.2rem;
+  font-family: "Kristi", cursive; 
+  font-size: 2.8rem; 
+  font-weight: 300;  
   color: var(--text-dark);
   margin-top: 0.5rem;
   line-height: 1.2;
+  
+  /* El truco del grosor */
+  -webkit-text-stroke: 1px var(--text-dark);
+
+  /* El truco del espacio entre letras */
+  letter-spacing: 0.01em; /* Puedes subirlo a 0.08em o cambiarlo a 1px o 2px si quieres más espacio */
 }
- 
 /* Right: portrait with circular badge overlay */
 .exp-images {
   position: relative;
