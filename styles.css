@@ -817,7 +817,7 @@ nav.scrolled .hamburger span {
 .service-icon-wrapper { width: 28px; height: 28px; background: transparent; border: none; border-radius: 0; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 1rem; margin: 0; padding: 0; flex-shrink: 0; transition: all 0.3s ease; }
 .service-card:hover .service-icon-wrapper { transform: scale(1.15); color: #00a3ff; }
 .service-card-body p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
-.btn-view-al {
+.btn-view-2 {
 display: inline-block;
   background: linear-gradient(135deg, #00a3ff 0%, #0077cc 100%);
   color: #ffffff; padding: 1rem 3.5rem; border-radius: var(--r-full);
@@ -825,8 +825,28 @@ display: inline-block;
   text-decoration: none; transition: all 0.3s ease;
   border: 2px solid transparent; box-shadow: 0 4px 20px rgba(0,163,255,0.3);
 }
+.btn-view-2:hover { background: #00a3ff; border-color: #929292; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,163,255,0.4); }
 
-.btn-view-al:hover { background: #00a3ff; border-color: #929292; transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,163,255,0.4); }
+/* ── BUTTONS ── */
+.btn-view-2 {
+  display: inline-block;
+  background: linear-gradient(135deg, #00a3ff 0%, #0077cc 100%);
+  color: #ffffff; 
+  padding: 1rem 3.5rem; 
+  border-radius: var(--r-full);
+  font-weight: 700; 
+  font-size: 0.85rem; 
+  letter-spacing: 0.14em; 
+  text-transform: uppercase;
+  text-decoration: none; 
+  transition: all 0.3s ease;
+  border: 2px solid transparent; 
+  box-shadow: 0 4px 20px rgba(0,163,255,0.3);
+  
+  /* CAMBIOS AQUÍ */
+  /* Ajusta este número para subirlo más o menos */
+  margin-bottom: 150px; /* Quitamos el espacio de abajo */
+}
 
 /* ── BUTTONS ── */
 .btn-view-all {
@@ -861,17 +881,17 @@ display: inline-block;
 .port-carousel-wrap::after { right: 0; background: linear-gradient(to left, rgba(255,255,255,0.6), transparent); }
 
 .port-carousel-track {
-  display: flex; gap: 2rem; width: max-content;
+  display: flex; gap: 0.75rem; width: max-content; /* ← gap reducido */
   animation: carouselScrollLeft 60s linear infinite;
   padding: 0.5rem 0;
 }
 .port-carousel-track:hover { animation-play-state: paused; }
 
-/* TARJETA RECTANGULAR VERTICAL COMPACTA */
+/* TARJETA RECTANGULAR VERTICAL — MÁS ALTA */
 .port-card { 
   flex: 0 0 auto; 
   width: 360px;             
-  aspect-ratio: 3 / 4;      
+  aspect-ratio: 2 / 3;      /* ← más alto (antes 3/4) */
   overflow: hidden; 
   position: relative; 
   cursor: pointer; 
@@ -922,34 +942,42 @@ display: inline-block;
   transform: scale(1.05);
 }
 
+/* BOTÓN VIEW — centrado más arriba */
+.port-card .btn-view {
+  position: absolute;
+  bottom: 30%;              /* ← subido (antes probablemente era bottom o top demasiado bajo) */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
 /* ── ANIMACIONES DEL CARRUSEL ── */
 @keyframes carouselScrollLeft {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(calc(-360px * 13 - 2rem * 13)); }
+  100% { transform: translateX(calc(-360px * 13 - 0.75rem * 13)); } /* ← gap ajustado */
 }
 
 @media(max-width:768px){
   .port-card { 
     width: 280px;
-    aspect-ratio: 3 / 4; 
+    aspect-ratio: 2 / 3; 
   }
   @keyframes carouselScrollLeft {
     0%   { transform: translateX(0); }
-    100% { transform: translateX(calc(-280px * 13 - 2rem * 13)); }
+    100% { transform: translateX(calc(-280px * 13 - 0.75rem * 13)); }
   }
 }
 
 @media(max-width:480px){
   .port-card { 
     width: 240px;
-    aspect-ratio: 3 / 4; 
+    aspect-ratio: 2 / 3; 
   }
   @keyframes carouselScrollLeft {
     0%   { transform: translateX(0); }
-    100% { transform: translateX(calc(-240px * 13 - 2rem * 13)); }
+    100% { transform: translateX(calc(-240px * 13 - 0.75rem * 13)); }
   }
 }
-
 /* ── TRUSTED PARTNERS ── */
 #brands { 
   padding: 6rem 5vw; 

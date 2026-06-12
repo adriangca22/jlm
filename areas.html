@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Areas – JLMD Install</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/webp" href="icono.webp">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+:root {
+  --primary: #005082;
+  --accent: #38bdf8;
+  --bg2: #f4f7fa;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --font: 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  background: #fff;
+  color: var(--text-dark);
+  font-family: var(--font);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
+img { display: block; max-width: 100%; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000; height: 72px; padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.4s;
+}
+nav.scrolled { box-shadow: 0 2px 12px rgba(0,80,130,0.07); }
+
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.70rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0; right: 100%;
+  height: 2px; background: var(--accent);
+  transition: right 0.3s; border-radius: 2px;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+.nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+.nav-socials { display: flex; gap: 0.6rem; align-items: center; }
+.nav-socials a {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 0.9rem;
+  transition: color 0.3s, transform 0.3s; text-decoration: none;
+}
+.nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  padding: 0.4rem; flex-direction: column; gap: 5px;
+}
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; }
+
+/* ── MOBILE MENU ── */
+.mobile-menu {
+  display: none; position: fixed; inset: 0;
+  background: #1a2838; z-index: 9998;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; opacity: 0; transition: opacity 0.3s;
+}
+.mobile-menu.open { display: flex; opacity: 1; }
+.mobile-menu a { font-size: 2.4rem; font-weight: 700; color: #fff; text-decoration: none; }
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 5vw;
+  background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 1.4rem; width: 52px; height: 52px;
+  border-radius: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; z-index: 9999;
+}
+
+/* ── AREAS SECTION ── */
+#areas {
+  padding-top: 72px;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.areas-hero {
+  padding: 5rem 5vw 3rem;
+  text-align: center;
+}
+
+.section-tag {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--primary);
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.section-tag::before,
+.section-tag::after {
+  content: ''; width: 28px; height: 2px;
+  background: var(--primary); border-radius: 2px;
+}
+
+.areas-heading {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 900; color: #001e3c;
+  line-height: 1.1; letter-spacing: -0.03em;
+  max-width: 700px; margin: 0 auto 1rem;
+}
+
+.areas-sub {
+  color: var(--text-muted); font-size: 1rem;
+  max-width: 480px; margin: 0 auto 3rem;
+}
+
+/* ── MAP ── */
+.map-wrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5vw 3rem;
+}
+
+#map {
+  width: 100%;
+  height: 480px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,80,130,0.12);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+#map.map-ready {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.map-google-link {
+  position: absolute;
+  top: 118px;
+  right: calc(5vw + 18px);
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 50px;
+  background: #fff;
+  color: var(--primary);
+  box-shadow: 0 10px 28px rgba(0,80,130,0.14);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+#map.map-ready + .map-google-link {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.map-google-link:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.leaflet-control-attribution { font-size: 10px !important; }
+
+.map-tooltip {
+  background: #001e3c !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: var(--font) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+  letter-spacing: 0.03em !important;
+}
+.map-tooltip::before { display: none !important; }
+
+/* ── CHIPS ── */
+.chips-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 5vw 4rem;
+}
+
+.areas-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.area-chip {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: var(--bg2);
+  color: var(--text-dark);
+  font-size: 0.82rem; font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.area-chip i { color: var(--primary); font-size: 0.72rem; }
+
+.area-chip:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,80,130,0.18);
+}
+
+.area-chip:hover i { color: var(--accent); }
+
+/* ── CERTIFICATION ── */
+.contractor-certification {
+  background: #001e3c;
+  padding: 1.6rem 5vw;
+}
+
+.cert-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cert-content {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.2rem; flex-wrap: wrap; text-align: center;
+}
+
+.cert-content > i {
+  font-size: 1.6rem; color: var(--accent);
+}
+
+.cert-text {
+  display: flex; align-items: center; gap: 0.7rem;
+  flex-wrap: wrap; justify-content: center;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.cert-label { color: rgba(255,255,255,0.55); }
+.cert-number { color: #fff; }
+.cert-divider { color: rgba(255,255,255,0.25); }
+.cert-licensed { color: var(--accent); }
+
+/* ── CTA FORM SECTION ── */
+#cta {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+  overflow: hidden;
+}
+
+/* Image panel */
+.cta-image-panel {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.cta-image-panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cta-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 30, 60, 0.82) 0%,
+    rgba(0, 80, 130, 0.65) 50%,
+    rgba(56, 189, 248, 0.25) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+}
+
+.cta-overlay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(56,189,248,0.15);
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 50px;
+  padding: 0.5rem 1.1rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  width: fit-content;
+}
+
+.cta-overlay-title {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.cta-overlay-title span {
+  color: var(--accent);
+}
+
+.cta-overlay-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.cta-stat strong {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.cta-stat span {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Form panel */
+.cta-form-panel {
+  background: #fff;
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.cta-form-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.8rem;
+}
+
+.cta-form-title {
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  font-weight: 900;
+  color: #001e3c;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.7rem;
+}
+
+.cta-form-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+  max-width: 400px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.72rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  background: var(--bg2);
+  transition: border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,80,130,0.08);
+  background: #fff;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-submit-btn {
+  margin-top: 0.4rem;
+  padding: 0.9rem 1.4rem;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 28px rgba(0,80,130,0.2);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.form-submit-btn:hover {
+  background: #003d63;
+  transform: translateY(-2px);
+}
+
+.form-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+.form-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  transition: all 0.25s;
+}
+
+.form-contact-link i { color: var(--primary); font-size: 0.75rem; }
+
+.form-contact-link:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: #fff;
+}
+
+/* Success state */
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 0;
+  gap: 0.7rem;
+}
+
+.form-success-icon {
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-success h3 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #001e3c;
+}
+
+.form-success p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  max-width: 340px;
+}
+
+/* ── ANIMATIONS ── */
+.anim-up { opacity: 0; transform: translateY(28px); transition: opacity 0.85s, transform 0.85s; }
+.anim-up.on { opacity: 1; transform: none; }
+
+.anim-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.anim-left.on { opacity: 1; transform: none; }
+
+.anim-right { opacity: 0; transform: translateX(36px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.anim-right.on { opacity: 1; transform: none; }
+
+/* ── FOOTER ── */
+footer { background: #1a2838; }
+
+.footer-main {
+  padding: 3.5rem 5vw 4.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.3fr;
+  gap: 4.2rem;
+}
+
+.footer-brand p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.92rem; line-height: 1.85; max-width: 300px;
+}
+
+.footer-col h4 {
+  font-size: 0.98rem; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: #fff; margin-bottom: 1.6rem; padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.7rem; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  font-size: 0.9rem; display: flex; align-items: center; gap: 0.6rem;
+  transition: color 0.3s, gap 0.3s;
+}
+.footer-col ul li a i { font-size: 0.65rem; color: var(--accent); }
+.footer-col ul li a:hover { color: var(--accent); gap: 0.9rem; }
+
+.social-row { display: flex; gap: 0.8rem; margin-top: 1.4rem; }
+.soc {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 1rem; text-decoration: none;
+  transition: all 0.3s;
+}
+.soc:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.09);
+  padding: 1.8rem 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem; color: rgba(255,255,255,0.5);
+}
+.footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+.footer-bottom a:hover { color: var(--accent); }
+.footer-bottom i { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #cta {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-image-panel {
+    min-height: 340px;
+  }
+
+  .cta-form-panel {
+    padding: 2.5rem 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  #map { height: 340px; }
+
+  .map-google-link {
+    right: 1.5rem;
+    top: 102px;
+    padding: 0.62rem 0.75rem;
+    font-size: 0.72rem;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .cert-text { font-size: 0.75rem; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .cta-overlay-stats { gap: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .areas-hero { padding: 3.5rem 1.5rem 2rem; }
+  .map-wrap, .chips-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+  #map { height: 280px; border-radius: 12px; }
+  .cta-form-panel { padding: 2rem 1.3rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html">
+    <img src="jlm.png" alt="JLMD Logo" style="height:50px;width:120px;">
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="#portfolio">Crew</a></li>
+    <li><a href="areas.html" class="active">Areas</a></li>
+    <li><a href="#cta">Contact</a></li>
+    <li class="nav-socials">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://wa.me/17863666875" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </li>
+  </ul>
+
+  <button class="hamburger" id="hbg">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mmenu">
+  <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
+  <a href="index.html" onclick="closeM()">Home</a>
+  <a href="about.html" onclick="closeM()">About</a>
+  <a href="services.html" onclick="closeM()">Services</a>
+  <a href="products.html" onclick="closeM()">Products</a>
+  <a href="areas.html" onclick="closeM()" style="color:var(--accent)">Areas</a>
+  <a href="#cta" onclick="closeM()">Contact</a>
+</div>
+
+<!-- AREAS -->
+<section id="areas">
+  <div class="areas-hero anim-up">
+    <div class="section-tag">Coverage</div>
+    <h2 class="areas-heading">Serving Palm Beach, Broward, and Dade Counties.</h2>
+    <p class="areas-sub">From South Miami to West Palm Beach — wherever your project is, we're there.</p>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-wrap">
+    <div id="map"></div>
+
+    <a
+      class="map-google-link"
+      href="https://maps.google.com/?cid=18417174297042571109&amp;g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&amp;hl=es-ES&amp;source=embed"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open Google Maps"
+    >
+      <i class="fa fa-map-marker-alt"></i>
+      Open Google Maps
+    </a>
+  </div>
+
+  <!-- CHIPS -->
+  <div class="chips-wrap">
+    <div class="areas-chips anim-up">
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Broward County</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Coral Gables</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Dade County</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Fontainebleau</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Fort Lauderdale</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Hollywood</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Little Gables</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Miami Springs</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Palm Beach</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Palm Beach County</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Pompano Beach</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> South Miami</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> West Park</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> Westchester</div>
+      <div class="area-chip"><i class="fa fa-map-marker-alt"></i> &amp; More!</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section class="contractor-certification">
+  <div class="cert-container">
+    <div class="cert-content anim-up">
+      <i class="fa fa-shield-alt"></i>
+      <div class="cert-text">
+        <span class="cert-label">Certified General Contractor:</span>
+        <span class="cert-number">CGC-1536193</span>
+        <span class="cert-divider">|</span>
+        <span class="cert-licensed">Licensed &amp; Insured</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA with form -->
+<section id="cta">
+
+  <!-- Image panel con overlay degradado -->
+  <div class="cta-image-panel anim-left">
+    <img src="imagens.png" alt="Installation work">
+    <div class="cta-image-overlay">
+      <div class="cta-overlay-badge">
+        <i class="fa fa-shield-alt"></i> Licensed &amp; Insured
+      </div>
+      <h2 class="cta-overlay-title">
+        South Florida's<br><span>Trusted Install</span><br>Experts.
+      </h2>
+      <div class="cta-overlay-stats">
+        <div class="cta-stat">
+          <strong>10+</strong>
+          <span>Years Active</span>
+        </div>
+        <div class="cta-stat">
+          <strong>3</strong>
+          <span>Counties Covered</span>
+        </div>
+        <div class="cta-stat">
+          <strong>24h</strong>
+          <span>Response Time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form panel -->
+  <div class="cta-form-panel anim-right">
+    <div class="cta-form-tag">Get In Touch</div>
+    <h2 class="cta-form-title">Request a<br>Free Estimate</h2>
+    <p class="cta-form-sub">Fill out the form and our team will contact you within 24 hours with a detailed quote.</p>
+
+    <div id="contactFormWrap">
+      <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="John" required></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Email Address</label><input type="email" placeholder="john@example.com" required></div>
+          <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="(786) 000-0000"></div>
+        </div>
+        <div class="form-field">
+          <label>Service Needed</label>
+          <select required>
+            <option value="" disabled selected>Select a service…</option>
+            <option>Impact Doors &amp; Windows</option>
+            <option>High-Rise Condo Install</option>
+            <option>Custom Storefront</option>
+            <option>Waterproofing</option>
+            <option>Precision Cutting &amp; Framing</option>
+            <option>Sidelight &amp; Sill Services</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Property Type</label>
+            <select>
+              <option value="" disabled selected>Select…</option>
+              <option>Residential – Single Family</option>
+              <option>Residential – Condo / HOA</option>
+              <option>Commercial</option>
+              <option>Mixed Use</option>
+            </select>
+          </div>
+          <div class="form-field"><label>City / Area</label><input type="text" placeholder="Miami, Fort Lauderdale…"></div>
+        </div>
+        <div class="form-field"><label>Project Details</label><textarea placeholder="Tell us about your project…"></textarea></div>
+        <button type="submit" class="form-submit-btn"><i class="fa fa-paper-plane"></i> Send My Request</button>
+      </form>
+
+      <div class="form-contact-links">
+        <a href="tel:7863666875" class="form-contact-link"><i class="fa fa-phone"></i> 786-366-6875</a>
+        <a href="tel:8884140767" class="form-contact-link"><i class="fa fa-phone"></i> (888) 414-0767</a>
+        <a href="mailto:info@jlmdinstall.com" class="form-contact-link"><i class="fa fa-envelope"></i> info@jlmdinstall.com</a>
+      </div>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon"><i class="fa fa-check"></i></div>
+      <h3>Message Sent!</h3>
+      <p>Thank you! Our team will reach out within 24 hours with your free estimate.</p>
+      <a href="tel:7863666875" class="form-contact-link" style="margin-top:0.5rem"><i class="fa fa-phone"></i> Call us now: 786-366-6875</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="#" style="display:block;margin-bottom:1.2rem;">
+        <img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;">
+      </a>
+      <p>Your go-to installation experts. Precision windows and doors across Florida for over a decade. Licensed, insured, committed to excellence.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Our Services</a></li>
+        <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
+        <li><a href="areas.html"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
+        <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
+        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:8884140767"><i class="fa fa-phone"></i> (888) 414-0767</a></li>
+        <li><a href="tel:7863666875"><i class="fa fa-phone"></i> 786-366-6875</a></li>
+        <li><a href="areas.html"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
+      </ul>
+
+      <div class="social-row">
+        <a href="#" class="soc"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="soc"><i class="fab fa-instagram"></i></a>
+        <a href="tel:7863666875" class="soc"><i class="fa fa-phone"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 JLMD Install · All Rights Reserved</span>
+    <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    <span>Made with <i class="fa fa-heart"></i> in South Florida</span>
+  </div>
+</footer>
+
+<script>
+/* NAV */
+document.getElementById('mclose').addEventListener('click', () => document.getElementById('mmenu').classList.remove('open'));
+document.getElementById('hbg').addEventListener('click', () => document.getElementById('mmenu').classList.add('open'));
+function closeM() { document.getElementById('mmenu').classList.remove('open'); }
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* SCROLL ANIMATIONS */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.anim-up, .anim-left, .anim-right').forEach(el => obs.observe(el));
+
+/* MAP */
+window.addEventListener('load', () => {
+  const map = L.map('map', {
+    center: [26.5, -80.8],
+    zoom: 7,
+    zoomControl: false,
+    scrollWheelZoom: false,
+    dragging: true,
+    touchZoom: true,
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO',
+    maxZoom: 14
+  }).addTo(map);
+
+  const pinIcon = L.divIcon({
+    className: '',
+    html: `<div style="
+      width:14px;height:14px;
+      background:#005082;
+      border:2.5px solid #38bdf8;
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(0,80,130,0.15);
+    "></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+
+  const locations = [
+    { name: 'Broward County',    lat: 26.1224, lng: -80.1373 },
+    { name: 'Coral Gables',      lat: 25.7215, lng: -80.2684 },
+    { name: 'Dade County',       lat: 25.7617, lng: -80.1918 },
+    { name: 'Fontainebleau',     lat: 25.7744, lng: -80.3274 },
+    { name: 'Fort Lauderdale',   lat: 26.1224, lng: -80.1373 },
+    { name: 'Hollywood',         lat: 26.0112, lng: -80.1495 },
+    { name: 'Little Gables',     lat: 25.7367, lng: -80.2812 },
+    { name: 'Miami Springs',     lat: 25.8225, lng: -80.2934 },
+    { name: 'Palm Beach',        lat: 26.7056, lng: -80.0364 },
+    { name: 'Pompano Beach',     lat: 26.2379, lng: -80.1248 },
+    { name: 'South Miami',       lat: 25.7083, lng: -80.2917 },
+    { name: 'West Park',         lat: 25.9870, lng: -80.1859 },
+    { name: 'Westchester',       lat: 25.7467, lng: -80.3334 },
+  ];
+
+  locations.forEach(loc => {
+    L.marker([loc.lat, loc.lng], { icon: pinIcon })
+      .addTo(map)
+      .bindTooltip(loc.name, {
+        permanent: false,
+        direction: 'top',
+        className: 'map-tooltip',
+        offset: [0, -8]
+      });
+  });
+
+  setTimeout(() => {
+    document.getElementById('map').classList.add('map-ready');
+
+    setTimeout(() => {
+      map.flyTo([25.98, -80.22], 10, {
+        animate: true,
+        duration: 2.2,
+        easeLinearity: 0.25
+      });
+    }, 400);
+  }, 300);
+});
+
+/* FORM SUBMIT */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  document.getElementById('contactFormWrap').style.display = 'none';
+  const success = document.getElementById('formSuccess');
+  success.style.display = 'flex';
+}
+</script>
+
+</body>
+</html>
