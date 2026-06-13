@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crew – JLMD Install</title>
+ 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Kristi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/webp" href="icono.webp">
+ 
+<style>
+:root {
+  --primary: #005082;
+  --accent: #38bdf8;
+  --bg2: #f4f7fa;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --font: 'Inter', sans-serif;
+}
+ 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+ 
+body {
+  background: #fff;
+  color: var(--text-dark);
+  font-family: var(--font);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+ 
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
+ 
+img { display: block; max-width: 100%; }
+ 
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 72px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.4s;
+}
+ 
+nav.scrolled { box-shadow: 0 2px 12px rgba(0,80,130,0.07); }
+ 
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  align-items: center;
+}
+ 
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.70rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+ 
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 100%;
+  height: 2px;
+  background: var(--accent);
+  transition: right 0.3s;
+  border-radius: 2px;
+}
+ 
+.nav-links a:hover,
+.nav-links a.active { color: var(--primary); }
+.nav-links a:hover::after,
+.nav-links a.active::after { right: 0; }
+ 
+.nav-socials { display: flex; gap: 0.6rem; align-items: center; }
+ 
+.nav-socials a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary);
+  font-size: 0.9rem;
+  transition: color 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+ 
+.nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+ 
+.hamburger {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 0.4rem;
+  flex-direction: column; gap: 5px;
+}
+ 
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text-dark); border-radius: 2px;
+}
+ 
+/* MOBILE MENU */
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0;
+  background: #1a2838;
+  z-index: 9998;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+ 
+.mobile-menu.open { display: flex; opacity: 1; }
+ 
+.mobile-menu a {
+  font-size: 2.4rem; font-weight: 700;
+  color: #fff; text-decoration: none;
+}
+ 
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 5vw;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 1.4rem;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+ 
+/* CAROUSEL SECTION */
+.carousel-section {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  margin-top: 72px;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.carousel-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 5vw 8rem;
+  text-align: center;
+  color: #fff;
+}
+
+.carousel-content h2 {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.carousel-content h2 .highlight {
+  color: var(--primary);
+}
+
+.carousel-content p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+/* Available for New Projects Button - Glassmorphism */
+.availability-badge {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.1rem;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-size: 0.75rem; /* Aumentado un poco para que se lea bien en minúsculas */
+  font-weight: 600;
+  letter-spacing: 0.02em; /* Reducido el espaciado */
+  text-transform: none; /* Cambiado de uppercase a none */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.availability-badge i {
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+.availability-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.availability-badge i {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.availability-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-dot.active {
+  background: var(--accent);
+  border-color: #fff;
+  transform: scale(1.2);
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev { left: 30px; }
+.carousel-arrow.next { right: 30px; }
+
+@media (max-width: 768px) {
+  .availability-badge {
+    top: 20px;
+    left: 20px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.7rem;
+  }
+  
+  .carousel-content {
+    padding: 0 5vw 7rem;
+  }
+  
+  .carousel-content h2 {
+    font-size: 1.4rem;
+  }
+  
+  .carousel-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* FOUNDER SECTION */
+.founder-section {
+  padding: 6rem 5vw;
+  background: var(--bg2);
+}
+
+.founder-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.founder-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.founder-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.founder-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+.founder-image-wrapper {
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.founder-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.founder-content:hover .founder-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.founder-info {
+  padding: 3.5rem;
+}
+
+.founder-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.founder-role {
+  color: var(--primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.founder-info > p {
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+.founder-signature {
+  font-family: "Kristi", cursive;
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--text-dark);
+  margin-top: 0.5rem;
+  line-height: 1.2;
+  -webkit-text-stroke: 1px var(--text-dark);
+  letter-spacing: 0.01em;
+  display: block;
+}
+
+.founder-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid var(--border);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* CREW SECTION */
+.crew-section {
+  padding: 6rem 5vw;
+  background: #fff;
+}
+
+.crew-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.crew-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.crew-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.crew-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.crew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+}
+
+.crew-member {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.crew-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0,80,130,0.15);
+}
+
+.crew-member-image {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.crew-member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.crew-member:hover .crew-member-image img {
+  transform: scale(1.08);
+}
+
+.crew-member-info {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.crew-member-info h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+}
+
+.crew-member-info .role {
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* PRODUCTS SECTION */
+#premium-products {
+  min-height: 100vh;
+  display: flex; align-items: center;
+}
+ 
+.pp-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8rem 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+ 
+.pp-content { display: flex; flex-direction: column; gap: 1.5rem; }
+ 
+.section-tag {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--primary);
+  display: flex; align-items: center; gap: 0.7rem;
+}
+ 
+.section-tag::before {
+  content: ''; width: 28px; height: 2px;
+  background: var(--primary); border-radius: 2px;
+}
+ 
+.pp-title {
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 900;
+  color: #001e3c;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+ 
+.pp-title span { color: var(--primary); }
+ 
+.pp-desc {
+  color: #94a3b8;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  max-width: 520px;
+}
+ 
+.pp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem;
+  background: var(--accent);
+  color: #001e3c;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: 1rem;
+  width: fit-content;
+}
+ 
+.pp-btn:hover { background: #7dd3fc; transform: translateY(-3px) scale(1.03); }
+ 
+.pp-images { display: flex; justify-content: flex-end; align-items: flex-start; }
+ 
+.pp-image-wrapper { display: flex; flex-direction: column; gap: 2rem; }
+ 
+.pp-image-top,
+.pp-image-bottom {
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+ 
+.pp-image-top { width: 420px; height: 320px; align-self: flex-start; }
+.pp-image-bottom { width: 380px; height: 420px; align-self: flex-end; margin-top: -1rem; }
+ 
+.pp-image-top img,
+.pp-image-bottom img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+ 
+.pp-image-top:hover,
+.pp-image-bottom:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+ 
+.pp-image-top:hover img,
+.pp-image-bottom:hover img { transform: scale(1.05); }
+ 
+/* FOOTER */
+footer { background: #1a2838; }
+ 
+.footer-main {
+  padding: 3.5rem 5vw 4.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.3fr;
+  gap: 4.2rem;
+}
+ 
+.footer-brand p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.92rem; line-height: 1.85;
+  max-width: 300px;
+}
+ 
+.footer-col h4 {
+  font-size: 0.98rem; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 1.6rem; padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+ 
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.7rem; }
+ 
+.footer-col ul li a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none; font-size: 0.9rem;
+  display: flex; align-items: center; gap: 0.6rem;
+  transition: color 0.3s, gap 0.3s;
+}
+ 
+.footer-col ul li a i { font-size: 0.65rem; color: var(--accent); }
+.footer-col ul li a:hover { color: var(--accent); gap: 0.9rem; }
+ 
+.social-row { display: flex; gap: 0.8rem; margin-top: 1.4rem; }
+ 
+.soc {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+ 
+.soc:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+ 
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.09);
+  padding: 1.8rem 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem; color: rgba(255,255,255,0.5);
+}
+ 
+.footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+.footer-bottom a:hover { color: var(--accent); }
+.footer-bottom i { color: var(--accent); }
+ 
+/* ANIMATIONS */
+.anim-left  { opacity: 0; transform: translateX(-42px); transition: opacity 0.85s, transform 0.85s; }
+.anim-right { opacity: 0; transform: translateX(42px);  transition: opacity 0.85s, transform 0.85s; }
+.anim-left.on, .anim-right.on { opacity: 1; transform: none; }
+ 
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .pp-container { grid-template-columns: 1fr; gap: 3.5rem; }
+  .pp-images { justify-content: center; }
+  .pp-image-top  { width: 380px; height: 280px; align-self: center; }
+  .pp-image-bottom { width: 340px; height: 380px; align-self: center; margin-top: 0; }
+  
+  .founder-content { grid-template-columns: 1fr; }
+  .founder-image-wrapper { min-height: 400px; }
+}
+ 
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+ 
+  .carousel-arrow { display: none; }
+  .carousel-content h2 { font-size: 1.4rem; }
+  .carousel-content p { font-size: 0.9rem; }
+ 
+  .pp-container { padding: 5rem 1.5rem; gap: 3rem; }
+ 
+  .pp-image-top,
+  .pp-image-bottom { width: 100%; max-width: 400px; height: 280px; align-self: center; margin-top: 0; }
+ 
+  .pp-image-wrapper { gap: 1.5rem; }
+ 
+  .founder-section, .crew-section { padding: 4rem 1.5rem; }
+  .founder-info { padding: 2.5rem 2rem; }
+  .founder-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  
+  .crew-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .crew-member-image { height: 350px; }
+ 
+  .footer-main { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+}
+ 
+@media (max-width: 480px) {
+  .pp-image-top, .pp-image-bottom { height: 220px; }
+  .pp-title { font-size: clamp(2rem, 10vw, 3rem); }
+  .founder-info h3 { font-size: 1.6rem; }
+  .founder-signature { font-size: 2.2rem; }
+}
+</style>
+</head>
+ 
+<body>
+ 
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html">
+    <img src="jlm.png" alt="JLMD Logo" style="height:50px;width:120px;">
+  </a>
+ 
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="#crew" class="active">Crew</a></li>
+    <li><a href="areas.html">Areas</a></li>
+    <li class="nav-socials">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://wa.me/17863666875" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </li>
+  </ul>
+ 
+  <button class="hamburger" id="hbg">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mmenu">
+  <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
+  <a href="index.html" onclick="closeM()">Home</a>
+  <a href="about.html" onclick="closeM()">About</a>
+  <a href="products.html" onclick="closeM()">Products</a>
+  <a href="#crew" onclick="closeM()" style="color:var(--accent)">Crew</a>
+  <a href="areas.html" onclick="closeM()">Areas</a>
+  <a href="#cta" onclick="closeM()">Free Estimate</a>
+</div>
+<!-- CAROUSEL SECTION -->
+<section class="carousel-section" id="homeCarousel">
+  <!-- Badge fijo - siempre visible -->
+  <div class="availability-badge">
+    <i class="fa fa-headset"></i> Available for New Projects
+  </div>
+  
+  <!-- Slide 1 -->
+  <div class="carousel-slide active">
+    <img src="img/grupo (1).jpg" alt="Quality Installation" class="carousel-image">
+    <div class="carousel-content">
+      <h2>Your Home's <span class="highlight">Security</span>, Backed by a Trained Team</h2>
+      <p>Let our team seal your installation to ensure maximum efficiency and security</p>
+    </div>
+  </div>
+  
+  <!-- Slide 2 -->
+  <div class="carousel-slide">
+    <img src="img/grupo (2).jpg" alt="Professional Team" class="carousel-image">
+    <div class="carousel-content">
+      <h2>Over <span class="highlight">25 Years</span> of Excellence in Installation</h2>
+      <p>A dedicated crew of specialists trusted by thousands of homeowners across South Florida for quality craftsmanship.</p>
+    </div>
+  </div>
+  
+  <!-- Slide 3 -->
+  <div class="carousel-slide">
+    <img src="img/grupo (3).jpg" alt="Premium Products" class="carousel-image">
+    <div class="carousel-content">
+      <h2><span class="highlight">Premium Products</span>, Professional Installation</h2>
+      <p>We partner with industry leaders to bring you the best impact-resistant solutions</p>
+    </div>
+  </div>
+  
+  <!-- Navigation Arrows -->
+  <div class="carousel-arrow prev" onclick="changeSlide(-1)">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="carousel-arrow next" onclick="changeSlide(1)">
+    <i class="fa fa-chevron-right"></i>
+  </div>
+  
+  <!-- Dots -->
+  <div class="carousel-dots">
+    <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+    <div class="carousel-dot" onclick="goToSlide(1)"></div>
+    <div class="carousel-dot" onclick="goToSlide(2)"></div>
+  </div>
+</section>
+<!-- FOUNDER SECTION -->
+<section class="founder-section" id="founder">
+  <div class="founder-container">
+    <div class="founder-header anim-left">
+      <h2>Some Words From Our Founder</h2>
+    </div>
+    
+    <div class="founder-content anim-left">
+      <div class="founder-image-wrapper">
+        <img src="img/7.jpg" alt="Jose Diaz - Founder">
+      </div>
+      <div class="founder-info">
+        <h3>Jose Diaz</h3>
+        <div class="founder-role">
+          <i class="fa fa-star"></i> Founder & CEO
+        </div>
+        <p>My name is Jose Diaz, and with 25 years of experience in the construction industry, including over ten years in the installation business, I am deeply committed to ensuring our clients' satisfaction with our work. Give us an opportunity, and I assure you, you will be satisfied with our service.</p>
+        <span class="founder-signature">Jose Diaz</span>
+        
+        <div class="founder-stats">
+          <div class="stat-item">
+            <span class="stat-number">25+</span>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5000+</span>
+            <div class="stat-label">Projects Done</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <div class="stat-label">Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREW SECTION -->
+<section class="crew-section" id="crew">
+  <div class="crew-container">
+    <div class="crew-header anim-left">
+      <h2>Meet Our Expert Team</h2>
+      <p>Our skilled professionals are dedicated to delivering exceptional results on every project</p>
+    </div>
+    
+    <div class="crew-grid">
+      <!-- Team Member 1 -->
+      <div class="crew-member anim-left">
+        <div class="crew-member-image">
+          <img src="img/6.jpg" alt="Alain Serrano">
+        </div>
+        <div class="crew-member-info">
+          <h3>Alain Serrano</h3>
+          <div class="role">Operations Manager</div>
+        </div>
+      </div>
+      
+      <!-- Team Member 2 -->
+      <div class="crew-member anim-left">
+        <div class="crew-member-image">
+          <img src="img/5.jpg" alt="Max Diaz">
+        </div>
+        <div class="crew-member-info">
+          <h3>Max Diaz</h3>
+          <div class="role">Content Creator</div>
+        </div>
+      </div>
+      
+      <!-- Team Member 3 -->
+      <div class="crew-member anim-left">
+        <div class="crew-member-image">
+          <img src="img/1.jpg" alt="Hilda Diaz">
+        </div>
+        <div class="crew-member-info">
+          <h3>Hilda Diaz</h3>
+          <div class="role">Managing Director</div>
+        </div>
+      </div>
+      
+      <!-- Team Member 4 -->
+      <div class="crew-member anim-right">
+        <div class="crew-member-image">
+          <img src="img/3.jpg" alt="Domingo Garcias Flores">
+        </div>
+        <div class="crew-member-info">
+          <h3>Domingo Garcias Flores</h3>
+          <div class="role">Project Manager</div>
+        </div>
+      </div>
+      
+      <!-- Team Member 5 -->
+      <div class="crew-member anim-right">
+        <div class="crew-member-image">
+          <img src="img/2.jpg" alt="Luis Trabanino">
+        </div>
+        <div class="crew-member-info">
+          <h3>Luis Trabanino</h3>
+          <div class="role">Field Supervisor</div>
+        </div>
+      </div>
+      
+      <!-- Team Member 6 -->
+      <div class="crew-member anim-right">
+        <div class="crew-member-image">
+          <img src="img/4.jpg" alt="Juan Carlos Cisneros De Leon">
+        </div>
+        <div class="crew-member-info">
+          <h3>Juan Carlos Cisneros De Leon</h3>
+          <div class="role">Project Manager</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="#" style="display:block;margin-bottom:1.2rem;">
+        <img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;">
+      </a>
+      <p>Your go-to installation experts. Precision windows and doors across Florida for over a decade. Licensed, insured, committed to excellence.</p>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#precision"><i class="fa fa-chevron-right"></i> Our Services</a></li>
+        <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
+        <li><a href="#areas"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
+        <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
+      </ul>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
+        <li><a href="#elevated"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
+      </ul>
+    </div>
+ 
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:8884140767"><i class="fa fa-phone"></i> (888) 414-0767</a></li>
+        <li><a href="tel:7863666875"><i class="fa fa-phone"></i> 786-366-6875</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward & Dade</a></li>
+      </ul>
+      <div class="social-row">
+        <a href="#" class="soc"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="soc"><i class="fab fa-instagram"></i></a>
+        <a href="tel:7863666875" class="soc"><i class="fa fa-phone"></i></a>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="footer-bottom">
+    <span>© 2026 JLMD Install · All Rights Reserved</span>
+    <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    <span>Made with <i class="fa fa-heart"></i> in South Florida</span>
+  </div>
+</footer>
+ 
+<script>
+// Mobile Menu
+const hbg = document.getElementById('hbg');
+const mmenu = document.getElementById('mmenu');
+document.getElementById('mclose').addEventListener('click', () => mmenu.classList.remove('open'));
+hbg.addEventListener('click', () => mmenu.classList.add('open'));
+function closeM() { mmenu.classList.remove('open'); }
+ 
+// Nav Scroll Effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+ 
+// Intersection Observer for Animations
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+ 
+document.querySelectorAll('.anim-left, .anim-right').forEach(el => obs.observe(el));
+
+// Carousel Functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.carousel-dot');
+let carouselInterval;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    dots[i].classList.remove('active');
+  });
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  currentSlide = index;
+}
+
+function changeSlide(direction) {
+  let newIndex = currentSlide + direction;
+  if (newIndex >= slides.length) newIndex = 0;
+  if (newIndex < 0) newIndex = slides.length - 1;
+  showSlide(newIndex);
+  resetCarousel();
+}
+
+function goToSlide(index) {
+  showSlide(index);
+  resetCarousel();
+}
+
+function nextSlide() {
+  changeSlide(1);
+}
+
+function resetCarousel() {
+  clearInterval(carouselInterval);
+  carouselInterval = setInterval(nextSlide, 6000);
+}
+
+// Auto-advance carousel
+carouselInterval = setInterval(nextSlide, 6000);
+
+// Pause carousel on hover
+document.querySelector('.carousel-section').addEventListener('mouseenter', () => {
+  clearInterval(carouselInterval);
+});
+
+document.querySelector('.carousel-section').addEventListener('mouseleave', () => {
+  carouselInterval = setInterval(nextSlide, 6000);
+});
+</script>
+ 
+</body>
+</html>
