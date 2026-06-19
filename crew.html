@@ -229,7 +229,10 @@ nav {
   flex-wrap: wrap;
 }
 .crew-top-row .crew-member { width: 240px; flex-shrink: 0; }
-.crew-top-row .crew-member-image { height: 320px; }
+.crew-top-row .crew-member-image {
+  width: 240px;
+  height: 240px;
+}
 
 /* BOTTOM ROW — 5 miembros */
 .crew-bottom-row {
@@ -238,8 +241,11 @@ nav {
   gap: 2rem;
   flex-wrap: wrap;
 }
-.crew-bottom-row .crew-member { width: 210px; flex-shrink: 0; }
-.crew-bottom-row .crew-member-image { height: 280px; }
+.crew-bottom-row .crew-member { width: 200px; flex-shrink: 0; }
+.crew-bottom-row .crew-member-image {
+  width: 200px;
+  height: 200px;
+}
 
 /* CREW CARD — sin caja blanca */
 .crew-member {
@@ -251,11 +257,11 @@ nav {
 }
 .crew-member:hover { transform: translateY(-8px); }
 
-/* IMAGEN con efecto hover azulado inferior */
+/* IMAGEN circular */
 .crew-member-image {
   position: relative;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 50%;        /* ← círculo */
   background: #c8d8e8;
 }
 .crew-member-image img {
@@ -282,7 +288,7 @@ nav {
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 50% 50%;  /* ← sigue la curva del círculo */
   pointer-events: none;
 }
 .crew-member:hover .crew-member-image::after { opacity: 1; }
@@ -805,7 +811,7 @@ footer { background: #1a2838; }
     <div class="crew-top-row">
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/7.jpg" alt="Jose Diaz">
+          <img src="img/FUNDADOR.png" alt="Jose Diaz">
         </div>
         <div class="crew-member-info">
           <h3>Jose Diaz</h3>
@@ -817,7 +823,7 @@ footer { background: #1a2838; }
 
       <div class="crew-member anim-right">
         <div class="crew-member-image">
-          <img src="img/1.jpg" alt="Hilda Diaz">
+          <img src="img/Hilda.png" alt="Hilda Diaz">
         </div>
         <div class="crew-member-info">
           <h3>Hilda Diaz</h3>
@@ -830,47 +836,47 @@ footer { background: #1a2838; }
     <div class="crew-bottom-row">
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/6.jpg" alt="Alain Serrano">
+          <img src="img/Michel-Vega.png" alt="Alain Serrano">
         </div>
         <div class="crew-member-info">
-          <h3>Alain Serrano</h3>
-          <div class="role">Operations Manager</div>
+          <h3>Michel Vega.</h3>
+          <div class="role">Logistics</div>
         </div>
       </div>
 
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/5.jpg" alt="Max Diaz">
+          <img src="img/Raudel-Hurtado.png" alt="Max Diaz">
         </div>
         <div class="crew-member-info">
-          <h3>Max Diaz</h3>
-          <div class="role">Content Creator</div>
+          <h3>Raudel Hurtado</h3>
+          <div class="role">Field Supervisor</div>
         </div>
       </div>
 
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/3.jpg" alt="Domingo Garcias Flores">
+          <img src="img/Randy-Llorca.png" alt="Domingo Garcias Flores">
         </div>
         <div class="crew-member-info">
-          <h3>Domingo Garcias Flores</h3>
+          <h3>Randy Llorca</h3>
           <div class="role">Project Manager</div>
         </div>
       </div>
 
       <div class="crew-member anim-right">
         <div class="crew-member-image">
-          <img src="img/2.jpg" alt="Luis Trabanino">
+          <img src="img/Alain-Gomez.png" alt="Luis Trabanino">
         </div>
         <div class="crew-member-info">
-          <h3>Luis Trabanino</h3>
-          <div class="role">Field Supervisor</div>
+          <h3>Alain Gomez</h3>
+          <div class="role">Logistics</div>
         </div>
       </div>
 
       <div class="crew-member anim-right">
         <div class="crew-member-image">
-          <img src="img/4.jpg" alt="Juan Carlos Cisneros De Leon">
+          <img src="img/Juan-Carlos.png" alt="Juan Carlos Cisneros De Leon">
         </div>
         <div class="crew-member-info">
           <h3>Juan Carlos Cisneros De Leon</h3>
