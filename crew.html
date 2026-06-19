@@ -57,46 +57,52 @@ body {
 img { display: block; max-width: 100%; }
 
 /* NAV */
+/* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  height: 72px;
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000; height: 72px;
   padding: 0 5vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,255,255,0.96);
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.4s;
 }
-nav.scrolled { box-shadow: 0 2px 12px rgba(0,80,130,0.07); }
-.nav-links {
-  display: flex; gap: 1.5rem; list-style: none; align-items: center;
+.nav-logo {
+  font-family: var(--font-display); font-size: 1.75rem; font-weight: 800;
+  letter-spacing: 0.01em; color: var(--primary); text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
 }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
 .nav-links a {
   color: var(--text-muted); text-decoration: none;
   font-size: 0.70rem; font-weight: 500;
   letter-spacing: 0.06em; text-transform: uppercase;
-  transition: color 0.3s; position: relative;
+  transition: color 0.3s ease; position: relative;
 }
 .nav-links a::after {
   content: ''; position: absolute;
   bottom: -4px; left: 0; right: 100%;
   height: 2px; background: var(--accent);
-  transition: right 0.3s; border-radius: 2px;
+  transition: right 0.3s ease; border-radius: 2px;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--primary); }
-.nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { right: 0; }
 .nav-socials { display: flex; gap: 0.6rem; align-items: center; }
 .nav-socials a {
   width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--primary); font-size: 0.9rem;
-  transition: color 0.3s, transform 0.3s; text-decoration: none;
+  transition: all 0.3s ease; text-decoration: none;
 }
 .nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+.hamburger {
+  display: none; background: none; border: none;
+  cursor: pointer; padding: 0.4rem;
+  flex-direction: column; gap: 5px;
+}
+
 .hamburger {
   display: none; background: none; border: none; cursor: pointer;
   padding: 0.4rem; flex-direction: column; gap: 5px;
@@ -712,9 +718,11 @@ footer { background: #1a2838; }
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html">
-    <img src="jlm.png" alt="JLMD Logo" style="height:50px;width:120px;">
+  <a href="#" class="nav-logo">
+    <img src="icono.webp" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px;margin-top: -15px;">
+    JLMD<span class="dot">.</span>
   </a>
+
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
@@ -722,10 +730,10 @@ footer { background: #1a2838; }
     <li><a href="products.html">Products</a></li>
     <li><a href="#crew" class="active">Crew</a></li>
     <li><a href="areas.html">Areas</a></li>
-   <li class="nav-socials">
-  <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+<li class="nav-socials">
+  <a href="https://www.instagram.com/jlmd.install/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://www.tiktok.com/@jlmd.install" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
   <a href="https://wa.me/17863666875" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 </li>
   </ul>
@@ -920,47 +928,49 @@ footer { background: #1a2838; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-main">
-    <div class="footer-col footer-brand">
-      <img src="jlm.png" alt="JLMD Install" style="height:48px;margin-bottom:1.2rem;">
-      <p>South Florida's trusted window &amp; door installation specialists. Quality craftsmanship, impact-resistant solutions.</p>
-      <div class="social-row">
-        <a href="https://instagram.com" target="_blank" class="soc"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com" target="_blank" class="soc"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://x.com" target="_blank" class="soc"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/17863666875" target="_blank" class="soc"><i class="fab fa-whatsapp"></i></a>
-      </div>
+    <div class="footer-brand">
+     <a href="#" class="foot-logo"><img src="login.png" alt="JLMD Install" style="height:75px;width:auto;"></a>
+      <p>Your go-to installation experts. Precision windows and doors across South Florida for over a decade. Licensed, insured, committed to excellence.</p>
     </div>
     <div class="footer-col">
-      <h4>Pages</h4>
+      <h4>Navigate</h4>
       <ul>
-        <li><a href="index.html"><i class="fa fa-chevron-right"></i> Home</a></li>
-        <li><a href="about.html"><i class="fa fa-chevron-right"></i> About</a></li>
-        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Services</a></li>
-        <li><a href="products.html"><i class="fa fa-chevron-right"></i> Products</a></li>
-        <li><a href="areas.html"><i class="fa fa-chevron-right"></i> Areas</a></li>
+        <li><a href="#about"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Our Services</a></li>
+        <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
+        <li><a href="#areas"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
+        <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
-        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Impact Windows</a></li>
-        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
-        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Sliding Doors</a></li>
-        <li><a href="services.html"><i class="fa fa-chevron-right"></i> Entry Doors</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="tel:17863666875"><i class="fa fa-chevron-right"></i> (786) 366-6875</a></li>
-        <li><a href="mailto:jlmdinstall@gmail.com"><i class="fa fa-chevron-right"></i> jlmdinstall@gmail.com</a></li>
-        <li><a href="areas.html"><i class="fa fa-chevron-right"></i> South Florida</a></li>
+        <li><a href="tel:17863666875"><i class="fa fa-phone"></i> +1 786-366-6875</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
       </ul>
+      <div class="social-row">
+        <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" class="soc" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/jlmd.install/" target="_blank" class="soc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@jlmd.install" target="_blank" class="soc" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/17863666875" target="_blank" class="soc" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 JLMD Install. Made with <i class="fa fa-heart"></i> in South Florida.</span>
-    <span><a href="#">Privacy Policy</a> · <a href="#">Terms</a></span>
+    <span>© 2026 JLMD Install · All Rights Reserved</span>
+    <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    <span>Made with <i class="fa fa-heart"></i> in South Florida</span>
   </div>
 </footer>
 

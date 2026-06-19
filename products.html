@@ -42,71 +42,51 @@ body {
  
 img { display: block; max-width: 100%; }
  
-/* NAV */
+/* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  height: 72px;
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000; height: 72px;
   padding: 0 5vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,255,255,0.96);
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.4s;
 }
- 
-nav.scrolled { box-shadow: 0 2px 12px rgba(0,80,130,0.07); }
- 
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-  align-items: center;
+.nav-logo {
+  font-family: var(--font-display); font-size: 1.75rem; font-weight: 800;
+  letter-spacing: 0.01em; color: var(--primary); text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
 }
- 
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
 .nav-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.70rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: color 0.3s;
-  position: relative;
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.70rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.3s ease; position: relative;
 }
- 
 .nav-links a::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   bottom: -4px; left: 0; right: 100%;
-  height: 2px;
-  background: var(--accent);
-  transition: right 0.3s;
-  border-radius: 2px;
+  height: 2px; background: var(--accent);
+  transition: right 0.3s ease; border-radius: 2px;
 }
- 
-.nav-links a:hover,
-.nav-links a.active { color: var(--primary); }
-.nav-links a:hover::after,
-.nav-links a.active::after { right: 0; }
- 
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { right: 0; }
 .nav-socials { display: flex; gap: 0.6rem; align-items: center; }
- 
 .nav-socials a {
-  width: 36px; height: 36px;
-  border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: var(--primary);
-  font-size: 0.9rem;
-  transition: color 0.3s, transform 0.3s;
-  text-decoration: none;
+  color: var(--primary); font-size: 0.9rem;
+  transition: all 0.3s ease; text-decoration: none;
 }
- 
 .nav-socials a:hover { color: var(--accent); transform: translateY(-2px); }
- 
+.hamburger {
+  display: none; background: none; border: none;
+  cursor: pointer; padding: 0.4rem;
+  flex-direction: column; gap: 5px;
+}
 .hamburger {
   display: none;
   background: none; border: none; cursor: pointer;
@@ -150,98 +130,239 @@ nav.scrolled { box-shadow: 0 2px 12px rgba(0,80,130,0.07); }
   display: flex; align-items: center; justify-content: center;
   z-index: 9999;
 }
- 
-/* PRODUCTS SECTION */
 #premium-products {
-  min-height: 100vh;
-  display: flex; align-items: center;
+  padding: 0;
+  overflow: hidden;
 }
- 
+
+/* Barra superior azul oscura con botón All View */
+.pp-top-bar {
+  background: #001e3c;
+  padding: 2rem 5vw;
+  display: flex;
+  justify-content: center;
+}
+
+.pp-all-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #38bdf8;
+  color: #001e3c;
+  padding: 0.9rem 3rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.pp-all-view-btn:hover {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+}
+
+/* Container principal */
 .pp-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 8rem 5vw;
+  padding: 6rem 5vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   align-items: center;
 }
- 
-.pp-content { display: flex; flex-direction: column; gap: 1.5rem; }
- 
-.section-tag {
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--primary);
-  display: flex; align-items: center; gap: 0.7rem;
+
+.pp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
- 
-.section-tag::before {
-  content: ''; width: 28px; height: 2px;
-  background: var(--primary); border-radius: 2px;
-}
- 
+
 .pp-title {
-  font-size: clamp(2rem, 4.5vw, 4rem);
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
   color: #001e3c;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
- 
-.pp-title span { color: var(--primary); }
- 
+
 .pp-desc {
   color: #94a3b8;
-  font-size: 1.05rem;
-  line-height: 1.85;
-  max-width: 520px;
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 480px;
 }
- 
+
 .pp-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem;
-  background: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  background: #38bdf8;
   color: #001e3c;
   padding: 1rem 3rem;
   border-radius: 50px;
   text-decoration: none;
-  font-size: 0.85rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   margin-top: 1rem;
+  border: none;
+  cursor: pointer;
   width: fit-content;
 }
- 
-.pp-btn:hover { background: #7dd3fc; transform: translateY(-3px) scale(1.03); }
- 
-.pp-images { display: flex; justify-content: flex-end; align-items: flex-start; }
- 
-.pp-image-wrapper { display: flex; flex-direction: column; gap: 2rem; }
- 
+
+.pp-btn:hover {
+  background: #7dd3fc;
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* ===== SECCIÓN DE IMÁGENES - SIN RECUADROS ===== */
+.pp-images {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background: transparent !important;
+}
+
+.pp-image-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: transparent !important;
+}
+
+/* Eliminar completamente cualquier recuadro, sombra o fondo */
 .pp-image-top,
 .pp-image-bottom {
-  overflow: hidden;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: transform 0.4s, box-shadow 0.4s;
+  position: relative;
+  overflow: visible !important; /* Cambiado de hidden a visible */
+  border-radius: 0 !important; /* Eliminar border-radius */
+  box-shadow: none !important; /* Eliminar shadow */
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
 }
- 
-.pp-image-top { width: 420px; height: 320px; align-self: flex-start; }
-.pp-image-bottom { width: 380px; height: 420px; align-self: flex-end; margin-top: -1rem; }
- 
+
+/* Imagen superior: alineada a la IZQUIERDA */
+.pp-image-top {
+  width: 420px;
+  height: 320px;
+  align-self: flex-start;
+}
+
+/* Imagen inferior: alineada a la DERECHA */
+.pp-image-bottom {
+  width: 380px;
+  height: 420px;
+  align-self: flex-end;
+  margin-top: -1rem;
+}
+
 .pp-image-top img,
 .pp-image-bottom img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease;
+  display: block;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
 }
- 
+
+/* Eliminar hover effects que puedan crear recuadros */
 .pp-image-top:hover,
-.pp-image-bottom:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
- 
+.pp-image-bottom:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 .pp-image-top:hover img,
-.pp-image-bottom:hover img { transform: scale(1.05); }
- 
+.pp-image-bottom:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== FIN SECCIÓN DE IMÁGENES ===== */
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pp-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 4rem 5vw;
+  }
+  
+  .pp-images {
+    justify-content: center;
+  }
+  
+  .pp-image-top {
+    width: 380px;
+    height: 280px;
+    align-self: center;
+  }
+  
+  .pp-image-bottom {
+    width: 340px;
+    height: 380px;
+    align-self: center;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .pp-top-bar {
+    padding: 1.5rem 5vw;
+  }
+  
+  .pp-container {
+    padding: 3rem 5vw;
+    gap: 3rem;
+  }
+  
+  .pp-image-top,
+  .pp-image-bottom {
+    width: 100%;
+    max-width: 400px;
+    height: 280px;
+  }
+  
+  .pp-image-wrapper {
+    gap: 1.5rem;
+  }
+  
+  .pp-title {
+    font-size: 2rem;
+  }
+  
+  .pp-desc {
+    font-size: 0.95rem;
+  }
+  
+  .pp-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pp-image-top,
+  .pp-image-bottom {
+    height: 220px;
+  }
+}
 /* FOOTER */
 footer { background: #1a2838; }
  
@@ -343,11 +464,12 @@ footer { background: #1a2838; }
  
 <body>
  
-<!-- NAV -->
 <nav id="nav">
-  <a href="index.html">
-    <img src="jlm.png" alt="JLMD Logo" style="height:50px;width:120px;">
+  <a href="#" class="nav-logo">
+    <img src="icono.webp" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px;margin-top: -15px;">
+    JLMD<span class="dot">.</span>
   </a>
+
  
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -356,10 +478,11 @@ footer { background: #1a2838; }
     <li><a href="products.html" class="active">Products</a></li>
     <li><a href="crew.html">Crew</a></li>
     <li><a href="areas.html">Areas</a></li>
-   <li class="nav-socials">
-  <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+<li class="nav-socials">
+<li class="nav-socials">
+  <a href="https://www.instagram.com/jlmd.install/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://www.tiktok.com/@jlmd.install" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
   <a href="https://wa.me/17863666875" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 </li>
   </ul>
@@ -412,50 +535,44 @@ footer { background: #1a2838; }
 <footer>
   <div class="footer-main">
     <div class="footer-brand">
-      <a href="#" style="display:block;margin-bottom:1.2rem;">
-        <img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;">
-      </a>
-      <p>Your go-to installation experts. Precision windows and doors across Florida for over a decade. Licensed, insured, committed to excellence.</p>
+      <a href="#" class="foot-logo"><img src="jlm.png" alt="JLMD Install" style="height:48px;width:auto;"></a>
+      <p>Your go-to installation experts. Precision windows and doors across South Florida for over a decade. Licensed, insured, committed to excellence.</p>
     </div>
- 
     <div class="footer-col">
       <h4>Navigate</h4>
       <ul>
-        <li><a href="about.html"><i class="fa fa-chevron-right"></i> About Us</a></li>
-        <li><a href="#precision"><i class="fa fa-chevron-right"></i> Our Services</a></li>
+        <li><a href="#about"><i class="fa fa-chevron-right"></i> About Us</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> Our Services</a></li>
         <li><a href="#portfolio"><i class="fa fa-chevron-right"></i> Portfolio</a></li>
         <li><a href="#areas"><i class="fa fa-chevron-right"></i> Service Areas</a></li>
         <li><a href="#cta"><i class="fa fa-chevron-right"></i> Free Estimate</a></li>
       </ul>
     </div>
- 
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
         <li><a href="#services"><i class="fa fa-chevron-right"></i> Impact Doors</a></li>
         <li><a href="#services"><i class="fa fa-chevron-right"></i> Window Installation</a></li>
-        <li><a href="#elevated"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
+        <li><a href="#services"><i class="fa fa-chevron-right"></i> High-Rise Installs</a></li>
         <li><a href="#services"><i class="fa fa-chevron-right"></i> Custom Storefronts</a></li>
         <li><a href="#services"><i class="fa fa-chevron-right"></i> Waterproofing</a></li>
         <li><a href="#services"><i class="fa fa-chevron-right"></i> Sill Replacement</a></li>
       </ul>
     </div>
- 
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="tel:8884140767"><i class="fa fa-phone"></i> (888) 414-0767</a></li>
-        <li><a href="tel:7863666875"><i class="fa fa-phone"></i> 786-366-6875</a></li>
-        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward & Dade</a></li>
+        <li><a href="tel:17863666875"><i class="fa fa-phone"></i> +1 786-366-6875</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
       </ul>
       <div class="social-row">
-        <a href="#" class="soc"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="soc"><i class="fab fa-instagram"></i></a>
-        <a href="tel:7863666875" class="soc"><i class="fa fa-phone"></i></a>
+        <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" class="soc" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/jlmd.install/" target="_blank" class="soc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@jlmd.install" target="_blank" class="soc" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/17863666875" target="_blank" class="soc" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
- 
   <div class="footer-bottom">
     <span>© 2026 JLMD Install · All Rights Reserved</span>
     <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
