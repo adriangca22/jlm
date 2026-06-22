@@ -128,70 +128,112 @@ nav {
 
 /* CAROUSEL */
 .carousel-section {
-  position: relative; height: 100vh; min-height: 600px;
-  overflow: hidden; margin-top: 72px;
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  margin-top: 72px;
 }
+
 .carousel-slide {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  opacity: 0; transition: opacity 1s ease-in-out;
-  display: flex; align-items: flex-end; justify-content: center;
+  position: relative; /* Cambiado de absolute a relative */
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* Siempre visible */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-.carousel-slide.active { opacity: 1; }
+
+/* Eliminamos la transición y el active */
 .carousel-slide::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(0,0,0,0.6); z-index: 1;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
 }
+
 .carousel-image {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
+
 .carousel-content {
-  position: relative; z-index: 2; max-width: 900px;
-  padding: 0 5vw 8rem; text-align: center; color: #fff;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 5vw 8rem;
+  text-align: center;
+  color: #fff;
 }
+
 .carousel-content h2 {
-  font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800;
-  line-height: 1.2; margin-bottom: 0.8rem; letter-spacing: -0.02em;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
 }
-.carousel-content h2 .highlight { color: var(--accent); }
+
+.carousel-content h2 .highlight {
+  color: var(--accent);
+}
+
 .carousel-content p {
-  font-size: 0.95rem; color: rgba(255,255,255,0.85);
-  max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
 }
+
 .availability-badge {
-  position: absolute; top: 30px; left: 30px; z-index: 3;
-  background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2); padding: 0.5rem 1.1rem;
-  border-radius: 50px; display: inline-flex; align-items: center;
-  gap: 0.4rem; color: #fff; font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.02em; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  transition: all 0.3s ease; cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 3;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.5rem 1.1rem;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-.availability-badge i { font-size: 0.85rem; color: var(--accent); }
+
+.availability-badge i {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
 .availability-badge:hover {
-  background: rgba(255,255,255,0.2); transform: translateY(-2px);
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
-.carousel-dots {
-  position: absolute; bottom: 40px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 12px; z-index: 3;
+
+/* Eliminamos completamente los dots y flechas */
+.carousel-dots,
+.carousel-dot,
+.carousel-arrow,
+.carousel-arrow.prev,
+.carousel-arrow.next {
+  display: none !important;
 }
-.carousel-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: rgba(255,255,255,0.4); border: 2px solid transparent;
-  cursor: pointer; transition: all 0.3s;
-}
-.carousel-dot.active { background: var(--accent); border-color: #fff; transform: scale(1.2); }
-.carousel-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-  color: #fff; width: 50px; height: 50px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 3; transition: all 0.3s; font-size: 1.2rem;
-}
-.carousel-arrow:hover { background: rgba(255,255,255,0.25); transform: translateY(-50%) scale(1.1); }
-.carousel-arrow.prev { left: 30px; }
-.carousel-arrow.next { right: 30px; }
 
 /* CREW SECTION */
 .crew-section {
@@ -759,29 +801,14 @@ footer { background: #1a2838; }
   <a href="#cta" onclick="closeM()">Free Estimate</a>
 </div>
 
-<!-- CAROUSEL -->
+<!-- CAROUSEL - Static Slide -->
 <section class="carousel-section" id="homeCarousel">
   <div class="availability-badge">
     <i class="fa fa-headset"></i> Available for New Projects
   </div>
 
+  <!-- Solo se mantiene el slide 3 -->
   <div class="carousel-slide active">
-    <img src="img/grupo (1).jpg" alt="Quality Installation" class="carousel-image">
-    <div class="carousel-content">
-      <h2>Your Home's <span class="highlight">Security</span>, Backed by a Trained Team</h2>
-      <p>Let our team seal your installation to ensure maximum efficiency and security</p>
-    </div>
-  </div>
-
-  <div class="carousel-slide">
-    <img src="img/grupo (2).jpg" alt="Professional Team" class="carousel-image">
-    <div class="carousel-content">
-      <h2>Over <span class="highlight">25 Years</span> of Excellence in Installation</h2>
-      <p>A dedicated crew of specialists trusted by thousands of homeowners across South Florida for quality craftsmanship.</p>
-    </div>
-  </div>
-
-  <div class="carousel-slide">
     <img src="img/grupo (3).jpg" alt="Premium Products" class="carousel-image">
     <div class="carousel-content">
       <h2><span class="highlight">Premium Products</span>, Professional Installation</h2>
@@ -789,14 +816,8 @@ footer { background: #1a2838; }
     </div>
   </div>
 
-  <div class="carousel-arrow prev" onclick="changeSlide(-1)"><i class="fa fa-chevron-left"></i></div>
-  <div class="carousel-arrow next" onclick="changeSlide(1)"><i class="fa fa-chevron-right"></i></div>
-
-  <div class="carousel-dots">
-    <div class="carousel-dot active" onclick="goToSlide(0)"></div>
-    <div class="carousel-dot" onclick="goToSlide(1)"></div>
-    <div class="carousel-dot" onclick="goToSlide(2)"></div>
-  </div>
+  <!-- Se eliminan las flechas de navegación -->
+  <!-- Se eliminan los dots/puntos de navegación -->
 </section>
 
 <!-- CREW SECTION -->
