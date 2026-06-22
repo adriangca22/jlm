@@ -17,38 +17,63 @@
 <div class="scroll-progress"><div class="scroll-progress-bar" id="progressBar"></div></div>
 <div class="particles-container" id="particles"></div>
  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLMD Install – Window & Door Installation Experts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="icono/webp" href="icono.webp">
+</head>
+<body>
+ 
+<div class="page-overlay"></div>
+<div class="scroll-progress"><div class="scroll-progress-bar" id="progressBar"></div></div>
+<div class="particles-container" id="particles"></div>
+ 
 <!-- ══════════════════════ NAV ══════════════════════ -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <img src="icono.webp" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px;margin-top: -15px;">
+    <img src="icono.webp" alt="JLMD Logo" style="height: 40px; width: auto; margin-right: 8px; margin-top: -15px;">
     JLMD<span class="dot">.</span>
   </a>
-
-  </a>
+  
   <ul class="nav-links">
-      <a href="index.html">Home</a>
+    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-       <li><a href="products.html">Products</a></li>
-      <li><a href="crew.html">Crew</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="crew.html">Crew</a></li>
     <li><a href="areas.html">Areas</a></li>
-<li class="nav-socials">
-  <a href="https://www.instagram.com/jlmd.install/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-  <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://www.tiktok.com/@jlmd.install" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-  <a href="https://wa.me/17863666875" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-</li>
-  <button class="hamburger" id="hbg"><span></span><span></span><span></span></button>
+    <li class="nav-socials">
+      <a href="https://www.instagram.com/jlmd.install/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.tiktok.com/@jlmd.install" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://wa.me/17863666875" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </li>
+  </ul>
+  
+  <button class="hamburger" id="hbg">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
  
 <div class="mobile-menu" id="mmenu">
   <button class="mobile-close" id="mclose"><i class="fa fa-times"></i></button>
+  <a href="index.html" onclick="closeM()">Home</a>
   <a href="about.html" onclick="closeM()">About</a>
   <a href="services.html" onclick="closeM()">Services</a>
-     <li><a href="products.html">Products</a></li>
+  <a href="products.html" onclick="closeM()">Products</a>
   <a href="crew.html" onclick="closeM()">Crew</a>
   <a href="areas.html" onclick="closeM()">Areas</a>
-  <a href="#cta" onclick="closeM()" style="color:var(--accent)"></a>
+ 
 </div>
  
 <!-- ══════════════════════ 1. HERO ══════════════════════ -->
@@ -74,6 +99,10 @@
     <i class="fa fa-chevron-down scroll-arrow"></i>
   </div>
 </section>
+
+
+</body>
+</html>
  
 <!-- ══════════════════════ 2. LOGOS / PARTNERS ══════════════════════ -->
 <section id="logos">

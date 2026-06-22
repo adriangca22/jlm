@@ -1,17 +1,63 @@
-// NAVBAR SCROLL
+// ── SCROLL PROGRESS BAR ──
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressBar').style.width = scrolled + '%';
+});
+
+// ── PARTICLES ──
+(function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = (Math.random() * 4 + 1) + 'px';
+    p.style.height = p.style.width;
+    p.style.animationDuration = (Math.random() * 20 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.opacity = Math.random() * 0.4 + 0.1;
+    container.appendChild(p);
+  }
+})();
+
+// ── NAVBAR SCROLL ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
 
-// MOBILE MENU
-document.getElementById('hbg').addEventListener('click', () => { 
-    document.getElementById('mmenu').classList.add('open'); 
-    document.body.style.overflow = 'hidden'; 
+// ── MOBILE MENU ──
+const hamburger = document.getElementById('hbg');
+const mobileMenu = document.getElementById('mmenu');
+const closeBtn = document.getElementById('mclose');
+
+hamburger.addEventListener('click', () => { 
+  mobileMenu.classList.add('open'); 
+  document.body.style.overflow = 'hidden'; 
 });
-document.getElementById('mclose').addEventListener('click', closeM);
+
+closeBtn.addEventListener('click', closeM);
+
 function closeM() { 
-    document.getElementById('mmenu').classList.remove('open'); 
-    document.body.style.overflow = ''; 
+  mobileMenu.classList.remove('open'); 
+  document.body.style.overflow = ''; 
 }
+
+// Cerrar menú al hacer click en un enlace (para móvil)
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+  link.addEventListener('click', closeM);
+});
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 
 // HERO SLIDER
 // FIX: guard against missing slides (if section uses video instead of slider, skip)
@@ -184,3 +230,43 @@ document.addEventListener('DOMContentLoaded', () => {
         badgeObserver.observe(badge);
     }
 });
+// ✅ Destacar la tarjeta CENTRAL del carrusel del portfolio
+function highlightCenterPortfolioCard() {
+  const wrap = document.querySelector('.port-carousel-wrap');
+  const cards = document.querySelectorAll('.port-card');
+  
+  if (!wrap || cards.length === 0) return;
+  
+  const wrapRect = wrap.getBoundingClientRect();
+  const viewportCenter = wrapRect.left + wrapRect.width / 2;
+  
+  let closestCard = null;
+  let closestDistance = Infinity;
+  
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cardCenter = rect.left + rect.width / 2;
+    const distance = Math.abs(viewportCenter - cardCenter);
+    
+    if (rect.right > wrapRect.left && rect.left < wrapRect.right) {
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestCard = card;
+      }
+    }
+  });
+  
+  cards.forEach(card => card.classList.remove('is-center'));
+  if (closestCard) closestCard.classList.add('is-center');
+}
+
+function runPortfolioHighlight() {
+  highlightCenterPortfolioCard();
+  requestAnimationFrame(runPortfolioHighlight);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(runPortfolioHighlight, 100);
+});
+
+window.addEventListener('resize', highlightCenterPortfolioCard);
