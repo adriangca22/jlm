@@ -1623,7 +1623,7 @@ display: inline-block;
   color: var(--text-muted);
   font-size: 0.85rem;
   margin: 0 0 1.5rem;
-  opacity: 0.7;
+ 
 }
 
 .port-carousel-wrap { 
@@ -1632,15 +1632,11 @@ display: inline-block;
   margin-top: 2rem;
   padding: 0 2rem;
 }
-.port-carousel-wrap::before,
-.port-carousel-wrap::after { 
-  content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; 
-}
-.port-carousel-wrap::before { left: 0; background: linear-gradient(to right, rgba(255,255,255,0.6), transparent); }
-.port-carousel-wrap::after { right: 0; background: linear-gradient(to left, rgba(255,255,255,0.6), transparent); }
 
 .port-carousel-track {
-  display: flex; gap: 0.75rem; width: max-content;
+  display: flex; 
+  gap: 0.75rem; 
+  width: max-content;
   animation: carouselScrollLeft 90s linear infinite;
   padding: 0.5rem 0;
 }
@@ -1653,11 +1649,24 @@ display: inline-block;
   overflow: hidden; 
   position: relative; 
   cursor: pointer; 
-  transition: transform 0.3s ease;
-  border-radius: 0;         
-  box-shadow: var(--shadow-md);
+
+  border-radius: 0;
+
+
 }
-.port-card:hover { transform: translateY(-6px); }
+
+.port-card.is-center {
+  opacity: 1;
+  filter: brightness(1);
+  transform: translateY(-6px) scale(1.03);
+  z-index: 5;
+}
+
+.port-card:hover { 
+  transform: translateY(-6px) scale(1.05); 
+  opacity: 1;
+  filter: brightness(1);
+}
 
 .port-image-wrapper {
   width: 100%;
@@ -1686,61 +1695,61 @@ display: inline-block;
   z-index: 2;
 }
 
-/* ✅ LABELS: Texto blanco, ARRIBA a la izquierda, SIN caja, SIN fondo */
 .img-label {
   position: absolute;
-  top: 18px;                 /* ✅ Cambiado de bottom a top */
-  left: 18px;
-  transform: none;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 0;
   margin: 0;
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 2.5px;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  
-  /* ✅ Texto blanco puro */
   color: #ffffff;
-  
-  /* ✅ Explícitamente sin fondo ni caja */
   background: transparent !important;
   box-shadow: none !important;
   outline: none !important;
-  
-  /* ✅ Solo sombra del texto (no del elemento) para legibilidad */
   text-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.9),
-    0 1px 2px rgba(0, 0, 0, 0.8);
-  
-  filter: none;              /* ✅ Sin drop-shadow que pueda crear halos */
+    0 2px 12px rgb(0, 0, 0),
+    0 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 0, 0, 0.4);
+  filter: none;
   border: none;
   backdrop-filter: none;
   border-radius: 0;
   z-index: 10;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 0.5s ease, transform 0.3s ease;
+  transition: 
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1;
   display: inline-block;
   width: max-content;
+  white-space: nowrap;
 }
 
 .label-after {
   z-index: 11;
   opacity: 0;
+  transform: translate(-50%, -40%);
 }
 
 .label-before {
   z-index: 12;
   opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .port-card:hover .label-before {
   opacity: 0;
+  transform: translate(-50%, -60%);
 }
 
 .port-card:hover .label-after {
   opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .port-card:hover .img-before {
@@ -1776,9 +1785,8 @@ display: inline-block;
     100% { transform: translateX(calc(-320px * 10 - 0.75rem * 10)); }
   }
   .img-label {
-    font-size: 0.65rem;
-    top: 14px;               /* ✅ Cambiado de bottom a top */
-    left: 14px;
+    font-size: 1rem;
+    letter-spacing: 4px;
   }
   .port-carousel-wrap {
     padding: 0 1rem;
@@ -1795,17 +1803,13 @@ display: inline-block;
     100% { transform: translateX(calc(-280px * 10 - 0.75rem * 10)); }
   }
   .img-label {
-    font-size: 0.6rem;
-    top: 12px;               /* ✅ Cambiado de bottom a top */
-    left: 12px;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
   }
   .port-carousel-wrap {
     padding: 0 0.5rem;
   }
 }
-/* ════════════════════════════════════════════════════════
-   CTA - FREE ESTIMATE FORM
-   ════════════════════════════════════════════════════════ */
 #cta {
   padding: 4rem 2rem;
   background: #f8fafc;
