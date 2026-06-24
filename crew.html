@@ -235,19 +235,23 @@ nav {
   display: none !important;
 }
 
-/* CREW SECTION */
+/* ═══════ CREW SECTION ═══════ */
 .crew-section {
   padding: 6rem 5vw;
   background: #fff;
 }
+
 .crew-container {
   max-width: 1200px;
   margin: 0 auto;
 }
+
+/* ── Header ── */
 .crew-header {
   text-align: center;
   margin-bottom: 4rem;
 }
+
 .crew-header h2 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
@@ -255,6 +259,7 @@ nav {
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
+
 .crew-header p {
   color: var(--text-muted);
   font-size: 1.1rem;
@@ -262,34 +267,43 @@ nav {
   margin: 0 auto;
 }
 
-/* TOP ROW — Jose & Hilda */
-.crew-top-row {
+/* ── Filas del equipo ── */
+.crew-top-row,
+.crew-row {
   display: flex;
   justify-content: center;
   gap: 2.5rem;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
 }
-.crew-top-row .crew-member { width: 240px; flex-shrink: 0; }
+
+.crew-row:last-child {
+  margin-bottom: 0;
+}
+
+/* ── TOP ROW: 2 miembros (Jose & Hilda) ── */
+.crew-top-row .crew-member {
+  width: 260px;
+  flex-shrink: 0;
+}
+
 .crew-top-row .crew-member-image {
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
 }
 
-/* BOTTOM ROW — 5 miembros */
-.crew-bottom-row {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.crew-bottom-row .crew-member { width: 200px; flex-shrink: 0; }
-.crew-bottom-row .crew-member-image {
-  width: 200px;
-  height: 200px;
+/* ── Filas de 3 miembros ── */
+.crew-row-3 .crew-member {
+  width: 220px;
+  flex-shrink: 0;
 }
 
-/* CREW CARD — sin caja blanca */
+.crew-row-3 .crew-member-image {
+  width: 220px;
+  height: 220px;
+}
+
+/* ── CREW CARD ── */
 .crew-member {
   background: transparent;
   border-radius: 16px;
@@ -297,29 +311,39 @@ nav {
   box-shadow: none;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.crew-member:hover { transform: translateY(-8px); }
 
-/* IMAGEN circular */
+.crew-member:hover {
+  transform: translateY(-8px);
+}
+
+/* ── IMAGEN circular ── */
 .crew-member-image {
   position: relative;
   overflow: hidden;
-  border-radius: 50%;        /* ← círculo */
+  border-radius: 50%;
   background: #c8d8e8;
 }
+
 .crew-member-image img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: top;
   transition: transform 0.6s ease;
   display: block;
 }
-.crew-member:hover .crew-member-image img { transform: scale(1.06); }
 
-/* Gradiente azul en la parte inferior al hacer hover */
+.crew-member:hover .crew-member-image img {
+  transform: scale(1.06);
+}
+
+/* ── Gradiente azul en hover ── */
 .crew-member-image::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 55%;
   background: linear-gradient(
     to top,
@@ -330,36 +354,140 @@ nav {
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1;
-  border-radius: 0 0 50% 50%;  /* ← sigue la curva del círculo */
+  border-radius: 0 0 50% 50%;
   pointer-events: none;
 }
-.crew-member:hover .crew-member-image::after { opacity: 1; }
 
-/* INFO debajo de la imagen, sin fondo */
+.crew-member:hover .crew-member-image::after {
+  opacity: 1;
+}
+
+/* ── INFO debajo de la imagen ── */
 .crew-member-info {
-  padding: 0.75rem 0.25rem 0;
+  padding: 0.85rem 0.25rem 0;
   text-align: center;
   background: transparent;
 }
+
 .crew-member-info h3 {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-dark);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
-.crew-top-row .crew-member-info h3 { font-size: 1.15rem; }
+
+.crew-top-row .crew-member-info h3 {
+  font-size: 1.2rem;
+}
+
 .crew-member-info .role {
   color: var(--primary);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.crew-top-row .crew-member-info .role { font-size: 0.82rem; }
-.role-founder {
-  display: inline-flex; align-items: center; gap: 0.35rem;
+
+.crew-top-row .crew-member-info .role {
+  font-size: 0.85rem;
 }
-.role-founder i { color: #f59e0b; font-size: 0.72rem; }
+
+.role-founder {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.role-founder i {
+  color: #f59e0b;
+  font-size: 0.75rem;
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .crew-top-row .crew-member {
+    width: 220px;
+  }
+  
+  .crew-top-row .crew-member-image {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .crew-row-3 .crew-member {
+    width: 190px;
+  }
+  
+  .crew-row-3 .crew-member-image {
+    width: 190px;
+    height: 190px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .crew-section {
+    padding: 4rem 4vw;
+  }
+  
+  .crew-header {
+    margin-bottom: 3rem;
+  }
+  
+  .crew-top-row,
+  .crew-row {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .crew-top-row .crew-member,
+  .crew-row-3 .crew-member {
+    width: 180px;
+  }
+  
+  .crew-top-row .crew-member-image,
+  .crew-row-3 .crew-member-image {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .crew-member-info h3 {
+    font-size: 0.95rem;
+  }
+  
+  .crew-top-row .crew-member-info h3 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
+  .crew-top-row,
+  .crew-row {
+    gap: 1.5rem;
+  }
+  
+  .crew-top-row .crew-member,
+  .crew-row-3 .crew-member {
+    width: 150px;
+  }
+  
+  .crew-top-row .crew-member-image,
+  .crew-row-3 .crew-member-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .crew-member-info h3 {
+    font-size: 0.88rem;
+  }
+  
+  .crew-member-info .role {
+    font-size: 0.72rem;
+  }
+}
 
 /* FOOTER */
 footer { background: #1a2838; }
@@ -828,7 +956,7 @@ footer { background: #1a2838; }
       <p>Our skilled professionals are dedicated to delivering exceptional results on every project</p>
     </div>
 
-    <!-- TOP ROW: Jose + Hilda -->
+    <!-- TOP ROW: Jose + Hilda (2 miembros) -->
     <div class="crew-top-row">
       <div class="crew-member anim-left">
         <div class="crew-member-image">
@@ -853,21 +981,21 @@ footer { background: #1a2838; }
       </div>
     </div>
 
-    <!-- BOTTOM ROW: 5 miembros -->
-    <div class="crew-bottom-row">
+    <!-- MIDDLE ROW: 3 miembros -->
+    <div class="crew-row crew-row-3">
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/Michel-Vega.png" alt="Alain Serrano">
+          <img src="img/Michel-Vega.png" alt="Michel Vega">
         </div>
         <div class="crew-member-info">
-          <h3>Michel Vega.</h3>
+          <h3>Michel Vega</h3>
           <div class="role">Logistics</div>
         </div>
       </div>
 
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/Raudel-Hurtado.png" alt="Max Diaz">
+          <img src="img/Raudel-Hurtado.png" alt="Raudel Hurtado">
         </div>
         <div class="crew-member-info">
           <h3>Raudel Hurtado</h3>
@@ -877,17 +1005,20 @@ footer { background: #1a2838; }
 
       <div class="crew-member anim-left">
         <div class="crew-member-image">
-          <img src="img/Randy-Llorca.png" alt="Domingo Garcias Flores">
+          <img src="img/Randy-Llorca.png" alt="Randy Llorca">
         </div>
         <div class="crew-member-info">
           <h3>Randy Llorca</h3>
           <div class="role">Project Manager</div>
         </div>
       </div>
+    </div>
 
+    <!-- BOTTOM ROW: 3 miembros -->
+    <div class="crew-row crew-row-3">
       <div class="crew-member anim-right">
         <div class="crew-member-image">
-          <img src="img/Alain-Gomez.png" alt="Luis Trabanino">
+          <img src="img/Alain-Gomez.png" alt="Alain Gomez">
         </div>
         <div class="crew-member-info">
           <h3>Alain Gomez</h3>
@@ -904,8 +1035,17 @@ footer { background: #1a2838; }
           <div class="role">Project Manager</div>
         </div>
       </div>
-    </div>
 
+      <div class="crew-member anim-right">
+        <div class="crew-member-image">
+          <img src="img/Christian-Fernandez.png" alt="Sexto Miembro">
+        </div>
+        <div class="crew-member-info">
+          <h3>Christian Fernandez</h3>
+          <div class="role">Operation Manager</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
