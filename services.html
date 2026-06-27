@@ -487,7 +487,6 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
 }
 .btn-primary:hover { background: var(--primary-dark); box-shadow: var(--shadow-md); transform: translateY(-3px); }
 
-
 /* RECENT PROJECTS */
 #recent-projects {
   position: relative;
@@ -521,11 +520,10 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   letter-spacing: 0.02em;
 }
 
-/* CAMBIO PRINCIPAL: Usamos Flexbox para que se junten en el centro */
 .projects-grid {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Separación mínima real entre las imágenes */
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -535,10 +533,12 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   gap: 1rem;
   align-items: center;
   width: 100%;
-  max-width: 400px; /* Controlamos el ancho aquí, no en la imagen */
+  max-width: 400px;
+  cursor: pointer;
 }
 
 .project-image {
+  position: relative;
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -576,7 +576,259 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   width: 100%;
 }
 
-/* RESPONSIVE */
+/* OVERLAY - SIN FILTRO BORROSO */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 10, 30, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.project-card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* BOTÓN VIEW GALLERY - EFECTO GLASS SIN BORDER RADIUS */
+.view-text {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-card:hover .view-text {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================ */
+/* MODAL GALLERY - LIGHTBOX                     */
+/* ============================================ */
+.modal-gallery {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 10, 20, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-gallery.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  padding: 20px;
+  background: transparent;
+  box-shadow: none;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* BOTÓN X - GLASS TRANSPARENTE */
+.close-modal {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: rotate(90deg);
+}
+
+/* TÍTULO DEL MODAL - BLANCO CON FUERZA */
+.modal-title {
+  color: #ffffff;
+  /* Blanco */
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  /* Más fuerte */
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: none;
+  max-width: 90%;
+}
+
+.gallery-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  max-width: 98vw;
+}
+
+/* ⭐ IMÁGENES AÚN MÁS GRANDES */
+.project-gallery-images {
+  width: 100%;
+  max-width: 92vw;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.project-gallery-images img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+.gallery-images {
+  width: 100%;
+  max-width: 92vw;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.gallery-images img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: none;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+.gallery-images img.active {
+  display: block;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ⭐ BOTONES DE NAVEGACIÓN - GLASS TRANSPARENTE AZUL SUAVE */
+.gallery-nav {
+  background: rgba(100, 180, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(100, 180, 255, 0.4);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-nav:hover {
+  background: rgba(100, 180, 255, 0.3);
+  border-color: rgba(100, 180, 255, 0.7);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(100, 180, 255, 0.3);
+}
+
+/* ⭐ CONTADOR OCULTO */
+.gallery-counter {
+  display: none;
+}
+
+/* ⭐ THUMBNAILS OCULTOS */
+.gallery-thumbnails {
+  display: none !important;
+}
+
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
 @media (max-width: 968px) {
   .projects-grid {
     flex-direction: column;
@@ -586,11 +838,34 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   
   .projects-title {
     font-size: 1.8rem;
-    letter-spacing: 0.03em;
   }
   
   #recent-projects {
     padding: 4rem 5vw;
+  }
+  
+  .project-gallery-images,
+  .gallery-images {
+    height: 75vh;
+    max-width: 95vw;
+  }
+  
+  .modal-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  
+  .gallery-nav {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  
+  .close-modal {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
   }
 }
 
@@ -610,8 +885,136 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   .project-card {
     max-width: 100%;
   }
+  
+  .project-gallery-images,
+  .gallery-images {
+    height: 60vh;
+    max-width: 97vw;
+  }
+  
+  .modal-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .gallery-nav {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+  
+  .close-modal {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .gallery-container {
+    gap: 10px;
+  }
+  
+  .view-text {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+  }
+}
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
+@media (max-width: 968px) {
+  .projects-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .projects-title {
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+  }
+  
+  #recent-projects {
+    padding: 4rem 5vw;
+  }
+  
+  .modal-content {
+    margin: 20px auto;
+    padding: 20px 15px;
+  }
+  
+  .gallery-images {
+    height: 350px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+    padding: 0 40px;
+  }
+  
+  .gallery-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
 }
 
+@media (max-width: 640px) {
+  .projects-title {
+    font-size: 1.4rem;
+  }
+  
+  .projects-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .project-name {
+    font-size: 1rem;
+  }
+  
+  .project-card {
+    max-width: 100%;
+  }
+  
+  .modal-content {
+    margin: 10px;
+    padding: 15px 10px;
+  }
+  
+  .gallery-images {
+    height: 250px;
+  }
+  
+  .modal-title {
+    font-size: 1.1rem;
+    padding: 0 30px;
+    margin-bottom: 15px;
+  }
+  
+  .gallery-thumbnails .thumb {
+    width: 60px;
+    height: 45px;
+  }
+  
+  .gallery-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .close-modal {
+    font-size: 30px;
+    top: 10px;
+    right: 15px;
+  }
+  
+  .view-text {
+    font-size: 0.85rem;
+    padding: 10px 18px;
+  }
+}
 /* ── FOOTER ── */
 footer { background: #1a2838; }
 .footer-main {
@@ -1137,6 +1540,7 @@ footer { background: #1a2838; }
   </div>
   <button class="gallery-modal-arrow gallery-modal-next" id="galleryNext" aria-label="Next image"><i class="fa fa-chevron-right"></i></button>
 </div>
+
 <!-- RECENT PROJECTS -->
 <section id="recent-projects">
   <div class="projects-container">
@@ -1146,41 +1550,76 @@ footer { background: #1a2838; }
     </div>
     
     <div class="projects-grid">
-      <div class="project-card">
+      <!-- PROYECTO 1 - LUXURY -->
+      <div class="project-card" data-project="luxury">
         <div class="project-image">
-          <img src="imgx/1-BEFORE.png" alt="Luxury waterfront living in Boca Raton">
+          <img src="luxury/01.png" alt="Luxury waterfront living in Boca Raton">
+          <div class="overlay">
+            <span class="view-text">View Gallery</span>
+          </div>
         </div>
         <h3 class="project-name">Luxury waterfront living in Boca Raton</h3>
       </div>
       
-      <div class="project-card">
+      <!-- PROYECTO 2 - NAPLES -->
+      <div class="project-card" data-project="naples">
         <div class="project-image">
-          <img src="imgx/6-AFTER.png" alt="Naples Grande Beach Resort">
+          <img src="naples/01.png" alt="Naples Grande Beach Resort">
+          <div class="overlay">
+            <span class="view-text">View Gallery</span>
+          </div>
         </div>
         <h3 class="project-name">Naples Grande Beach Resort</h3>
       </div>
+      
+      <!-- ============================================ -->
+      <!-- PROYECTOS FUTUROS - DESCOMENTAR CUANDO SE AGREGUEN -->
+      <!-- ============================================ -->
+      <!--
+      <div class="project-card" data-project="project3">
+        <div class="project-image">
+          <img src="project3/01.png" alt="Nombre del Proyecto 3">
+          <div class="overlay">
+            <span class="view-text">View Gallery</span>
+          </div>
+        </div>
+        <h3 class="project-name">Nombre del Proyecto 3</h3>
+      </div>
+      -->
+      <!--
+      <div class="project-card" data-project="project4">
+        <div class="project-image">
+          <img src="project4/01.png" alt="Nombre del Proyecto 4">
+          <div class="overlay">
+            <span class="view-text">View Gallery</span>
+          </div>
+        </div>
+        <h3 class="project-name">Nombre del Proyecto 4</h3>
+      </div>
+      -->
     </div>
   </div>
 </section>
 
-
-    <!-- CTA banner with worker background image -->
-    <div class="clientele-cta anim-up">
-      <div class="clientele-cta-bg">
-        <img
-          src="pintors (1).png"
-          alt="JLMD Install worker">
+<!-- MODAL GALLERY - RECENT PROJECTS (UN SOLO MODAL DINÁMICO) -->
+<div id="projectModal" class="modal-gallery" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-modal" id="projectClose" aria-label="Close">&times;</button>
+    <h3 class="modal-title" id="projectModalTitle">Project Title</h3>
+    <div class="gallery-container">
+      <button class="gallery-nav prev" id="projectPrev" aria-label="Previous">&#10094;</button>
+      <div class="project-gallery-images">
+        <img id="projectModalImg" src="" alt="">
       </div>
-      <div class="clientele-cta-content">
-        <h3>Ready to experience<br>the JLMD difference?</h3>
-        <p>Whether you're a homeowner, builder, or developer, we're here to bring your vision to life with precision and excellence.</p>
-        <a href="#cta" class="clientele-cta-btn">
-          <i class="fa fa-envelope"></i> Get Your Free Estimate
-        </a>
-      </div>
+      <button class="gallery-nav next" id="projectNext" aria-label="Next">&#10095;</button>
     </div>
- 
+    <div class="gallery-counter">
+      <span id="projectModalCounter">1 / 8</span>
+    </div>
+    <div class="gallery-thumbnails" id="projectThumbnails"></div>
   </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
  <footer>
@@ -1232,6 +1671,9 @@ footer { background: #1a2838; }
 </footer>
 
 <script>
+// ============================================
+// NAVEGACIÓN Y ANIMACIONES (EXISTENTE)
+// ============================================
 const hbg = document.getElementById('hbg');
 const mmenu = document.getElementById('mmenu');
 document.getElementById('mclose').addEventListener('click', () => mmenu.classList.remove('open'));
@@ -1263,6 +1705,10 @@ const statsObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-num[data-target]').forEach(n => statsObserver.observe(n));
 
+
+// ============================================
+// GALERÍA 1: PRODUCTOS (EXISTENTE - SIN CAMBIOS)
+// ============================================
 const galleryData = {
   windows: {
     title: "Windows",
@@ -1371,11 +1817,7 @@ function updateModal() {
   galleryModalTitle.textContent = currentGallery.title;
   galleryModalImg.alt = item.alt;
   galleryModalCounter.textContent = `${currentIndex + 1} / ${currentGallery.images.length}`;
-  
-  // Cargar imagen local
   galleryModalImg.src = item.src;
-  
-  // Mostrar error en consola si falla
   galleryModalImg.onerror = () => {
     console.error(`No se pudo cargar la imagen: ${item.src}`);
   };
@@ -1399,13 +1841,173 @@ galleryModal.addEventListener('click', e => {
   if (e.target === galleryModal) closeGallery(); 
 });
 
+
+// ============================================
+// GALERÍA 2: RECENT PROJECTS (NUEVA - CON RUTAS ACTUALIZADAS)
+// ============================================
+const projectGalleryData = {
+  luxury: {
+    title: "Luxury waterfront living in Boca Raton",
+    images: [
+      { src: "luxury/01.png", alt: "Luxury Project 1" },
+      { src: "luxury/02.png", alt: "Luxury Project 2" },
+      { src: "luxury/03.png", alt: "Luxury Project 3" },
+      { src: "luxury/04.png", alt: "Luxury Project 4" },
+      { src: "luxury/05.png", alt: "Luxury Project 5" },
+      { src: "luxury/06.png", alt: "Luxury Project 6" },
+      { src: "luxury/07.png", alt: "Luxury Project 7" },
+      { src: "luxury/08.png", alt: "Luxury Project 8" }
+    ]
+  },
+  naples: {
+    title: "Naples Grande Beach Resort",
+    images: [
+      { src: "naples/01.png", alt: "Naples Project 1" },
+      { src: "naples/02.png", alt: "Naples Project 2" },
+      { src: "naples/03.png", alt: "Naples Project 3" },
+      { src: "naples/04.png", alt: "Naples Project 4" },
+      { src: "naples/05.png", alt: "Naples Project 5" },
+      { src: "naples/06.png", alt: "Naples Project 6" },
+      { src: "naples/07.png", alt: "Naples Project 7" },
+      { src: "naples/08.png", alt: "Naples Project 8" },
+      { src: "naples/09.png", alt: "Naples Project 9" },
+      { src: "naples/10.png", alt: "Naples Project 10" },
+      { src: "naples/11.png", alt: "Naples Project 11" },
+      { src: "naples/12.png", alt: "Naples Project 12" },
+      { src: "naples/13.png", alt: "Naples Project 13" },
+      { src: "naples/14.png", alt: "Naples Project 14" },
+      { src: "naples/15.png", alt: "Naples Project 15" },
+      { src: "naples/16.png", alt: "Naples Project 16" }
+    ]
+  },
+  // ============================================
+  // PROYECTOS FUTUROS - DESCOMENTAR Y COMPLETAR
+  // ============================================
+  /*
+  project3: {
+    title: "Nombre del Proyecto 3",
+    images: [
+      { src: "project3/01.png", alt: "Project 3 - Image 1" },
+      { src: "project3/02.png", alt: "Project 3 - Image 2" },
+      { src: "project3/03.png", alt: "Project 3 - Image 3" }
+    ]
+  },
+  project4: {
+    title: "Nombre del Proyecto 4",
+    images: [
+      { src: "project4/01.png", alt: "Project 4 - Image 1" },
+      { src: "project4/02.png", alt: "Project 4 - Image 2" },
+      { src: "project4/03.png", alt: "Project 4 - Image 3" }
+    ]
+  }
+  */
+};
+
+let currentProjectGallery = null, currentProjectIndex = 0;
+const projectModal = document.getElementById('projectModal');
+const projectModalTitle = document.getElementById('projectModalTitle');
+const projectModalImg = document.getElementById('projectModalImg');
+const projectModalCounter = document.getElementById('projectModalCounter');
+const projectThumbnails = document.getElementById('projectThumbnails');
+
+// Click en project cards
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', () => openProjectGallery(card.dataset.project));
+});
+
+function openProjectGallery(key) {
+  currentProjectGallery = projectGalleryData[key];
+  if (!currentProjectGallery) return;
+  currentProjectIndex = 0;
+  buildThumbnails();
+  updateProjectModal();
+  projectModal.classList.add('open');
+  projectModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+
+function closeProjectGallery() {
+  projectModal.classList.remove('open');
+  projectModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+function buildThumbnails() {
+  projectThumbnails.innerHTML = '';
+  currentProjectGallery.images.forEach((img, index) => {
+    const thumb = document.createElement('img');
+    thumb.src = img.src;
+    thumb.alt = img.alt;
+    thumb.className = 'thumb' + (index === 0 ? ' active' : '');
+    thumb.dataset.index = index;
+    thumb.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentProjectIndex = index;
+      updateProjectModal();
+    });
+    projectThumbnails.appendChild(thumb);
+  });
+}
+
+function updateProjectModal() {
+  if (!currentProjectGallery) return;
+  const item = currentProjectGallery.images[currentProjectIndex];
+  projectModalTitle.textContent = currentProjectGallery.title;
+  projectModalImg.alt = item.alt;
+  projectModalImg.src = item.src;
+  projectModalCounter.textContent = `${currentProjectIndex + 1} / ${currentProjectGallery.images.length}`;
+  
+  // Actualizar thumbnails activos
+  document.querySelectorAll('#projectThumbnails .thumb').forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === currentProjectIndex);
+  });
+  
+  projectModalImg.onerror = () => {
+    console.error(`No se pudo cargar la imagen: ${item.src}`);
+  };
+}
+
+function showProjectNext() { 
+  currentProjectIndex = (currentProjectIndex + 1) % currentProjectGallery.images.length; 
+  updateProjectModal(); 
+}
+
+function showProjectPrev() { 
+  currentProjectIndex = (currentProjectIndex - 1 + currentProjectGallery.images.length) % currentProjectGallery.images.length; 
+  updateProjectModal(); 
+}
+
+document.getElementById('projectClose').addEventListener('click', closeProjectGallery);
+document.getElementById('projectNext').addEventListener('click', (e) => {
+  e.stopPropagation();
+  showProjectNext();
+});
+document.getElementById('projectPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  showProjectPrev();
+});
+
+projectModal.addEventListener('click', e => { 
+  if (e.target === projectModal) closeProjectGallery(); 
+});
+
+// Teclado para ambos modales (sin conflicto)
 document.addEventListener('keydown', e => {
-  if (!galleryModal.classList.contains('open')) return;
-  if (e.key === 'Escape') closeGallery();
-  if (e.key === 'ArrowRight') showNext();
-  if (e.key === 'ArrowLeft') showPrev();
+  const isProductModalOpen = galleryModal.classList.contains('open');
+  const isProjectModalOpen = projectModal.classList.contains('open');
+  
+  // Solo uno puede estar abierto a la vez
+  if (isProductModalOpen) {
+    if (e.key === 'Escape') closeGallery();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  } else if (isProjectModalOpen) {
+    if (e.key === 'Escape') closeProjectGallery();
+    if (e.key === 'ArrowRight') showProjectNext();
+    if (e.key === 'ArrowLeft') showProjectPrev();
+  }
 });
 </script>
-
+ 
 </body>
 </html>
