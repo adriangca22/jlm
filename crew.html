@@ -234,6 +234,10 @@ nav {
 .carousel-arrow.next {
   display: none !important;
 }
+
+
+
+
 /* ══════ CREW SECTION ═══════ */
 .crew-section {
   padding: 6rem 5vw;
@@ -299,23 +303,14 @@ nav {
   height: 280px;
 }
 
-/* ── Filas de 3 miembros ── */
-.crew-row-3 .crew-member {
-  width: 250px;
-  flex-shrink: 0;
-}
-
-.crew-row-3 .crew-member-image {
-  width: 250px;
-  height: 250px;
-}
-
-/* ── Filas de 4 miembros ── */
+/* ── Filas de 3 y 4 miembros: MISMO TAMAÑO ── */
+.crew-row-3 .crew-member,
 .crew-row-4 .crew-member {
   width: 220px;
   flex-shrink: 0;
 }
 
+.crew-row-3 .crew-member-image,
 .crew-row-4 .crew-member-image {
   width: 220px;
   height: 220px;
@@ -398,10 +393,8 @@ nav {
   font-size: 1.2rem;
 }
 
-.crew-row-3 .crew-member-info h3 {
-  font-size: 1.05rem;
-}
-
+/* Texto unificado para filas de 3 y 4 */
+.crew-row-3 .crew-member-info h3,
 .crew-row-4 .crew-member-info h3 {
   font-size: 0.95rem;
 }
@@ -418,10 +411,7 @@ nav {
   font-size: 0.85rem;
 }
 
-.crew-row-3 .crew-member-info .role {
-  font-size: 0.82rem;
-}
-
+.crew-row-3 .crew-member-info .role,
 .crew-row-4 .crew-member-info .role {
   font-size: 0.75rem;
 }
@@ -450,12 +440,9 @@ nav {
     height: 200px;
   }
   
+  /* Mismo tamaño para filas de 3 y 4 */
   .crew-row-3 .crew-member,
-  .crew-row-3 .crew-member-image {
-    width: 180px;
-    height: 180px;
-  }
-  
+  .crew-row-3 .crew-member-image,
   .crew-row-4 .crew-member,
   .crew-row-4 .crew-member-image {
     width: 160px;
@@ -477,12 +464,9 @@ nav {
     height: 220px;
   }
   
+  /* Mismo tamaño para filas de 3 y 4 */
   .crew-row-3 .crew-member,
-  .crew-row-3 .crew-member-image {
-    width: 200px;
-    height: 200px;
-  }
-  
+  .crew-row-3 .crew-member-image,
   .crew-row-4 .crew-member,
   .crew-row-4 .crew-member-image {
     width: 180px;
@@ -490,189 +474,7 @@ nav {
   }
 }
 
-/* ═══════ RESPONSIVE ═══════ */
 
-/* Desktop mediano */
-@media (max-width: 1100px) {
-  .crew-row {
-    gap: 4rem;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 230px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 230px;
-    height: 230px;
-  }
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .crew-section {
-    padding: 6rem 3vw;
-  }
-  
-  .crew-top-row .crew-member {
-    width: 240px;
-  }
-  
-  .crew-top-row .crew-member-image {
-    width: 240px;
-    height: 240px;
-  }
-  
-  .crew-row {
-    gap: 3.5rem;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 210px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 210px;
-    height: 210px;
-  }
-}
-
-/* Tablet pequeña */
-@media (max-width: 850px) {
-  .crew-section {
-    padding: 5rem 3vw;
-  }
-  
-  .crew-row {
-    gap: 3rem;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 190px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 190px;
-    height: 190px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .crew-section {
-    padding: 4rem 4vw;
-  }
-  
-  .crew-header {
-    margin-bottom: 3rem;
-  }
-  
-  .crew-top-row {
-    gap: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-  
-  .crew-row {
-    gap: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-  
-  .crew-top-row .crew-member {
-    width: 200px;
-  }
-  
-  .crew-top-row .crew-member-image {
-    width: 200px;
-    height: 200px;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 170px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 170px;
-    height: 170px;
-  }
-  
-  .crew-member-info h3 {
-    font-size: 0.95rem;
-  }
-  
-  .crew-top-row .crew-member-info h3 {
-    font-size: 1.05rem;
-  }
-  
-  .crew-row-3 .crew-member-info h3 {
-    font-size: 0.95rem;
-  }
-}
-
-/* Mobile pequeño */
-@media (max-width: 580px) {
-  .crew-row {
-    gap: 1.5rem;
-  }
-  
-  .crew-top-row {
-    gap: 2rem;
-  }
-  
-  .crew-top-row .crew-member {
-    width: 160px;
-  }
-  
-  .crew-top-row .crew-member-image {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 145px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 145px;
-    height: 145px;
-  }
-  
-  .crew-member-info h3 {
-    font-size: 0.88rem;
-  }
-  
-  .crew-member-info .role {
-    font-size: 0.72rem;
-  }
-}
-
-/* Mobile muy pequeño */
-@media (max-width: 480px) {
-  .crew-row {
-    gap: 1.2rem;
-  }
-  
-  .crew-top-row {
-    gap: 1.5rem;
-  }
-  
-  .crew-top-row .crew-member {
-    width: 140px;
-  }
-  
-  .crew-top-row .crew-member-image {
-    width: 140px;
-    height: 140px;
-  }
-  
-  .crew-row-3 .crew-member {
-    width: 130px;
-  }
-  
-  .crew-row-3 .crew-member-image {
-    width: 130px;
-    height: 130px;
-  }
-}
 /* FOOTER */
 footer { background: #1a2838; }
 .footer-main {
