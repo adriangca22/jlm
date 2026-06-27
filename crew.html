@@ -234,15 +234,14 @@ nav {
 .carousel-arrow.next {
   display: none !important;
 }
-
-/* ═══════ CREW SECTION ═══════ */
+/* ══════ CREW SECTION ═══════ */
 .crew-section {
   padding: 6rem 5vw;
   background: #fff;
 }
 
 .crew-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -267,43 +266,62 @@ nav {
   margin: 0 auto;
 }
 
-/* ── Filas del equipo ── */
+/* ── Filas del equipo ─ */
 .crew-top-row,
 .crew-row {
   display: flex;
   justify-content: center;
-  gap: 2.5rem;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
+}
+
+/* ── GAP: separación entre círculos ── */
+.crew-top-row {
+  gap: 4rem;
+}
+
+.crew-row {
+  gap: 3rem;
 }
 
 .crew-row:last-child {
   margin-bottom: 0;
 }
 
-/* ── TOP ROW: 2 miembros (Jose & Hilda) ── */
+/* ── TOP ROW: 2 miembros (Jose & Hilda) ─ */
 .crew-top-row .crew-member {
-  width: 260px;
+  width: 280px;
   flex-shrink: 0;
 }
 
 .crew-top-row .crew-member-image {
-  width: 260px;
-  height: 260px;
+  width: 280px;
+  height: 280px;
 }
 
 /* ── Filas de 3 miembros ── */
 .crew-row-3 .crew-member {
-  width: 220px;
+  width: 250px;
   flex-shrink: 0;
 }
 
 .crew-row-3 .crew-member-image {
+  width: 250px;
+  height: 250px;
+}
+
+/* ── Filas de 4 miembros ── */
+.crew-row-4 .crew-member {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.crew-row-4 .crew-member-image {
   width: 220px;
   height: 220px;
 }
 
-/* ── CREW CARD ── */
+/* ─ CREW CARD ─ */
 .crew-member {
   background: transparent;
   border-radius: 16px;
@@ -380,6 +398,14 @@ nav {
   font-size: 1.2rem;
 }
 
+.crew-row-3 .crew-member-info h3 {
+  font-size: 1.05rem;
+}
+
+.crew-row-4 .crew-member-info h3 {
+  font-size: 0.95rem;
+}
+
 .crew-member-info .role {
   color: var(--primary);
   font-size: 0.78rem;
@@ -390,6 +416,14 @@ nav {
 
 .crew-top-row .crew-member-info .role {
   font-size: 0.85rem;
+}
+
+.crew-row-3 .crew-member-info .role {
+  font-size: 0.82rem;
+}
+
+.crew-row-4 .crew-member-info .role {
+  font-size: 0.75rem;
 }
 
 .role-founder {
@@ -403,17 +437,114 @@ nav {
   font-size: 0.75rem;
 }
 
-/* ═══════ RESPONSIVE ═══════ */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .crew-top-row .crew-member {
-    width: 220px;
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .crew-top-row,
+  .crew-row {
+    gap: 2rem;
   }
   
+  .crew-top-row .crew-member,
+  .crew-top-row .crew-member-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .crew-row-3 .crew-member,
+  .crew-row-3 .crew-member-image {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .crew-row-4 .crew-member,
+  .crew-row-4 .crew-member-image {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crew-top-row,
+  .crew-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  
+  .crew-top-row .crew-member,
   .crew-top-row .crew-member-image {
     width: 220px;
     height: 220px;
+  }
+  
+  .crew-row-3 .crew-member,
+  .crew-row-3 .crew-member-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .crew-row-4 .crew-member,
+  .crew-row-4 .crew-member-image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+
+/* Desktop mediano */
+@media (max-width: 1100px) {
+  .crew-row {
+    gap: 4rem;
+  }
+  
+  .crew-row-3 .crew-member {
+    width: 230px;
+  }
+  
+  .crew-row-3 .crew-member-image {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .crew-section {
+    padding: 6rem 3vw;
+  }
+  
+  .crew-top-row .crew-member {
+    width: 240px;
+  }
+  
+  .crew-top-row .crew-member-image {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .crew-row {
+    gap: 3.5rem;
+  }
+  
+  .crew-row-3 .crew-member {
+    width: 210px;
+  }
+  
+  .crew-row-3 .crew-member-image {
+    width: 210px;
+    height: 210px;
+  }
+}
+
+/* Tablet pequeña */
+@media (max-width: 850px) {
+  .crew-section {
+    padding: 5rem 3vw;
+  }
+  
+  .crew-row {
+    gap: 3rem;
   }
   
   .crew-row-3 .crew-member {
@@ -436,21 +567,32 @@ nav {
     margin-bottom: 3rem;
   }
   
-  .crew-top-row,
+  .crew-top-row {
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
   .crew-row {
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
   }
   
-  .crew-top-row .crew-member,
+  .crew-top-row .crew-member {
+    width: 200px;
+  }
+  
+  .crew-top-row .crew-member-image {
+    width: 200px;
+    height: 200px;
+  }
+  
   .crew-row-3 .crew-member {
-    width: 180px;
+    width: 170px;
   }
   
-  .crew-top-row .crew-member-image,
   .crew-row-3 .crew-member-image {
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
   }
   
   .crew-member-info h3 {
@@ -460,24 +602,38 @@ nav {
   .crew-top-row .crew-member-info h3 {
     font-size: 1.05rem;
   }
+  
+  .crew-row-3 .crew-member-info h3 {
+    font-size: 0.95rem;
+  }
 }
 
 /* Mobile pequeño */
-@media (max-width: 480px) {
-  .crew-top-row,
+@media (max-width: 580px) {
   .crew-row {
     gap: 1.5rem;
   }
   
-  .crew-top-row .crew-member,
-  .crew-row-3 .crew-member {
-    width: 150px;
+  .crew-top-row {
+    gap: 2rem;
   }
   
-  .crew-top-row .crew-member-image,
+  .crew-top-row .crew-member {
+    width: 160px;
+  }
+  
+  .crew-top-row .crew-member-image {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .crew-row-3 .crew-member {
+    width: 145px;
+  }
+  
   .crew-row-3 .crew-member-image {
-    width: 150px;
-    height: 150px;
+    width: 145px;
+    height: 145px;
   }
   
   .crew-member-info h3 {
@@ -489,6 +645,34 @@ nav {
   }
 }
 
+/* Mobile muy pequeño */
+@media (max-width: 480px) {
+  .crew-row {
+    gap: 1.2rem;
+  }
+  
+  .crew-top-row {
+    gap: 1.5rem;
+  }
+  
+  .crew-top-row .crew-member {
+    width: 140px;
+  }
+  
+  .crew-top-row .crew-member-image {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .crew-row-3 .crew-member {
+    width: 130px;
+  }
+  
+  .crew-row-3 .crew-member-image {
+    width: 130px;
+    height: 130px;
+  }
+}
 /* FOOTER */
 footer { background: #1a2838; }
 .footer-main {
@@ -1014,8 +1198,8 @@ footer { background: #1a2838; }
       </div>
     </div>
 
-    <!-- BOTTOM ROW: 3 miembros -->
-    <div class="crew-row crew-row-3">
+    <!-- BOTTOM ROW: 4 miembros -->
+    <div class="crew-row crew-row-4">
       <div class="crew-member anim-right">
         <div class="crew-member-image">
           <img src="img/Alain-Gomez.png" alt="Alain Gomez">
@@ -1038,11 +1222,21 @@ footer { background: #1a2838; }
 
       <div class="crew-member anim-right">
         <div class="crew-member-image">
-          <img src="img/Christian-Fernandez.png" alt="Sexto Miembro">
+          <img src="img/Christian-Fernandez.png" alt="Christian Fernandez">
         </div>
         <div class="crew-member-info">
           <h3>Christian Fernandez</h3>
           <div class="role">Operation Manager</div>
+        </div>
+      </div>
+
+      <div class="crew-member anim-right">
+        <div class="crew-member-image">
+          <img src="img/David-Vargas.png" alt="Nombre del Sexto Miembro">
+        </div>
+        <div class="crew-member-info">
+          <h3>David Vargas</h3>
+          <div class="role">Project Manager</div>
         </div>
       </div>
     </div>
