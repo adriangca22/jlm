@@ -174,21 +174,6 @@ document.querySelectorAll('.tilt-card').forEach(card => {
     });
 });
 
-// CONTACT FORM
-function handleFormSubmit(e) { 
-    e.preventDefault(); 
-    const btn = e.target.querySelector('.form-submit-btn'); 
-    if (btn) {
-        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending…'; 
-        btn.disabled = true; 
-        setTimeout(() => { 
-            const formWrap = document.getElementById('contactFormWrap');
-            const successDiv = document.getElementById('formSuccess');
-            if (formWrap) formWrap.style.display = 'none';
-            if (successDiv) successDiv.classList.add('show'); 
-        }, 1400);
-    }
-}
 
 // ABOUT COUNTER ANIMATION
 function animateCounter() {

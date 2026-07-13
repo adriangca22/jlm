@@ -205,9 +205,7 @@
     <div class="section-tag" style="justify-content:center">Our Work</div>
     <h2 class="section-title" style="text-align:center">Portfolio</h2>
     <p style="text-align:center;color:var(--text-muted);max-width:540px;margin:0 auto">Every project is handled with unmatched precision. Browse a selection of our recent residential and commercial installations across South Florida.</p>
-<h2 style="font-family: sans-serif; font-size: 1.35rem; font-weight: 700; text-transform: uppercase; color: #032970;">
-  Hover to toggle before and after
-</h2>
+    <p class="port-toggle-hint">Hover to toggle before and after</p>
   </div>
 
   <div class="port-carousel-wrap anim-up">
@@ -422,35 +420,7 @@
     <a href="services.html" class="btn-view-2">ALL VIEW</a>
   </div>
 
- 
-<!-- PRODUCTS -->
-<section id="premium-products">
-  <div class="pp-container">
-    <div class="pp-content anim-left">
-      <div class="section-tag">What We Offer</div>
-      <h2 class="pp-title">Premium Products,<br><span>Superior Results</span></h2>
-      <p class="pp-desc">
-        We partner with market-leading brands to deliver uncompromising quality for every project.
-        Fill in the gaps with PROTOSEAL silicone sealants to find the right product for your needs,
-        and experience the power of quality with ESWINDOWS.
-      </p>
-      <a href="products.html" class="pp-btn">Products</a>
-    </div>
- 
-    <div class="pp-images anim-right">
-      <div class="pp-image-wrapper">
-        <div class="pp-image-top">
-          <img src="PROTOSEAL.png" alt="Professional Sealant Application"
-            onerror="this.src='https://images.unsplash.com/photo-1581235720704-06d3acfcb04f?w=600&q=85&fit=crop'">
-        </div>
-        <div class="pp-image-bottom">
-          <img src="ventana.jpg" alt="Premium Window Systems"
-            onerror="this.src='https://images.unsplash.com/photo-1503708928676-1cb794adcd5d?w=600&q=85&fit=crop'">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 <!-- ══════════════════════ 6. TRUSTED PARTNERS (grid estático) ══════════════════════ -->
 <section id="brands">
   <div class="brands-head anim-up">
@@ -531,7 +501,6 @@
     </div>
   </div>
 </section>
-<!-- ══════════════════════ 8. CTA / FREE ESTIMATE ══════════════════════ -->
 <section id="cta">
   <div class="cta-container anim-up">
     <div class="cta-image">
@@ -543,31 +512,34 @@
       <p class="cta-form-sub">Fill out the form and our team will contact you within 24 hours with a detailed quote.</p>
       
       <div id="contactFormWrap">
-        <form class="cta-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+        <form class="cta-form" id="contactForm">
+          
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New Estimate Request!">
+
           <div class="form-row">
             <div class="form-group">
               <label>First Name</label>
-              <input type="text" placeholder="John" required>
+              <input type="text" name="name" placeholder="John" required>
             </div>
             <div class="form-group">
-              
-            </div>
+              </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" placeholder="john@example.com" required>
+              <input type="email" name="email" placeholder="john@example.com" required>
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="(786) 000-0000">
+              <input type="tel" name="phone" placeholder="(786) 000-0000">
             </div>
           </div>
           
           <div class="form-group">
             <label>Service Needed</label>
-            <select required>
+            <select name="service" required>
               <option value="" disabled selected>Select a service...</option>
               <option>Impact Doors & Windows</option>
               <option>High-Rise Condo Install</option>
@@ -582,7 +554,7 @@
           <div class="form-row">
             <div class="form-group">
               <label>Property Type</label>
-              <select>
+              <select name="property_type">
                 <option value="" disabled selected>Select...</option>
                 <option>Residential – Single Family</option>
                 <option>Residential – Condo / HOA</option>
@@ -592,19 +564,15 @@
             </div>
             <div class="form-group">
               <label>City / Area</label>
-              <input type="text" placeholder="Miami, Fort Lauderdale...">
+              <input type="text" name="city" placeholder="Miami, Fort Lauderdale...">
             </div>
           </div>
         
-          
-          <button type="submit" class="cta-submit">
+          <button type="submit" class="cta-submit" id="submitBtn">
             <i class="fa fa-paper-plane"></i> Send My Request
           </button>
         </form>
-        
-     
-      
-      <div class="form-success" id="formSuccess">
+      </div> <div class="form-success" id="formSuccess" style="display: none;">
         <div class="form-success-icon"><i class="fa fa-check"></i></div>
         <h3>Message Sent!</h3>
         <p>Thank you! Our team will reach out within 24 hours with your free estimate.</p>
@@ -612,9 +580,56 @@
           <i class="fa fa-phone"></i> Call us now: 786-366-6875
         </a>
       </div>
+
     </div>
   </div>
 </section>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita la recarga de página
+
+    const form = event.target;
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('formSuccess');
+
+    // Feedback visual en el botón
+    submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+
+    // Endpoint configurado con tu correo de pruebas
+    const emailDestino = "adrianshadow228@gmail.com"; 
+    const url = `https://formsubmit.co/ajax/${emailDestino}`;
+
+    const formData = new FormData(form);
+
+    fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) return response.json();
+        throw new Error('Network error');
+    })
+    .then(data => {
+        // Éxito: Oculta el formulario y muestra la confirmación
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Ops! Something went wrong. Please try again.");
+        
+        // Restaurar estado del botón si falla
+        submitBtn.innerHTML = '<i class="fa fa-paper-plane"></i> Send My Request';
+        submitBtn.disabled = false;
+    });
+});
+</script>
+
 <!-- ══════════════════════ 9. FOOTER ══════════════════════ -->
 <footer>
   <div class="footer-main">
@@ -646,9 +661,8 @@
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-       <li><a href="tel:17863666875"><i class="fa fa-phone"></i> +1 786-366-6875</a></li>
-<li><a href="mailto:director@jlmdinstall.com"><i class="fa fa-envelope"></i> director@jlmdinstall.com</a></li>
-<li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
+        <li><a href="tel:17863666875"><i class="fa fa-phone"></i> +1 786-366-6875</a></li>
+        <li><a href="#areas"><i class="fa fa-map-marker-alt"></i> Palm Beach, Broward &amp; Dade</a></li>
       </ul>
       <div class="social-row">
         <a href="https://www.facebook.com/Jlmdinstall/" target="_blank" class="soc" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
